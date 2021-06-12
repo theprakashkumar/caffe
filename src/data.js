@@ -1,0 +1,130 @@
+// import faker from "faker";
+
+// faker.seed(5);
+
+// export const data = [...Array(5)].map((item) => ({
+//     id: faker.datatype.uuid(),
+//     name: faker.commerce.productName(),
+//     image: faker.random.image(),
+//     price: faker.commerce.price(),
+//     material: faker.commerce.productMaterial(),
+//     brand: faker.lorem.word(),
+//     inStock: faker.datatype.boolean(),
+//     fastDelivery: faker.datatype.boolean(),
+//     ratings: faker.random.arrayElement([1, 2, 3, 4, 5]),
+//     offer: faker.random.arrayElement([
+//         "Save 50",
+//         "70% bonanza",
+//         "Republic Day Sale"
+//     ]),
+//     idealFor: faker.random.arrayElement([
+//         "Men",
+//         "Women",
+//         "Girl",
+//         "Boy",
+//         "Senior"
+//     ]),
+//     level: faker.random.arrayElement([
+//         "beginner",
+//         "amateur",
+//         "intermediate",
+//         "advanced",
+//         "professional"
+//     ]),
+//     color: faker.commerce.color()
+// }));
+
+export const data = [
+{
+    brand: "cupiditate",
+    color: "black",
+    fastDelivery: false,
+    id: "30dd35ef-7196-4c58-b4f3-c1abd732ce14",
+    idealFor: "Women",
+    image: "http://placeimg.com/640/480/cats",
+    inStock: true,
+    level: "beginner",
+    material: "Rubber",
+    name: "Intelligent Cotton Computer",
+    offer: "Republic Day Sale",
+    price: "878.00",
+    discount: "10%",
+    originalPrice: "1000",
+    ratings: 3,
+    __proto__: Object,
+},
+{
+    brand: "et",
+    color: "salmon",
+    fastDelivery: true,
+    id: "14d5d2e2-ff8f-413f-873a-bdc909950b8d",
+    idealFor: "Boy",
+    image: "http://placeimg.com/640/480/abstract",
+    inStock: true,
+    level: "beginner",
+    material: "Metal",
+    name: "Generic Frozen Chips",
+    offer: "Republic Day Sale",
+    price: "260.00",
+    discount: "10%",
+    originalPrice: "1000",
+    ratings: 1,
+    __proto__: Object,
+},
+{
+    brand: "id",
+    color: "green",
+    fastDelivery: true,
+    id: "79f162d5-89c3-4710-a141-740f4a3df96a",
+    idealFor: "Women",
+    image: "http://placeimg.com/640/480/transport",
+    inStock: true,
+    level: "intermediate",
+    material: "Frozen",
+    name: "Fantastic Soft Gloves",
+    offer: "Republic Day Sale",
+    price: "196.00",
+    discount: "10%",
+    originalPrice: "1000",
+    ratings: 1,
+    __proto__: Object,
+},
+
+{
+    brand: "excepturi",
+    color: "orange",
+    fastDelivery: true,
+    id: "983c20d3-d5a3-42c2-95af-739efef11cdf",
+    idealFor: "Men",
+    image: "http://placeimg.com/640/480/nightlife",
+    inStock: false,
+    level: "beginner",
+    material: "Soft",
+    name: "Incredible Plastic Computer",
+    offer: "70% bonanza",
+    price: "384.00",
+    discount: "10%",
+    originalPrice: "1000",
+    ratings: 1,
+    __proto__: Object,
+},
+
+{
+    brand: "dolor",
+    color: "pink",
+    fastDelivery: true,
+    id: "d1157bdc-877f-4c80-b906-3fcca0b3f79b",
+    idealFor: "Senior",
+    image: "http://placeimg.com/640/480/city",
+    inStock: true,
+    level: "professional",
+    material: "Frozen",
+    name: "Sleek Plastic Bike",
+    offer: "Save 50",
+    price: "575.00",
+    discount: "10%",
+    originalPrice: "1000",
+    ratings: 3,
+}
+
+];
