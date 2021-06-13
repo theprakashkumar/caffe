@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import './ProductCard.css';
 
 const ProductCard = (props) => {
-    const {id, name, image, price, ratings} = props.details;
+    const {_id, name, image, price, ratings, mrp, discount} = props.details;
     return(
         <div class="card-product">
                 <div class="card-product__image__wrapper">
@@ -33,11 +33,11 @@ const ProductCard = (props) => {
 
                 <div class="card-product__price__wrapper">
                     <div class="card-product__price">{'\u20B9'} {price}</div>
-                    <strike class="card-product__price__crossed ml-2">{'\u20B9'} 1000 </strike>
-                    <div class="card-product__price__discount ml-2">10% off</div>
+                    <strike class="card-product__price__crossed ml-2">{'\u20B9'} {mrp} </strike>
+                    <div class="card-product__price__discount ml-2">{discount} off</div>
                 </div>
 
-                <Link to={`/product/${id}`}>
+                <Link to={`/product/${_id}`}>
                     <button class="btn mt-1">SHOP NOW</button>
                 </Link>
 

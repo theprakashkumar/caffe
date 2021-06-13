@@ -1,44 +1,47 @@
 import { useContext } from "react";
-import { data } from "../data";
+import { DataContext } from "../contexts/DataContext";
 import { FilterContext } from "../contexts/FilterContext";
 import Filter from "./Filter";
 import ProductCard from "./ProductCard";
 
 const ProductList = () => {
+    const { data, isLoading } = useContext(DataContext);
     const { state } = useContext(FilterContext);
-    const {fastDeliveryOnly, showAll, sortBy} = state;
+    const { fastDeliveryOnly, showAll, sortBy } = state;
 
     // filter data
-    const getFilteredData = (data, fastDeliveryOnly, showAll) => {
-        return data
-        .filter(({fastDelivery}) => (
-            fastDeliveryOnly ? fastDelivery : true
-        ))
-        .filter(({inStock}) =>  (
-            showAll ? true : inStock
-        ));
+    const getFilteredProduct = (product, fastDeliveryOnly, showAll) => {
+        return product
+            .filter(({ fastDelivery }) =>
+                fastDeliveryOnly ? fastDelivery : true
+            )
+            .filter(({ inStock }) => (showAll ? true : inStock));
     };
-   
-    // sort data
-    const getSortedData = (data, sortBy) => {
+
+    // sort product
+    const getSortedProduct = (product, sortBy) => {
         if (sortBy && sortBy === "PRICE_LOW_TO_HIGH") {
-            return data.sort((a, b) => a["price"] - b["price"]);
+            return product.sort((a, b) => a["price"] - b["price"]);
         }
         if (sortBy && sortBy === "PRICE_HIGH_TO_LOW") {
-            return data.sort((a, b) => b["price"] - a["price"]);
+            return product.sort((a, b) => b["price"] - a["price"]);
         }
-        return data;
+        return product;
     };
-    
-    const filteredData = getFilteredData(data, fastDeliveryOnly, showAll);
-    const sortedData = getSortedData(filteredData, sortBy);
 
-    return(
+    const filteredProduct = getFilteredProduct(data, fastDeliveryOnly, showAll);
+    const sortedProduct = getSortedProduct(filteredProduct, sortBy);
+
+    return (
         <div className="product-card">
             <Filter />
-            { sortedData.map((product) => <ProductCard details={product}/>)}
+            {isLoading ? (
+                <p>Loading Data</p>
+            ) : (
+                data.map((product) => <ProductCard details={product} />)
+            )}
         </div>
-    )
-}
+    );
+};
 
 export default ProductList;

@@ -1,6 +1,7 @@
 import './App.css';
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import PrivateRoutes from "./utils/PrivateRoutes";
+import { DataProvider } from "./contexts/DataContext";
 import { AuthProvider } from "./contexts/AuthContext";
 import { FilterProvider } from "./contexts/FilterContext";
 import { CartProvider } from "./contexts/CartContext";
@@ -18,21 +19,23 @@ function App() {
     <div className="App">
       <header className="App-header">
         <AuthProvider>
-          <CartProvider>
-            <WishlistProvider>
-            <FilterProvider>
-              <Nav />
-              <Routes>
-                <Route path="/" element={<ProductList />}/>
-                <Route path="/product/:id" element={<ProductPage />} />
-                <Route path="/login" element={<Login/>} />
-                <Route path="/signup" element={<SignUp/>} />
-                <PrivateRoutes path="/wishlist" element={<Wishlist/>} />
-                <PrivateRoutes path="/cart" element={<Cart/>} />
-              </Routes>
-            </FilterProvider>
-            </WishlistProvider>
-          </CartProvider>
+          <DataProvider>
+            <CartProvider>
+              <WishlistProvider>
+              <FilterProvider>
+                <Nav />
+                <Routes>
+                  <Route path="/" element={<ProductList />}/>
+                  <Route path="/product/:id" element={<ProductPage />} />
+                  <Route path="/login" element={<Login/>} />
+                  <Route path="/signup" element={<SignUp/>} />
+                  <PrivateRoutes path="/wishlist" element={<Wishlist/>} />
+                  <PrivateRoutes path="/cart" element={<Cart/>} />
+                </Routes>
+              </FilterProvider>
+              </WishlistProvider>
+            </CartProvider>
+          </DataProvider>
         </AuthProvider>
       </header>
     </div>
