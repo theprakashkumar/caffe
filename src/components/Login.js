@@ -4,7 +4,7 @@ import { AuthContext } from "../contexts/AuthContext";
 
 const Login = () => {
     const { isUserLogin, loginWithCredential, logout } = useContext(AuthContext);
-    const [credential, setCredential] = useState({ username: "", password: ""});
+    const [credential, setCredential] = useState({ email: "", password: ""});
 
     const handleChange = (e) => {
         setCredential((credential) => ({
@@ -15,13 +15,13 @@ const Login = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        loginWithCredential(credential.username, credential.password);
+        loginWithCredential(credential.email, credential.password);
     }
     return ( 
         <div className="login">
             <p>
                 {isUserLogin.toString()}
-                { credential.username} {credential.password }
+                { credential.email} {credential.password }
             </p>
 
             { isUserLogin ? (
@@ -34,11 +34,11 @@ const Login = () => {
                 <form onSubmit={ handleSubmit }>
                 <div class="input-text-wrapper">
                     <input 
-                        class="input-text  input-text-full-name" 
+                        class="input-text  input-text-email" 
                         type="text" 
-                        placeholder="Full Name"
-                        name="username"
-                        value={ credential.username }
+                        placeholder="Email"
+                        name="email"
+                        value={ credential.email }
                         onChange={ handleChange }
                     />
                 </div>

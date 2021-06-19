@@ -7,28 +7,50 @@ import fakeApi from "../api/fakeApi";
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const [isUserLogin, setLogin] = useState(false);
+    const { isUserLogin: initialLogin, token: initialToken } = JSON.parse(
+        localStorage.getItem("login")
+    ) || { isUserLogin: false, token: null };
+    const [isUserLogin, setLogin] = useState(initialLogin);
+    const [token, setToken] = useState(initialToken);
     const { state } = useLocation();
     const navigate = useNavigate();
 
-    const loginWithCredential = async (username, password) => {
+    const loginWithCredential = async (email, password) => {
         if (isUserLogin) {
-            setLogin(false);
+            logout();
         } else {
             try {
-                const response = await fakeApi(username, password);
-                if (response.success) {
+                const response = await axios.post(
+                    "http://localhost:5000/users/login",
+                    {
+                        email,
+                        password,
+                    }
+                );
+                if (response.data.success) {
+                    console.log("Logged In...");
                     setLogin(true);
+                    setToken(response.data.token);
+                    localStorage?.setItem(
+                        "login",
+                        JSON.stringify({
+                            isUserLogin: true,
+                            token: response.data.token,
+                        })
+                    );
                 }
                 navigate(state?.from ? state.from : "/");
             } catch (error) {
-                console.log("Wrong Password");
+                console.log("Something Went Wrong!", error);
             }
         }
     };
 
     const logout = () => {
+        console.log("Logged Out!");
         setLogin(false);
+        setToken(null);
+        localStorage.removeItem("login");
     };
 
     const signUp = async (userDetails) => {
