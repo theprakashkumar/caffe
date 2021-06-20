@@ -11,7 +11,7 @@ export const DataProvider = ({ children }) => {
         const getData = async () => {
             try {
                 const response = await axios.get(
-                    "http://localhost:5000/products"
+                    "https://caffe-backend.theprakashkumar.repl.co/products"
                 );
                 if (response) {
                     setData(response.data.product);

@@ -2,14 +2,13 @@ import axios from "axios";
 import { createContext, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
-import fakeApi from "../api/fakeApi";
-
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const { isUserLogin: initialLogin, token: initialToken } = JSON.parse(
         localStorage.getItem("login")
     ) || { isUserLogin: false, token: null };
+
     const [isUserLogin, setLogin] = useState(initialLogin);
     const [token, setToken] = useState(initialToken);
     const { state } = useLocation();
@@ -21,7 +20,7 @@ export const AuthProvider = ({ children }) => {
         } else {
             try {
                 const response = await axios.post(
-                    "http://localhost:5000/users/login",
+                    "https://caffe-backend.theprakashkumar.repl.co/login",
                     {
                         email,
                         password,
@@ -72,7 +71,7 @@ export const AuthProvider = ({ children }) => {
     };
     return (
         <AuthContext.Provider
-            value={{ isUserLogin, loginWithCredential, logout, signUp }}
+            value={{ isUserLogin, loginWithCredential, token, logout, signUp }}
         >
             {children}
         </AuthContext.Provider>
