@@ -4,13 +4,21 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 export const AuthContext = createContext();
 
+const emptyUser = {
+    name: "",
+    email: "",
+    token: "",
+};
 export const AuthProvider = ({ children }) => {
-    const { isUserLogin: initialLogin, token: initialToken } = JSON.parse(
-        localStorage.getItem("login")
-    ) || { isUserLogin: false, token: null };
+    const { isUserLogin: initialLogin, userDetails: initialUserDetails } =
+        JSON.parse(localStorage.getItem("login")) || {
+            isUserLogin: false,
+            userDetails: emptyUser,
+        };
 
     const [isUserLogin, setLogin] = useState(initialLogin);
-    const [token, setToken] = useState(initialToken);
+    // const [token, setToken] = useState(initialToken);
+    const [userDetails, setUserDetails] = useState(emptyUser);
     const { state } = useLocation();
     const navigate = useNavigate();
 
@@ -20,7 +28,7 @@ export const AuthProvider = ({ children }) => {
         } else {
             try {
                 const response = await axios.post(
-                    "https://caffe-backend.theprakashkumar.repl.co/login",
+                    "https://caffe-backend.theprakashkumar.repl.co/users/login",
                     {
                         email,
                         password,
@@ -29,12 +37,20 @@ export const AuthProvider = ({ children }) => {
                 if (response.data.success) {
                     console.log("Logged In...");
                     setLogin(true);
-                    setToken(response.data.token);
+                    setUserDetails({
+                        name: response.data.name,
+                        email: response.data.email,
+                        token: response.data.token,
+                    });
                     localStorage?.setItem(
                         "login",
                         JSON.stringify({
                             isUserLogin: true,
-                            token: response.data.token,
+                            userDetails: {
+                                name: response.data.name,
+                                email: response.data.email,
+                                token: response.data.token,
+                            },
                         })
                     );
                 }
@@ -48,16 +64,16 @@ export const AuthProvider = ({ children }) => {
     const logout = () => {
         console.log("Logged Out!");
         setLogin(false);
-        setToken(null);
+        setUserDetails(emptyUser);
         localStorage.removeItem("login");
     };
 
-    const signUp = async (userDetails) => {
+    const signUp = async (userDetail) => {
         try {
             const response = await axios.post(
                 "http://localhost:5000/users/signup",
                 {
-                    ...userDetails,
+                    ...userDetail,
                 }
             );
             if (response.data.success) {
@@ -71,7 +87,7 @@ export const AuthProvider = ({ children }) => {
     };
     return (
         <AuthContext.Provider
-            value={{ isUserLogin, loginWithCredential, token, logout, signUp }}
+            value={{ isUserLogin, loginWithCredential, token: userDetails.token, name: userDetails.name, logout, signUp }}
         >
             {children}
         </AuthContext.Provider>

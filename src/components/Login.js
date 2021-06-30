@@ -3,65 +3,65 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 
 const Login = () => {
-    const { isUserLogin, loginWithCredential, logout } = useContext(AuthContext);
-    const [credential, setCredential] = useState({ email: "", password: ""});
+    const { isUserLogin, name, loginWithCredential, logout } =
+        useContext(AuthContext);
+    const [credential, setCredential] = useState({ email: "", password: "" });
 
     const handleChange = (e) => {
         setCredential((credential) => ({
             ...credential,
-            [e.target.name]: e.target.value
-        }))
-    }
+            [e.target.name]: e.target.value,
+        }));
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
         loginWithCredential(credential.email, credential.password);
-    }
-    return ( 
+    };
+    return (
         <div className="login">
             <p>
-                {isUserLogin.toString()}
-                { credential.email} {credential.password }
+                {isUserLogin ? name : "Not Logged In"}
+                {credential.email} {credential.password}
             </p>
 
-            { isUserLogin ? (
+            {isUserLogin ? (
                 <>
-                <p>Hi There!</p>
-                <button onClick={logout}>Logout</button>
+                    <p>Hi There!</p>
+                    <button onClick={logout}>Logout</button>
                 </>
             ) : (
                 <>
-                <form onSubmit={ handleSubmit }>
-                <div class="input-text-wrapper">
-                    <input 
-                        class="input-text  input-text-email" 
-                        type="text" 
-                        placeholder="Email"
-                        name="email"
-                        value={ credential.email }
-                        onChange={ handleChange }
-                    />
-                </div>
+                    <form onSubmit={handleSubmit}>
+                        <div class="input-text-wrapper">
+                            <input
+                                class="input-text  input-text-email"
+                                type="text"
+                                placeholder="Email"
+                                name="email"
+                                value={credential.email}
+                                onChange={handleChange}
+                            />
+                        </div>
 
-                <div class="input-text-wrapper">
-                    <input class="input-text input-text-password" 
-                    type="password"
-                    placeholder="Password" 
-                    name="password"
-                    value={ credential.password }
-                    onChange={ handleChange }
-                    />
-                </div>
+                        <div class="input-text-wrapper">
+                            <input
+                                class="input-text input-text-password"
+                                type="password"
+                                placeholder="Password"
+                                name="password"
+                                value={credential.password}
+                                onChange={handleChange}
+                            />
+                        </div>
 
-                <button class="btn btn--md">Login</button>
-
-            </form>
-            <Link to="/signup">Don't Have Account Create One!</Link>
-            </>
+                        <button class="btn btn--md">Login</button>
+                    </form>
+                    <Link to="/signup">Don't Have Account Create One!</Link>
+                </>
             )}
-             
         </div>
-     );
-}
- 
+    );
+};
+
 export default Login;
