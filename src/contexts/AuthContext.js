@@ -5,6 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 export const AuthContext = createContext();
 
 const emptyUser = {
+    id: "",
     name: "",
     email: "",
     token: "",
@@ -18,7 +19,7 @@ export const AuthProvider = ({ children }) => {
 
     const [isUserLogin, setLogin] = useState(initialLogin);
     // const [token, setToken] = useState(initialToken);
-    const [userDetails, setUserDetails] = useState(emptyUser);
+    const [userDetails, setUserDetails] = useState(initialUserDetails);
     const { state } = useLocation();
     const navigate = useNavigate();
 
@@ -28,7 +29,7 @@ export const AuthProvider = ({ children }) => {
         } else {
             try {
                 const response = await axios.post(
-                    "https://caffe-backend.theprakashkumar.repl.co/users/login",
+                    "http://localhost:5000/users/login",
                     {
                         email,
                         password,
@@ -38,6 +39,7 @@ export const AuthProvider = ({ children }) => {
                     console.log("Logged In...");
                     setLogin(true);
                     setUserDetails({
+                        id: response.data.id,
                         name: response.data.name,
                         email: response.data.email,
                         token: response.data.token,
@@ -47,6 +49,7 @@ export const AuthProvider = ({ children }) => {
                         JSON.stringify({
                             isUserLogin: true,
                             userDetails: {
+                                id: response.data.id,
                                 name: response.data.name,
                                 email: response.data.email,
                                 token: response.data.token,
@@ -87,7 +90,15 @@ export const AuthProvider = ({ children }) => {
     };
     return (
         <AuthContext.Provider
-            value={{ isUserLogin, loginWithCredential, token: userDetails.token, name: userDetails.name, logout, signUp }}
+            value={{
+                isUserLogin,
+                loginWithCredential,
+                id: userDetails.id,
+                token: userDetails.token,
+                name: userDetails.name,
+                logout,
+                signUp,
+            }}
         >
             {children}
         </AuthContext.Provider>

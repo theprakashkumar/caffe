@@ -1,13 +1,15 @@
-import { useContext } from "react";
+import axios from "axios";
+import { useContext, useState, useEffect } from "react";
 import { DataContext } from "../contexts/DataContext";
 import { FilterContext } from "../contexts/FilterContext";
 import Filter from "./Filter";
 import ProductCard from "./ProductCard";
 
 const ProductList = () => {
-    const { data, isLoading } = useContext(DataContext);
+    const { data } = useContext(DataContext);
     const { state } = useContext(FilterContext);
     const { fastDeliveryOnly, showAll, sortBy } = state;
+    const [isLoading] = useState(false);
 
     // filter data
     const getFilteredProduct = (product, fastDeliveryOnly, showAll) => {
@@ -38,7 +40,7 @@ const ProductList = () => {
             {isLoading ? (
                 <p>Loading Data</p>
             ) : (
-                data.map((product) => <ProductCard details={product} />)
+                sortedProduct.map((product) => <ProductCard details={product} />)
             )}
         </div>
     );

@@ -1,11 +1,9 @@
-import './App.css';
+import "./App.css";
+import axios from "axios";
+import { useState, useEffect, useContext } from "react";
 import { Routes, Route } from "react-router-dom";
 import PrivateRoutes from "./utils/PrivateRoutes";
-import { DataProvider } from "./contexts/DataContext";
-import { AuthProvider } from "./contexts/AuthContext";
-import { FilterProvider } from "./contexts/FilterContext";
-import { CartProvider } from "./contexts/CartContext";
-import { WishlistProvider } from "./contexts/WishlistContext";
+import { DataContext } from "./contexts/DataContext";
 import Nav from "./components/Nav";
 import ProductList from "./components/ProductList";
 import ProductPage from "./components/ProductPage";
@@ -15,31 +13,42 @@ import Wishlist from "./components/Wishlist";
 import Cart from "./components/Cart";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <AuthProvider>
-          <DataProvider>
-            <CartProvider>
-              <WishlistProvider>
-              <FilterProvider>
+    const { setData } = useContext(DataContext);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        // get data from the server
+        const getData = async () => {
+            try {
+                const response = await axios.get(
+                    "http://localhost:5000/products"
+                );
+                if (response) {
+                    setData(response.data.product);
+                    setIsLoading(false);
+                }
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        getData();
+    }, []);
+
+    return (
+        <div className="App">
+            <header className="App-header">
                 <Nav />
                 <Routes>
-                  <Route path="/" element={<ProductList />}/>
-                  <Route path="/product/:id" element={<ProductPage />} />
-                  <Route path="/login" element={<Login/>} />
-                  <Route path="/signup" element={<SignUp/>} />
-                  <PrivateRoutes path="/wishlist" element={<Wishlist/>} />
-                  <PrivateRoutes path="/cart" element={<Cart/>} />
+                    <Route path="/" element={<ProductList />} />
+                    <Route path="/product/:id" element={<ProductPage />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/signup" element={<SignUp />} />
+                    <PrivateRoutes path="/wishlist" element={<Wishlist />} />
+                    <PrivateRoutes path="/cart" element={<Cart />} />
                 </Routes>
-              </FilterProvider>
-              </WishlistProvider>
-            </CartProvider>
-          </DataProvider>
-        </AuthProvider>
-      </header>
-    </div>
-  );
+            </header>
+        </div>
+    );
 }
 
 export default App;
