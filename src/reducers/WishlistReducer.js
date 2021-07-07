@@ -10,7 +10,7 @@ const wishlistReducer = (state, action) => {
                 },
             ];
         case "REMOVE_FROM_WISHLIST":
-            return state.filter((item) => item.id !== action.payload.id);
+            return state.filter((item) => item.product._id !== action.payload.id);
         case "MOVE_ITEM_TO_CART":
             console.log("Item Has Move to Cart!");
     }

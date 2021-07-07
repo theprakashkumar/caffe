@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 export const AuthContext = createContext();
 
 const emptyUser = {
-    id: "",
+    userId: "",
     name: "",
     email: "",
     token: "",
@@ -18,7 +18,6 @@ export const AuthProvider = ({ children }) => {
         };
 
     const [isUserLogin, setLogin] = useState(initialLogin);
-    // const [token, setToken] = useState(initialToken);
     const [userDetails, setUserDetails] = useState(initialUserDetails);
     const { state } = useLocation();
     const navigate = useNavigate();
@@ -29,27 +28,30 @@ export const AuthProvider = ({ children }) => {
         } else {
             try {
                 const response = await axios.post(
-                    "http://localhost:5000/users/login",
+                    "/users/login",
                     {
                         email,
                         password,
                     }
                 );
                 if (response.data.success) {
-                    console.log("Logged In...");
+                    console.log({...response.data});
+                    console.log(response.data.name);
                     setLogin(true);
                     setUserDetails({
-                        id: response.data.id,
+                        userId: response.data.id,
                         name: response.data.name,
                         email: response.data.email,
                         token: response.data.token,
                     });
+                    console.log("use", userDetails.userId);
+                    console.log("use", userDetails);
                     localStorage?.setItem(
                         "login",
                         JSON.stringify({
                             isUserLogin: true,
                             userDetails: {
-                                id: response.data.id,
+                                userId: response.data.id,
                                 name: response.data.name,
                                 email: response.data.email,
                                 token: response.data.token,
@@ -93,7 +95,7 @@ export const AuthProvider = ({ children }) => {
             value={{
                 isUserLogin,
                 loginWithCredential,
-                id: userDetails.id,
+                userId: userDetails.userId,
                 token: userDetails.token,
                 name: userDetails.name,
                 logout,

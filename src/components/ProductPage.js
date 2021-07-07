@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useContext } from "react";
 import { DataContext } from "../contexts/DataContext";
 import { CartContext } from "../contexts/CartContext";
@@ -9,12 +10,67 @@ const ProductPage = (props) => {
     const { data } = useContext(DataContext);
     const { dispatch: cartDispatch } = useContext(CartContext);
     const { dispatch: wishlistDispatch } = useContext(WishlistContext);
-    const { isUserLogin } = useContext(AuthContext);
+    const { isUserLogin, userId, token } = useContext(AuthContext);
     const { id } = useParams();
     const navigate = useNavigate();
     const product = data.find((item) => item._id === id);
-    const { image, name, price, discount, originalPrice } = product;
-    // console.log(product);
+    const { _id, image, name, price, discount, originalPrice } = product;
+
+    // add product to the wishlist
+    const addToWishlist = async (id) => {
+        console.log("addtowish")
+        try {
+            const response = await axios.post(
+                `/wishlist/${userId}`,
+                {
+                    _id: id,
+                },
+                {
+                    headers: {
+                        authorization: token,
+                    },
+                }
+            );
+            if (response.data.success) {
+                console.log("Updated Wishlist");
+                console.log(response.data);
+                wishlistDispatch({
+                    type: "ADD_TO_WISHLIST",
+                    payload: { id: id },
+                });
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    // // remove product from the wishlist
+    // const removeFromWishlist = (id) => {
+    //     try {
+    //         const response = await axios.delete(
+    //             `/wishlist/${userId}`,
+    //             {
+    //                 _id: id,
+    //             },
+    //             {
+    //                 headers: {
+    //                     authorization: token,
+    //                 },
+    //             }
+    //         );
+    //         if (response.data.success) {
+    //             console.log("Deleted Item from Wishlist");
+    //             console.log("response.data");
+    //             wishlistDispatch({
+    //                 type: "REMOVE_FROM_WISHLIST",
+    //                 payload: { id: id },
+    //             });
+    //         }
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // };
+
     return (
         <div className="product-page">
             <div className="product-page__main">
@@ -51,10 +107,7 @@ const ProductPage = (props) => {
                         class="btn mt-1"
                         onClick={() => {
                             isUserLogin
-                                ? wishlistDispatch({
-                                      type: "ADD_TO_WISHLIST",
-                                      payload: { id: id },
-                                  })
+                                ? addToWishlist(_id)
                                 : navigate("/login");
                         }}
                     >

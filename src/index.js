@@ -9,6 +9,9 @@ import { AuthProvider } from "./contexts/AuthContext";
 import { FilterProvider } from "./contexts/FilterContext";
 import { CartProvider } from "./contexts/CartContext";
 import { WishlistProvider } from "./contexts/WishlistContext";
+import axios from "axios";
+
+axios.defaults.baseURL = "http://localhost:5000";
 
 ReactDOM.render(
     <React.StrictMode>

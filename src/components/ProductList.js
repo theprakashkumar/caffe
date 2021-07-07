@@ -1,5 +1,4 @@
-import axios from "axios";
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState } from "react";
 import { DataContext } from "../contexts/DataContext";
 import { FilterContext } from "../contexts/FilterContext";
 import Filter from "./Filter";
@@ -40,7 +39,9 @@ const ProductList = () => {
             {isLoading ? (
                 <p>Loading Data</p>
             ) : (
-                sortedProduct.map((product) => <ProductCard details={product} />)
+                sortedProduct.map((product) => (
+                    <ProductCard details={product} />
+                ))
             )}
         </div>
     );
