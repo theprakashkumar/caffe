@@ -3,7 +3,7 @@ const cartReducer = (state, action) => {
         case "ADD_TO_CART":
             return [...state, action.payload.product];
         case "REMOVE_FROM_CART":
-            return state.filter((item) => item.id !== action.payload.id);
+            return state.filter((item) => item._id !== action.payload.id);
         case "INCREASE_QUANTITY":
             return state.map((item) => {
                 return item.id === action.payload.id

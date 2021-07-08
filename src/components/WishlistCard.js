@@ -13,7 +13,6 @@ const WishlistCard = (props) => {
     // remove product from the wishlist
     const removeFromWishlist = async (id) => {
         try {
-            console.log("delet id", id);
             const response = await axios.delete(`/wishlist/${userId}`, {
                 headers: {
                     authorization: token,

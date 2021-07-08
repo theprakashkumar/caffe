@@ -1,11 +1,42 @@
+import axios from "axios";
 import { useContext } from "react";
+import { AuthContext } from "../contexts/AuthContext";
 import { CartContext } from "../contexts/CartContext";
 
 const CartCard = (props) => {
+    const { userId, token } = useContext(AuthContext);
     const { dispatch } = useContext(CartContext);
     const { quantity } = props.product;
-    const { image, name, price, mrp, id } = props.product.product;
+    const { image, name, price, mrp, _id } = props.product.product;
+    console.log(props.product.product);
 
+    // delete from the cart
+    const removeFromCart = async (id) => {
+        try {
+            const response = await axios.delete(`/cart/${userId}`, {
+                headers: {
+                    authorization: token,
+                },
+                data: {
+                    _id,
+                },
+            });
+            if (response.data.success) {
+                console.log("Item Removed");
+                console.log(response.data);
+                dispatch({
+                    type: "REMOVE_FROM_CART",
+                    payload: {
+                        _id: _id,
+                    },
+                });
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    // manipulate cart
     return (
         <div className="card-cart">
             <div className="card-cart__image__wrapper">
@@ -37,7 +68,7 @@ const CartCard = (props) => {
                         onClick={() =>
                             dispatch({
                                 type: "DECREASE_QUANTITY",
-                                payload: { id },
+                                payload: { _id },
                             })
                         }
                         className="btn card-cart__control__button"
@@ -53,7 +84,7 @@ const CartCard = (props) => {
                         onClick={() =>
                             dispatch({
                                 type: "INCREASE_QUANTITY",
-                                payload: { id },
+                                payload: { _id },
                             })
                         }
                         className="btn card-cart__control__button"
@@ -61,7 +92,7 @@ const CartCard = (props) => {
                         <span className="material-icons-round">add</span>
                     </button>
                     <button
-                        onClick={() => dispatch({ type: "REMOVE_FROM_CART" })}
+                        onClick={() => removeFromCart(_id)}
                         className="btn card-cart__control__button"
                     >
                         <span className="material-icons-round">delete</span>

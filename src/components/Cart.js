@@ -23,11 +23,10 @@ const Cart = () => {
                 },
             });
             if (response.data.success) {
-                console.log("got cart", response.data);
                 addToCart(response.data.cart.cartItems);
             }
         } catch (error) {
-            console.log("error is:", error);
+            console.log(error);
         }
     };
 
@@ -40,7 +39,6 @@ const Cart = () => {
                     product,
                 },
             });
-            console.log("One Product Has Added!");
         }
     };
 
@@ -52,7 +50,6 @@ const Cart = () => {
             {state[0]
                 ? state.map((item) => {
                       // let product = foundProduct(item.id);
-                      console.log("item is ", item);
                       return <CartCard product={item} />;
                   })
                 : "Your Cart Is Empty! 😟"}
