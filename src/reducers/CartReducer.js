@@ -1,9 +1,13 @@
 const cartReducer = (state, action) => {
     switch (action.type) {
+        case "SYNC_CART":
+            return [...action.payload.product];
         case "ADD_TO_CART":
-            return [...state, action.payload.product];
+            return [...state, { ...action.payload.product }];
         case "REMOVE_FROM_CART":
-            return state.filter((item) => item._id !== action.payload.id);
+            return state.filter(
+                (item) => item.product._id !== action.payload._id
+            );
         case "INCREASE_QUANTITY":
             return state.map((item) => {
                 return item.id === action.payload.id

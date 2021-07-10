@@ -14,18 +14,14 @@ import Cart from "./components/Cart";
 
 function App() {
     const { setData } = useContext(DataContext);
-    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         // get data from the server
         const getData = async () => {
             try {
-                const response = await axios.get(
-                    "/products"
-                );
-                if (response) {
+                const response = await axios.get("/products");
+                if (response.data.success) {
                     setData(response.data.product);
-                    setIsLoading(false);
                 }
             } catch (err) {
                 console.log(err);

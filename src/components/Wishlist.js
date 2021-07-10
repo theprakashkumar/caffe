@@ -22,25 +22,16 @@ const Wishlist = () => {
                 },
             });
             if (response.data.success) {
-                addToContext(response.data.wishlist.wishlistItems);
-                console.log(response.data.wishlist.wishlistItems);
+                wishlistDispatch({
+                    type: "SYNC_WISHLIST",
+                    payload: {
+                        product: response.data.wishlist.wishlistItems,
+                    },
+                });
                 setLoading(false);
             }
         } catch (error) {
-            console.log("Something wrong");
             console.log(error);
-        }
-    };
-
-    // send the data to context
-    const addToContext = (arr) => {
-        for (const product of arr) {
-            wishlistDispatch({
-                type: "ADD_TO_WISHLIST",
-                payload: {
-                    product: product.product,
-                },
-            });
         }
     };
 

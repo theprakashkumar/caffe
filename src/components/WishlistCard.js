@@ -25,7 +25,7 @@ const WishlistCard = (props) => {
                 console.log("Item Deleted From the server!");
                 wishlistDispatch({
                     type: "REMOVE_FROM_WISHLIST",
-                    payload: { id: id },
+                    payload: { _id },
                 });
                 // Delete item form the context
             }

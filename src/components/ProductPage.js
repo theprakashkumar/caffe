@@ -18,10 +18,37 @@ const ProductPage = (props) => {
 
     // add product to the wishlist
     const addToWishlist = async (id) => {
-        console.log("addtowish")
         try {
             const response = await axios.post(
                 `/wishlist/${userId}`,
+                {
+                    _id,
+                },
+                {
+                    headers: {
+                        authorization: token,
+                    },
+                }
+            );
+            if (response.data.success) {
+                console.log(response.data);
+                wishlistDispatch({
+                    type: "ADD_TO_WISHLIST",
+                    payload: {
+                        product,
+                    },
+                });
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    // add product to cart
+    const addToCart = async (id) => {
+        try {
+            const response = await axios.post(
+                `/cart/${userId}`,
                 {
                     _id: id,
                 },
@@ -32,11 +59,12 @@ const ProductPage = (props) => {
                 }
             );
             if (response.data.success) {
-                console.log("Updated Wishlist");
-                console.log(response.data);
-                wishlistDispatch({
-                    type: "ADD_TO_WISHLIST",
-                    payload: { id: id },
+                console.log("add to cart");
+                cartDispatch({
+                    type: "ADD_TO_CART",
+                    payload: {
+                        product,
+                    },
                 });
             }
         } catch (error) {
@@ -117,12 +145,7 @@ const ProductPage = (props) => {
                     <button
                         class="btn mt-1"
                         onClick={() => {
-                            isUserLogin
-                                ? cartDispatch({
-                                      type: "ADD_TO_CART",
-                                      payload: { id: id },
-                                  })
-                                : navigate("/login");
+                            isUserLogin ? addToCart(_id) : navigate("/login");
                         }}
                     >
                         ADD TO CART

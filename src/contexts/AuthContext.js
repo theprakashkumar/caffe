@@ -27,15 +27,12 @@ export const AuthProvider = ({ children }) => {
             logout();
         } else {
             try {
-                const response = await axios.post(
-                    "/users/login",
-                    {
-                        email,
-                        password,
-                    }
-                );
+                const response = await axios.post("/users/login", {
+                    email,
+                    password,
+                });
                 if (response.data.success) {
-                    console.log({...response.data});
+                    console.log({ ...response.data });
                     console.log(response.data.name);
                     setLogin(true);
                     setUserDetails({

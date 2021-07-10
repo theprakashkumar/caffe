@@ -1,20 +1,16 @@
 import axios from "axios";
 import "./Cart.css";
-import { useContext, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import { CartContext } from "../contexts/CartContext";
 import CartCard from "./CartCard";
 
-// const foundProduct = (id) => {
-//    return data.find(item => item.id === id)
-// }
-
 const Cart = () => {
+    const [loading, setLoading] = useState(true);
     const { state, dispatch } = useContext(CartContext);
     const { isUserLogin, userId, token } = useContext(AuthContext);
 
     // get cart data from server
-
     const getCart = async () => {
         try {
             const response = await axios.get(`/cart/${userId}`, {
@@ -23,22 +19,16 @@ const Cart = () => {
                 },
             });
             if (response.data.success) {
-                addToCart(response.data.cart.cartItems);
+                dispatch({
+                    type: "SYNC_CART",
+                    payload: {
+                        product: response.data.cart.cartItems,
+                    },
+                });
+                setLoading(false);
             }
         } catch (error) {
             console.log(error);
-        }
-    };
-
-    // send data to server
-    const addToCart = (arr) => {
-        for (const product of arr) {
-            dispatch({
-                type: "ADD_TO_CART",
-                payload: {
-                    product,
-                },
-            });
         }
     };
 
@@ -47,12 +37,15 @@ const Cart = () => {
     }, []);
     return (
         <div>
-            {state[0]
-                ? state.map((item) => {
-                      // let product = foundProduct(item.id);
-                      return <CartCard product={item} />;
-                  })
-                : "Your Cart Is Empty! 😟"}
+            {loading ? (
+                <p>loading</p>
+            ) : state[0] ? (
+                state.map((item) => {
+                    return <CartCard product={item} />;
+                })
+            ) : (
+                "Your Cart Is Empty! 😟"
+            )}
         </div>
     );
 };

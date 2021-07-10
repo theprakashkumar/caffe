@@ -7,8 +7,7 @@ const CartCard = (props) => {
     const { userId, token } = useContext(AuthContext);
     const { dispatch } = useContext(CartContext);
     const { quantity } = props.product;
-    const { image, name, price, mrp, _id } = props.product.product;
-    console.log(props.product.product);
+    const { image, name, price, discount, mrp, _id } = props.product.product;
 
     // delete from the cart
     const removeFromCart = async (id) => {
@@ -18,16 +17,14 @@ const CartCard = (props) => {
                     authorization: token,
                 },
                 data: {
-                    _id,
+                    _id: id,
                 },
             });
             if (response.data.success) {
-                console.log("Item Removed");
-                console.log(response.data);
                 dispatch({
                     type: "REMOVE_FROM_CART",
                     payload: {
-                        _id: _id,
+                        _id,
                     },
                 });
             }
@@ -59,7 +56,7 @@ const CartCard = (props) => {
                         {"\u20B9"} {mrp}{" "}
                     </strike>
                     <div className="card-cart__price__discount ml-2">
-                        10% off
+                        {discount}% off
                     </div>
                 </div>
 
