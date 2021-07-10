@@ -6,8 +6,8 @@ import { CartContext } from "../contexts/CartContext";
 const CartCard = (props) => {
     const { userId, token } = useContext(AuthContext);
     const { dispatch } = useContext(CartContext);
-    const { quantity } = props.product;
-    const { image, name, price, discount, mrp, _id } = props.product.product;
+    const { _id, quantity } = props.product;
+    const { image, name, price, discount, mrp, _id:id } = props.product.product;
 
     // delete from the cart
     const removeFromCart = async (id) => {
@@ -34,6 +34,63 @@ const CartCard = (props) => {
     };
 
     // manipulate cart
+    // increment
+    const increment = async (id, quantity) => {
+        try {
+            const response = await axios.put(
+                `/cart/${userId}`,
+                {
+                    _id: id,
+                    quantity,
+                },
+                {
+                    headers: {
+                        authorization: token,
+                    },
+                }
+            );
+            if (response.data.success) {
+                console.log("Update");
+                console.log(response.data);
+                dispatch({
+                    type: "SYNC_CART",
+                    payload: {
+                        product: response.data.updatedCart.cartItems
+                    }
+                })
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    // decrement
+    const decrement = async (id, quantity) => {
+        try {
+            const response = await axios.put(
+                `/cart/${userId}`,
+                {
+                    _id: id,
+                    quantity,
+                },
+                {
+                    headers: {
+                        authorization: token,
+                    },
+                }
+            );
+            if (response.data.success) {
+                dispatch({
+                    type: "SYNC_CART",
+                    payload: {
+                        product: response.data.updatedCart.cartItems
+                    }
+                })
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return (
         <div className="card-cart">
             <div className="card-cart__image__wrapper">
@@ -62,12 +119,7 @@ const CartCard = (props) => {
 
                 <div className="card-cart__control__wrapper">
                     <button
-                        onClick={() =>
-                            dispatch({
-                                type: "DECREASE_QUANTITY",
-                                payload: { _id },
-                            })
-                        }
+                        onClick={() => decrement(_id, quantity - 1)}
                         className="btn card-cart__control__button"
                     >
                         <span className="material-icons-round">remove</span>
@@ -78,12 +130,7 @@ const CartCard = (props) => {
                     </div>
 
                     <button
-                        onClick={() =>
-                            dispatch({
-                                type: "INCREASE_QUANTITY",
-                                payload: { _id },
-                            })
-                        }
+                        onClick={() => increment(_id, quantity + 1)}
                         className="btn card-cart__control__button"
                     >
                         <span className="material-icons-round">add</span>

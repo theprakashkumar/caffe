@@ -19,6 +19,7 @@ const Cart = () => {
                 },
             });
             if (response.data.success) {
+                console.log(response.data.cart.cartItems);
                 dispatch({
                     type: "SYNC_CART",
                     payload: {
