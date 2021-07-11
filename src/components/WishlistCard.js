@@ -22,12 +22,43 @@ const WishlistCard = (props) => {
                 },
             });
             if (response.data.success) {
-                console.log("Item Deleted From the server!");
                 wishlistDispatch({
                     type: "REMOVE_FROM_WISHLIST",
                     payload: { _id },
                 });
-                // Delete item form the context
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    // move item to cart
+    const moveToCart = async (id) => {
+        try {
+            const response = await axios.put(
+                `/wishlist/${userId}`,
+                {
+                    _id,
+                },
+                {
+                    headers: {
+                        authorization: token,
+                    },
+                }
+            );
+            if (response.data.success) {
+                cartDispatch({
+                    type: "SYNC_CART",
+                    payload: {
+                        product: response.data.updatedCart.cartItems,
+                    },
+                });
+                wishlistDispatch({
+                    type: "SYNC_WISHLIST",
+                    payload: {
+                        product: response.data.updatedWishlist.wishlistItems,
+                    },
+                });
             }
         } catch (error) {
             console.log(error);
@@ -71,16 +102,7 @@ const WishlistCard = (props) => {
 
                     <button
                         class="btn btn--icon btn--sm card-wishlist__control__button"
-                        onClick={() => {
-                            cartDispatch({
-                                type: "ADD_TO_CART",
-                                payload: { id: _id },
-                            });
-                            wishlistDispatch({
-                                type: "REMOVE_FROM_WISHLIST",
-                                payload: { id: _id },
-                            });
-                        }}
+                        onClick={() => moveToCart(_id)}
                     >
                         <span class="material-icons-outlined btn--icon__icon">
                             shopping_bag
