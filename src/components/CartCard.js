@@ -7,7 +7,14 @@ const CartCard = (props) => {
     const { userId, token } = useContext(AuthContext);
     const { dispatch } = useContext(CartContext);
     const { _id, quantity } = props.product;
-    const { image, name, price, discount, mrp, _id:id } = props.product.product;
+    const {
+        image,
+        name,
+        price,
+        discount,
+        mrp,
+        _id: productId,
+    } = props.product.product;
 
     // delete from the cart
     const removeFromCart = async (id) => {
@@ -22,9 +29,9 @@ const CartCard = (props) => {
             });
             if (response.data.success) {
                 dispatch({
-                    type: "REMOVE_FROM_CART",
+                    type: "SYNC_CART",
                     payload: {
-                        _id,
+                        product: response.data.updatedCart.cartItems,
                     },
                 });
             }
@@ -34,7 +41,6 @@ const CartCard = (props) => {
     };
 
     // manipulate cart
-    // increment
     const increment = async (id, quantity) => {
         try {
             const response = await axios.put(
@@ -50,20 +56,18 @@ const CartCard = (props) => {
                 }
             );
             if (response.data.success) {
-                console.log("Update");
-                console.log(response.data);
                 dispatch({
                     type: "SYNC_CART",
                     payload: {
-                        product: response.data.updatedCart.cartItems
-                    }
-                })
+                        product: response.data.updatedCart.cartItems,
+                    },
+                });
             }
         } catch (error) {
             console.log(error);
         }
     };
-    // decrement
+
     const decrement = async (id, quantity) => {
         try {
             const response = await axios.put(
@@ -82,9 +86,29 @@ const CartCard = (props) => {
                 dispatch({
                     type: "SYNC_CART",
                     payload: {
-                        product: response.data.updatedCart.cartItems
-                    }
-                })
+                        product: response.data.updatedCart.cartItems,
+                    },
+                });
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    // delete item from cart
+    const deleteFromCart = async (id) => {
+        try {
+            const response = await axios.delete(`/cart/${userId}`, {
+                headers: {
+                    authorization: token,
+                },
+                data: {
+                    id,
+                },
+            });
+            if (response.data.success) {
+                console.log("data updated");
+                console.log(response.data);
             }
         } catch (error) {
             console.log(error);
@@ -136,10 +160,15 @@ const CartCard = (props) => {
                         <span className="material-icons-round">add</span>
                     </button>
                     <button
-                        onClick={() => removeFromCart(_id)}
+                        onClick={() => removeFromCart(productId)}
                         className="btn card-cart__control__button"
                     >
-                        <span className="material-icons-round">delete</span>
+                        <span
+                            className="material-icons-round"
+                            onChange={() => deleteFromCart(productId)}
+                        >
+                            delete
+                        </span>
                     </button>
                 </div>
             </div>
