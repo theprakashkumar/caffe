@@ -1,10 +1,14 @@
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
+import { CartContext } from "../contexts/CartContext";
+import { WishlistContext } from "../contexts/WishlistContext";
 
 const Login = () => {
     const { isUserLogin, name, loginWithCredential, logout } =
         useContext(AuthContext);
+    const { dispatch: cartDispatch } = useContext(CartContext);
+    const { dispatch: wishlistDispatch } = useContext(WishlistContext);
     const [credential, setCredential] = useState({ email: "", password: "" });
 
     const handleChange = (e) => {
@@ -18,6 +22,16 @@ const Login = () => {
         e.preventDefault();
         loginWithCredential(credential.email, credential.password);
     };
+
+    const handleLogout = () => {
+        cartDispatch({
+            type: "RESET_CART",
+        });
+        wishlistDispatch({
+            type: "RESET_WISHLIST",
+        });
+        logout();
+    };
     return (
         <div className="login">
             <p>
@@ -28,7 +42,7 @@ const Login = () => {
             {isUserLogin ? (
                 <>
                     <p>Hi There!</p>
-                    <button onClick={logout}>Logout</button>
+                    <button onClick={handleLogout}>Logout</button>
                 </>
             ) : (
                 <>

@@ -21,7 +21,7 @@ const Nav = () => {
                     <span class="material-icons-outlined icon-with-badge__icon">
                         bookmark_border
                     </span>
-                    <span class=" icon-with-badge__text">{wishlistState.length}</span>
+                    <span class=" icon-with-badge__text">{wishlistState?.length}</span>
                 </div>
             </Link>
             {/* <p>{ isUserLogin.toString() }</p> */}
@@ -30,7 +30,7 @@ const Nav = () => {
                     <span class="material-icons-outlined icon-with-badge__icon">
                         shopping_bag
                     </span>
-                    <span class="icon-with-badge__text">{cartState.length}</span>
+                    <span class="icon-with-badge__text">{cartState?.length}</span>
                 </div>
             </Link>
             <Link to="/login">

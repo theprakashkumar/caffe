@@ -8,28 +8,30 @@ const cartReducer = (state, action) => {
             return state.filter(
                 (item) => item.product._id !== action.payload._id
             );
-        case "INCREASE_QUANTITY":
-            return state.map((item) => {
-                return item._id === action.payload.id
-                    ? {
-                          ...item,
-                          quantity: item.quantity + 1,
-                      }
-                    : item;
-            });
-        case "DECREASE_QUANTITY":
-            let foundItem = state.find((item) => item.id === action.payload.id);
-            if (foundItem.quantity === 1) {
-                return state.filter((item) => item.id !== action.payload.id);
-            }
-            return state.map((item) => {
-                return item.id === action.payload.id
-                    ? {
-                          ...item,
-                          quantity: item.quantity - 1,
-                      }
-                    : item;
-            });
+        case "RESET_CART":
+            return [];
+        // case "INCREASE_QUANTITY":
+        //     return state.map((item) => {
+        //         return item._id === action.payload.id
+        //             ? {
+        //                   ...item,
+        //                   quantity: item.quantity + 1,
+        //               }
+        //             : item;
+        //     });
+        // case "DECREASE_QUANTITY":
+        //     let foundItem = state.find((item) => item.id === action.payload.id);
+        //     if (foundItem.quantity === 1) {
+        //         return state.filter((item) => item.id !== action.payload.id);
+        //     }
+        //     return state.map((item) => {
+        //         return item.id === action.payload.id
+        //       //      ? {
+        //                   ...item,
+        //                   quantity: item.quantity - 1,
+        //               }
+        //             : item;
+        //     });
     }
 };
 

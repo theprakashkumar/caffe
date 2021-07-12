@@ -12,6 +12,8 @@ const wishlistReducer = (state, action) => {
             );
         case "MOVE_ITEM_TO_CART":
             console.log("Item Has Move to Cart!");
+        case "RESET_WISHLIST":
+            return [];
     }
 };
 
