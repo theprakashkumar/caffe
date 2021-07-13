@@ -1,13 +1,11 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import { DataContext } from "../contexts/DataContext";
 import { CartContext } from "../contexts/CartContext";
 import { WishlistContext } from "../contexts/WishlistContext";
 import { AuthContext } from "../contexts/AuthContext";
 import { useParams, useNavigate } from "react-router-dom";
 
 const ProductPage = (props) => {
-    const { data } = useContext(DataContext);
     const { dispatch: cartDispatch } = useContext(CartContext);
     const { dispatch: wishlistDispatch } = useContext(WishlistContext);
     const { isUserLogin, userId, token } = useContext(AuthContext);

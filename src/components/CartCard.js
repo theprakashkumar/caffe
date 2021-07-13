@@ -121,7 +121,7 @@ const CartCard = (props) => {
                 <img
                     src={image}
                     className="card-cart__image"
-                    alt="Product Image"
+                    alt="Product"
                 />
             </div>
 

@@ -1,6 +1,6 @@
 import "./App.css";
 import axios from "axios";
-import { useState, useEffect, useContext } from "react";
+import { useEffect, useContext } from "react";
 import { Routes, Route } from "react-router-dom";
 import PrivateRoutes from "./utils/PrivateRoutes";
 import { DataContext } from "./contexts/DataContext";

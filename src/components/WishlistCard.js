@@ -68,11 +68,7 @@ const WishlistCard = (props) => {
     return (
         <div class="card-wishlist">
             <div class="card-wishlist__image__wrapper">
-                <img
-                    src={image}
-                    class="card-wishlist__image"
-                    alt="Product Image"
-                />
+                <img src={image} class="card-wishlist__image" alt="Product" />
             </div>
             <div class="card-wishlist__description">
                 <div class="card-wishlist__description__title">{name}</div>

@@ -8,7 +8,7 @@ import CartCard from "./CartCard";
 const Cart = () => {
     const [loading, setLoading] = useState(true);
     const { state, dispatch } = useContext(CartContext);
-    const { isUserLogin, userId, token } = useContext(AuthContext);
+    const { userId, token } = useContext(AuthContext);
 
     // get cart data from server
     const getCart = async () => {

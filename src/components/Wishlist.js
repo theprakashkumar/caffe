@@ -2,16 +2,13 @@ import "./Wishlist.css";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../contexts/AuthContext";
-import { DataContext } from "../contexts/DataContext";
 import { WishlistContext } from "../contexts/WishlistContext";
-import { CartContext } from "../contexts/CartContext";
 import WishlistCard from "./WishlistCard";
 
 const Wishlist = () => {
     const [loading, setLoading] = useState(true);
     const { userId, token } = useContext(AuthContext);
     const { state, dispatch: wishlistDispatch } = useContext(WishlistContext);
-    const { dispatch: cartDispatch } = useContext(CartContext);
 
     // load data from the server
     const getWishlist = async () => {

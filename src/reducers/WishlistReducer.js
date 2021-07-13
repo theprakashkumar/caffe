@@ -1,5 +1,3 @@
-// ! Move to Cart Statement
-
 const wishlistReducer = (state, action) => {
     switch (action.type) {
         case "SYNC_WISHLIST":
@@ -10,10 +8,10 @@ const wishlistReducer = (state, action) => {
             return state.filter(
                 (item) => item.product._id !== action.payload._id
             );
-        case "MOVE_ITEM_TO_CART":
-            console.log("Item Has Move to Cart!");
         case "RESET_WISHLIST":
             return [];
+        default:
+            return state;
     }
 };
 
