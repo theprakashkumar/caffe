@@ -5,6 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import PrivateRoutes from "./utils/PrivateRoutes";
 import { DataContext } from "./contexts/DataContext";
 import Nav from "./components/Nav";
+import Home from "./components/Home";
 import ProductList from "./components/ProductList";
 import ProductPage from "./components/ProductPage";
 import Login from "./components/Login";
@@ -94,7 +95,8 @@ function App() {
             <header className="App-header">
                 <Nav />
                 <Routes>
-                    <Route path="/" element={<ProductList />} />
+                    <Route path="/" element={<Home />} />
+                    <Route path="/products" element={<ProductList />} />
                     <Route path="/product/:id" element={<ProductPage />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<SignUp />} />
