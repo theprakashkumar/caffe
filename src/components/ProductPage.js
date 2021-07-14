@@ -5,43 +5,61 @@ import { WishlistContext } from "../contexts/WishlistContext";
 import { AuthContext } from "../contexts/AuthContext";
 import { useParams, useNavigate } from "react-router-dom";
 
-const ProductPage = (props) => {
-    const { dispatch: cartDispatch } = useContext(CartContext);
-    const { dispatch: wishlistDispatch } = useContext(WishlistContext);
+const ProductPage = () => {
+    const { state: cartState, dispatch: cartDispatch } =
+        useContext(CartContext);
+    const { state: wishlistState, dispatch: wishlistDispatch } =
+        useContext(WishlistContext);
     const { isUserLogin, userId, token } = useContext(AuthContext);
     const { id } = useParams();
     const navigate = useNavigate();
     const [product, setProduct] = useState(null);
 
-    const addToWishlist = async (id) => {
-        try {
-            const response = await axios.post(
-                `/wishlist/${userId}`,
-                {
-                    _id: id,
-                },
-                {
-                    headers: {
-                        authorization: token,
-                    },
-                }
-            );
-            if (response.data.success) {
-                console.log(response.data);
-                wishlistDispatch({
-                    type: "ADD_TO_WISHLIST",
-                    payload: {
-                        product,
-                    },
-                });
-            }
-        } catch (error) {
-            console.log(error);
+    const [isProductInCart, setIsProductInCart] = useState(false);
+    const [isProductInWishlist, setIsProductInWishlist] = useState(false);
+
+    // find if item is already in cart or wishlist
+    // const inCartOrWishlist = (id) => {
+    //     const inCart = cartState.find((item) => item.product?._id === id);
+    //     const inWishlist = wishlistState.find(
+    //         (item) => item.product?._id === id
+    //     );
+
+    //     if (inCart) {
+    //         setIsProductInCart(true);
+    //     }
+    //     if (inWishlist) {
+    //         setIsProductInWishlist(true);
+    //     }
+
+    //     console.log({isProductInCart})
+    //     console.log("product id", id);
+    //     // console.log("product id from inCart", inCart.product._id);
+    //     console.log({ inCart });
+    //     console.log({ inWishlist });
+    // };
+
+    const inCart = (id) => {
+        const alreadyInCart = cartState.find(
+            (item) => item.product?._id === id
+        );
+        if (alreadyInCart) {
+            setIsProductInCart(true);
+        }
+    };
+
+    const inWishlist = (id) => {
+        const alreadyInWishlist = wishlistState.find((item) => item._id === id);
+        if (alreadyInWishlist) {
+            setIsProductInWishlist(true);
         }
     };
 
     // add product to cart
-    const addToCart = async (id) => {
+    const addToCartHandler = async (id) => {
+        if (isProductInCart) {
+            return navigate("/cart");
+        }
         try {
             const response = await axios.post(
                 `/cart/${userId}`,
@@ -55,9 +73,39 @@ const ProductPage = (props) => {
                 }
             );
             if (response.data.success) {
-                console.log("add to cart");
                 cartDispatch({
                     type: "ADD_TO_CART",
+                    payload: {
+                        product,
+                    },
+                });
+                setIsProductInCart(true);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    // add product to wishlist
+    const addToWishlist = async (id) => {
+        if (isProductInWishlist) {
+            return navigate("/wishlist");
+        }
+        try {
+            const response = await axios.post(
+                `/wishlist/${userId}`,
+                {
+                    _id: id,
+                },
+                {
+                    headers: {
+                        authorization: token,
+                    },
+                }
+            );
+            if (response.data.success) {
+                wishlistDispatch({
+                    type: "ADD_TO_WISHLIST",
                     payload: {
                         product,
                     },
@@ -81,37 +129,25 @@ const ProductPage = (props) => {
             }
         };
         getProduct(id);
+        console.log("3", isProductInCart);
+        inCart(id);
+        console.log("4", isProductInCart);
+        inWishlist(id);
     }, []);
 
-    // // remove product from the wishlist
-    // const removeFromWishlist = (id) => {
-    //     try {
-    //         const response = await axios.delete(
-    //             `/wishlist/${userId}`,
-    //             {
-    //                 _id: id,
-    //             },
-    //             {
-    //                 headers: {
-    //                     authorization: token,
-    //                 },
-    //             }
-    //         );
-    //         if (response.data.success) {
-    //             console.log("Deleted Item from Wishlist");
-    //             console.log("response.data");
-    //             wishlistDispatch({
-    //                 type: "REMOVE_FROM_WISHLIST",
-    //                 payload: { id: id },
-    //             });
-    //         }
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // };
+    useEffect(() => {
+        console.log("1", isProductInCart);
+        inCart(id);
+        console.log("2", isProductInCart);
+    }, [cartState]);
+
+    useEffect(() => {
+        inWishlist(id);
+    }, [wishlistState]);
 
     return (
         <div>
+            {isProductInWishlist.toString()}
             {product ? (
                 <div className="product-page">
                     <div className="product-page__main">
@@ -150,18 +186,20 @@ const ProductPage = (props) => {
                                         : navigate("/login");
                                 }}
                             >
-                                WISHLIST
+                                {isProductInWishlist
+                                    ? "WISHLISTED"
+                                    : "WISHLIST"}
                             </button>
 
                             <button
                                 class="btn mt-1"
                                 onClick={() => {
                                     isUserLogin
-                                        ? addToCart(product?._id)
+                                        ? addToCartHandler(product?._id)
                                         : navigate("/login");
                                 }}
                             >
-                                ADD TO CART
+                                {isProductInCart ? "GO TO CART" : "ADD TO CART"}
                             </button>
                         </div>
                     </div>
