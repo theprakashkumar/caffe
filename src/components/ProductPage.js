@@ -129,16 +129,12 @@ const ProductPage = () => {
             }
         };
         getProduct(id);
-        console.log("3", isProductInCart);
         inCart(id);
-        console.log("4", isProductInCart);
         inWishlist(id);
     }, []);
 
     useEffect(() => {
-        console.log("1", isProductInCart);
         inCart(id);
-        console.log("2", isProductInCart);
     }, [cartState]);
 
     useEffect(() => {

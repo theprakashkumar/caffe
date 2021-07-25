@@ -2,8 +2,6 @@ import "./App.css";
 import axios from "axios";
 import { useEffect, useContext } from "react";
 import { Routes, Route } from "react-router-dom";
-import PrivateRoutes from "./utils/PrivateRoutes";
-import { DataContext } from "./contexts/DataContext";
 import Nav from "./components/Nav";
 import Home from "./components/Home";
 import ProductList from "./components/ProductList";
@@ -12,6 +10,8 @@ import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import Wishlist from "./components/Wishlist";
 import Cart from "./components/Cart";
+import PrivateRoutes from "./utils/PrivateRoutes";
+import { DataContext } from "./contexts/DataContext";
 import { AuthContext } from "./contexts/AuthContext";
 import { WishlistContext } from "./contexts/WishlistContext";
 import { CartContext } from "./contexts/CartContext";
@@ -22,7 +22,7 @@ function App() {
     const { dispatch: wishlistDispatch } = useContext(WishlistContext);
     const { dispatch: cartDispatch } = useContext(CartContext);
 
-    // get data from the server
+    // get data from the server and save them in context
     const getData = async () => {
         try {
             const response = await axios.get("/products");
@@ -34,7 +34,7 @@ function App() {
         }
     };
 
-    // get cart data from server
+    // get cart data from server and save them in context
     const getCart = async () => {
         try {
             const response = await axios.get(`/cart/${userId}`, {
@@ -55,7 +55,7 @@ function App() {
         }
     };
 
-    // load data from the server
+    // get wishlist data from the server and save them in context
     const getWishlist = async () => {
         try {
             const response = await axios.get(`/wishlist/${userId}`, {
@@ -83,6 +83,7 @@ function App() {
             getCart();
         }
     }, []);
+
     useEffect(() => {
         if (isUserLogin) {
             getWishlist();

@@ -10,7 +10,7 @@ const ProductList = () => {
     const { fastDeliveryOnly, showAll, sortBy } = state;
     const [isLoading] = useState(false);
 
-    // filter data
+    // filter products
     const getFilteredProduct = (product, fastDeliveryOnly, showAll) => {
         return product
             .filter(({ fastDelivery }) =>
@@ -19,7 +19,7 @@ const ProductList = () => {
             .filter(({ inStock }) => (showAll ? true : inStock));
     };
 
-    // sort product
+    // sort products
     const getSortedProduct = (product, sortBy) => {
         if (sortBy && sortBy === "PRICE_LOW_TO_HIGH") {
             return product.sort((a, b) => a["price"] - b["price"]);
