@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useContext, useEffect } from "react";
 import { WishlistContext } from "../contexts/WishlistContext";
 import { AuthContext } from "../contexts/AuthContext";
@@ -14,6 +14,8 @@ const ProductCard = (props) => {
 
     const [isProductInWishlist, setIsProductInWishlist] = useState(false);
 
+    const navigate = useNavigate();
+
     const inWishlist = (id) => {
         const alreadyInWishlist = wishlistState.find((item) => item._id === id);
         if (alreadyInWishlist) {
@@ -23,7 +25,6 @@ const ProductCard = (props) => {
 
     // add product to wishlist
     const addToWishlist = async (id) => {
-        console.log("Adding to Wishlist");
         try {
             const response = await axios.post(
                 `/wishlist/${userId}`,
@@ -37,8 +38,6 @@ const ProductCard = (props) => {
                 }
             );
             if (response.data.success) {
-                console.log("Added to Wishlist");
-                console.log(response.data);
                 wishlistDispatch({
                     type: "SYNC_WISHLIST",
                     payload: {
@@ -78,7 +77,11 @@ const ProductCard = (props) => {
     };
 
     const clickHandler = () => {
-        !isProductInWishlist ? addToWishlist(_id) : removeFromWishlist(_id);
+        if (isUserLogin) {
+            !isProductInWishlist ? addToWishlist(_id) : removeFromWishlist(_id);
+        } else {
+            navigate("/login", { state: { from: "/products" } });
+        }
     };
 
     useEffect(() => {
