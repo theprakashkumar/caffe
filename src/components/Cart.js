@@ -4,6 +4,7 @@ import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import { CartContext } from "../contexts/CartContext";
 import CartCard from "./CartCard";
+import EmptyCart from "./EmptyCart";
 
 const Cart = () => {
     const [loading, setLoading] = useState(true);
@@ -45,7 +46,7 @@ const Cart = () => {
                     return <CartCard product={item} />;
                 })
             ) : (
-                "Your Cart Is Empty! 😟"
+                <EmptyCart />
             )}
         </div>
     );
