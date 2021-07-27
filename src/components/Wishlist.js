@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import { WishlistContext } from "../contexts/WishlistContext";
 import WishlistCard from "./WishlistCard";
+import EmptyWishlist from "./EmptyWishlist";
 
 const Wishlist = () => {
     const [loading, setLoading] = useState(true);
@@ -47,7 +48,7 @@ const Wishlist = () => {
                     return <WishlistCard product={item} />;
                 })
             ) : (
-                "Your Wishlist is Empty :("
+                <EmptyWishlist />
             )}
         </div>
     );
