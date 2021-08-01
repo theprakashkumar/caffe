@@ -12,7 +12,7 @@ const EmptyWishlist = () => {
             />
             <div className="heading--h6">I am empty :(</div>
             <div>Your Wishlist is Empty</div>
-            <Link className="btn btn--link" to="/products">
+            <Link className="btn btn--link link" to="/products">
                 Go to Catalog
             </Link>
         </div>
