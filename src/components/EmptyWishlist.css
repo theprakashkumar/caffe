@@ -1,0 +1,9 @@
+.empty-cart {
+    width: max-content;
+    margin: 3rem auto;
+}
+.empty-cart__image {
+    display: block;
+    width: 15rem;
+    height: auto;
+}
