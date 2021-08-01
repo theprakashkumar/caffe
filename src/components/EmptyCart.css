@@ -1,0 +1,9 @@
+.empty-wishlist {
+    width: max-content;
+    margin: 3rem auto;
+}
+.empty-wishlist__image {
+    display: block;
+    width: 15rem;
+    height: auto;
+}
