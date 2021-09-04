@@ -24,3 +24,6 @@ Ecom
 -   Add which link item is active.
 
 -   Maybe download SVG of icon and directly add.
+
+- If token is expired simply logout the user.
+

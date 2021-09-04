@@ -1,0 +1,22 @@
+.home {
+    position: absolute;
+}
+.home__img {
+    width: 100%;
+    height: auto;
+}
+
+.home__description-container {
+    position: absolute;
+    top: 25%;
+    width: 100%;
+    display: flex;
+    color: var(--main-background);
+    flex-direction: column;
+    align-items: center;
+}
+
+.btn {
+    margin-top: 2rem;
+    color: var(--main-text-color);
+}
