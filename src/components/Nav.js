@@ -9,37 +9,38 @@ const Nav = () => {
     const { state: wishlistState } = useContext(WishlistContext);
     return (
         <div className="nav">
-            <Link to="/">
-                <div className="nav__brand">Caffè</div>
+            <Link className="nav__logo" to="/">
+                Caffè
             </Link>
-            <Link to="/wishlist">
-                <div class="icon-with-badge">
-                    <span class="material-icons-outlined icon-with-badge__icon">
-                        bookmark_border
-                    </span>
-                    <span class=" icon-with-badge__text">
-                        {wishlistState?.length}
-                    </span>
-                </div>
-            </Link>
-            {/* <p>{ isUserLogin.toString() }</p> */}
-            <Link to="/cart">
-                <div class="icon-with-badge">
-                    <span class="material-icons-outlined icon-with-badge__icon">
-                        shopping_bag
-                    </span>
-                    <span class="icon-with-badge__text">
-                        {cartState?.length}
-                    </span>
-                </div>
-            </Link>
-            <Link to="/login">
-                <div class="icon-with-badge">
-                    <span class="material-icons-outlined icon-with-badge__icon">
-                        perm_identity
-                    </span>
-                </div>
-            </Link>
+            <div className="nav__menu">
+                <Link className="nav__item" to="/wishlist">
+                    <div class="icon-with-badge">
+                        <span class="material-icons-outlined icon-with-badge__icon">
+                            bookmark_border
+                        </span>
+                        <span class=" icon-with-badge__text">
+                            {wishlistState?.length}
+                        </span>
+                    </div>
+                </Link>
+                <Link className="nav__item" to="/cart">
+                    <div class="icon-with-badge">
+                        <span class="material-icons-outlined icon-with-badge__icon">
+                            shopping_cart
+                        </span>
+                        <span class="icon-with-badge__text">
+                            {cartState?.length}
+                        </span>
+                    </div>
+                </Link>
+                <Link className="nav__item" to="/login">
+                    <div class="icon-with-badge">
+                        <span class="material-icons-outlined icon-with-badge__icon">
+                            perm_identity
+                        </span>
+                    </div>
+                </Link>
+            </div>
         </div>
     );
 };

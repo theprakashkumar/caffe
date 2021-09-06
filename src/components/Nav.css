@@ -1,3 +1,46 @@
-.nav__brand {
-    letter-spacing: 3px;
+.nav {
+    padding: 0.8rem 3rem;
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 20;
+}
+
+.nav__logo {
+    letter-spacing: 1px;
+    font-family: "Pacifico", cursive;
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+.nav__item {
+    height: 36px;
+}
+
+.icon-with-badge {
+    justify-content: center;
+    align-items: center;
+    margin-right: 0;
+    margin-left: 0.8rem;
+}
+
+@media only screen and (max-width: 768px) {
+    .nav {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .nav__menu {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        align-self: flex-end;
+        justify-self: flex-end;
+        padding: 0;
+    }
+
+    .nav__menu .nav__item:first-child {
+        margin-left: auto;
+    }
 }

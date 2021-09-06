@@ -1,19 +1,16 @@
 .home {
-    position: absolute;
-}
-.home__img {
-    width: 100%;
-    height: auto;
-}
-
-.home__description-container {
-    position: absolute;
-    top: 25%;
-    width: 100%;
+    height: 100vh;
+    background-image: url(../assets/LandingPhoto.jpg);
     display: flex;
-    color: var(--main-background);
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    background-size: cover;
+}
+
+.heading {
+    color: var(--main-background);
+    text-align: center;
 }
 
 .btn {
