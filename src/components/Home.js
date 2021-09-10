@@ -5,8 +5,8 @@ import LandingPhoto from "../assets/LandingPhoto.jpg";
 const Home = () => {
     return (
         <header className="home">
-            <div class="heading heading--h2">Brewing Starts Here!</div>
-            <Link className="btn" to="/products">
+            <div className="heading heading--h2 home-heading">Brewing Starts Here!</div>
+            <Link className="btn home-btn" to="/products">
                 Explore Products
             </Link>
         </header>

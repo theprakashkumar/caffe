@@ -1,3 +1,4 @@
+import "./Login.css";
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
@@ -34,11 +35,6 @@ const Login = () => {
     };
     return (
         <div className="login">
-            <p>
-                {isUserLogin ? name : "Not Logged In"}
-                {credential.email} {credential.password}
-            </p>
-
             {isUserLogin ? (
                 <>
                     <p>Hi There!</p>
@@ -46,32 +42,40 @@ const Login = () => {
                 </>
             ) : (
                 <>
-                    <form onSubmit={handleSubmit}>
-                        <div class="input-text-wrapper">
-                            <input
-                                class="input-text  input-text-email"
-                                type="text"
-                                placeholder="Email"
-                                name="email"
-                                value={credential.email}
-                                onChange={handleChange}
-                            />
-                        </div>
+                    <div className="login-from-container">
+                        <div className="heading heading--h4 login-heading">Welcome Back!</div>
+                        <form onSubmit={handleSubmit}>
+                            <div className="input-text-wrapper mb-1">
+                                <input
+                                    className="input-text  input-text-email"
+                                    type="text"
+                                    placeholder="Email"
+                                    name="email"
+                                    value={credential.email}
+                                    onChange={handleChange}
+                                />
+                            </div>
 
-                        <div class="input-text-wrapper">
-                            <input
-                                class="input-text input-text-password"
-                                type="password"
-                                placeholder="Password"
-                                name="password"
-                                value={credential.password}
-                                onChange={handleChange}
-                            />
-                        </div>
+                            <div className="input-text-wrapper">
+                                <input
+                                    className="input-text input-text-password"
+                                    type="password"
+                                    placeholder="Password"
+                                    name="password"
+                                    value={credential.password}
+                                    onChange={handleChange}
+                                />
+                            </div>
 
-                        <button class="btn btn--md">Login</button>
-                    </form>
-                    <Link to="/signup">Don't Have Account Create One!</Link>
+                            <button className="btn btn--md login-btn mt-1 mb-1">
+                                Login
+                            </button>
+                        </form>
+
+                        <Link className="btn btn--link login-btn-link" to="/signup">
+                            Don't Have Account Create One!
+                        </Link>
+                    </div>
                 </>
             )}
         </div>

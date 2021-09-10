@@ -1,0 +1,23 @@
+.login-from-container {
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+    
+}
+
+.login-heading {
+    color: var(--main-text-color);
+    text-align: center;
+    font-weight: 400;
+    margin-top: 20%;
+    margin-bottom: 3rem;
+}
+
+.login-btn {
+    width: 100%;
+}
+
+.login-btn-link {
+    display: flex;
+    width: fit-content;
+}

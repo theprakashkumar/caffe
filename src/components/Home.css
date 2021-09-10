@@ -8,12 +8,12 @@
     background-size: cover;
 }
 
-.heading {
+.home-heading {
     color: var(--main-background);
     text-align: center;
 }
 
-.btn {
+.home-btn {
     margin-top: 2rem;
     color: var(--main-text-color);
 }
