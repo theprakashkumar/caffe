@@ -6,7 +6,7 @@ import { AuthContext } from "../contexts/AuthContext";
 import "./ProductCard.css";
 
 const ProductCard = (props) => {
-    const { _id, name, image, price, ratings, mrp, discount } = props.details;
+    const { _id, name, image, price, rating, mrp, discount, tastingNodes, category  } = props.details;
     const { isUserLogin, userId, token } = useContext(AuthContext);
 
     const { state: wishlistState, dispatch: wishlistDispatch } =
@@ -17,8 +17,6 @@ const ProductCard = (props) => {
     const navigate = useNavigate();
 
     const inWishlist = (id) => {
-        console.log(wishlistState);
-        console.log(_id);
         const alreadyInWishlist = wishlistState.find(
             (item) => item.product._id === id
         );
@@ -102,8 +100,6 @@ const ProductCard = (props) => {
             <div class="card-product__image__wrapper">
                 <img src={image} alt="product" class="card-product__image" />
                 <button class="card-product__icon" onClick={clickHandler}>
-                    {/* {isProductInWishlist ? "wished" : "wish"} */}
-                    {/* <span class="material-icons md-36">favorite_border</span> */}
                     <svg
                         width="24"
                         height="24"
@@ -119,14 +115,15 @@ const ProductCard = (props) => {
             <div class="card-product__name">{name}</div>
 
             <div class="card-product__description">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum
-                accusamus, quo veniam at ipsum
+                Tasting Nodes: {tastingNodes} 
+                <br />
+                Roast: {category}
             </div>
 
             <div class="card-product__rating__wrapper">
                 <div class="card-product__rating__icon__wrapper">
                     <span class="card-product__rating__icon__text">
-                        {ratings}
+                        {rating}
                     </span>
                     <span class="material-icons-outlined card-product__rating__icon">
                         star
