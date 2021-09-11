@@ -15,6 +15,7 @@ import { DataContext } from "./contexts/DataContext";
 import { AuthContext } from "./contexts/AuthContext";
 import { WishlistContext } from "./contexts/WishlistContext";
 import { CartContext } from "./contexts/CartContext";
+import Footer from "./components/Footer";
 
 function App() {
     const { setData } = useContext(DataContext);
@@ -104,6 +105,7 @@ function App() {
                     <PrivateRoutes path="/wishlist" element={<Wishlist />} />
                     <PrivateRoutes path="/cart" element={<Cart />} />
                 </Routes>
+                <Footer />
             </header>
         </div>
     );
