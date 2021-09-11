@@ -1,3 +1,4 @@
+import "./SignUp.css"
 import { useContext, useState } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 
@@ -24,42 +25,48 @@ const SignUp = () => {
     };
     return (
         <div className="signup">
-            <form onSubmit={handleSubmit}>
-                <div class="input-text-wrapper">
-                    <input
-                        class="input-text  input-text-full-name"
-                        type="text"
-                        placeholder="Full Name"
-                        name="name"
-                        value={userDetails.name}
-                        onChange={handleChange}
-                    />
+            <div className="sign-up-from-container">
+                <div className="heading heading--h4 sign-up-heading">
+                    Create Account!
                 </div>
 
-                <div class="input-text-wrapper">
-                    <input
-                        class="input-text input-text-email"
-                        type="text"
-                        placeholder="Email"
-                        name="email"
-                        value={userDetails.email}
-                        onChange={handleChange}
-                    />
-                </div>
+                <form onSubmit={handleSubmit}>
+                    <div class="input-text-wrapper mb-1">
+                        <input
+                            class="input-text  input-text-full-name"
+                            type="text"
+                            placeholder="Full Name"
+                            name="name"
+                            value={userDetails.name}
+                            onChange={handleChange}
+                        />
+                    </div>
 
-                <div class="input-text-wrapper">
-                    <input
-                        class="input-text input-text-password"
-                        type="password"
-                        placeholder="Password"
-                        name="password"
-                        value={userDetails.password}
-                        onChange={handleChange}
-                    />
-                </div>
+                    <div class="input-text-wrapper mb-1">
+                        <input
+                            class="input-text input-text-email"
+                            type="text"
+                            placeholder="Email"
+                            name="email"
+                            value={userDetails.email}
+                            onChange={handleChange}
+                        />
+                    </div>
 
-                <button class="btn btn--lg">SIGN UP</button>
-            </form>
+                    <div class="input-text-wrapper">
+                        <input
+                            class="input-text input-text-password"
+                            type="password"
+                            placeholder="Password"
+                            name="password"
+                            value={userDetails.password}
+                            onChange={handleChange}
+                        />
+                    </div>
+
+                    <button class="btn btn--lg sign-up-btn mt-1">SIGN UP</button>
+                </form>
+            </div>
         </div>
     );
 };
