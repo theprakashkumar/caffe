@@ -1,3 +1,4 @@
+import "./ProductCard.css";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useContext, useEffect } from "react";
@@ -6,7 +7,17 @@ import { AuthContext } from "../contexts/AuthContext";
 import "./ProductCard.css";
 
 const ProductCard = (props) => {
-    const { _id, name, image, price, rating, mrp, discount, tastingNodes, category  } = props.details;
+    const {
+        _id,
+        name,
+        image,
+        price,
+        rating,
+        mrp,
+        discount,
+        tastingNodes,
+        category,
+    } = props.details;
     const { isUserLogin, userId, token } = useContext(AuthContext);
 
     const { state: wishlistState, dispatch: wishlistDispatch } =
@@ -98,7 +109,11 @@ const ProductCard = (props) => {
     return (
         <div class="card-product">
             <div class="card-product__image__wrapper">
-                <img src={image} alt="product" class="card-product__image" />
+                <img
+                    src={image}
+                    alt="product"
+                    class="card-product__image product-card-image"
+                />
                 <button class="card-product__icon" onClick={clickHandler}>
                     <svg
                         width="24"
@@ -115,9 +130,7 @@ const ProductCard = (props) => {
             <div class="card-product__name">{name}</div>
 
             <div class="card-product__description">
-                Tasting Nodes: {tastingNodes} 
-                <br />
-                Roast: {category}
+                {tastingNodes} | {category}
             </div>
 
             <div class="card-product__rating__wrapper">
