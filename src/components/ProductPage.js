@@ -1,3 +1,4 @@
+import "./ProductPage.css";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../contexts/CartContext";
@@ -143,16 +144,43 @@ const ProductPage = () => {
 
     return (
         <div>
-            {isProductInWishlist.toString()}
             {product ? (
                 <div className="product-page">
-                    <div className="product-page__main">
+                    <div className="product-page__main mt-3">
                         <div className="product-page__main__right">
-                            <img src={product.image} alt="product-page" />
+                            <img
+                                src={product.image}
+                                className="product-page__main__right__image"
+                                alt="product-image"
+                            />
                         </div>
                         <div className="product-page__main__left">
-                            <div className="product-page__main__left__title">
+                            <div className="product-page__main__left__title heading heading--h3">
                                 {product.name}
+                            </div>
+                            <div class="card-product__rating__wrapper">
+                                <div class="card-product__rating__icon__wrapper">
+                                    <span class="card-product__rating__icon__text">
+                                        {product.rating}
+                                    </span>
+                                    <span class="material-icons-outlined card-product__rating__icon">
+                                        star
+                                    </span>
+                                </div>
+                                <span class="card-product__rating__reviews">
+                                    342 Ratings & 29 Reviews
+                                </span>
+                            </div>
+                            <div class="card-product__price__wrapper">
+                                <div class="card-product__price">
+                                    {"\u20B9"} {product.price}
+                                </div>
+                                <strike class="card-product__price__crossed ml-2">
+                                    {"\u20B9"} {product.mrp}
+                                </strike>
+                                <div class="card-product__price__discount ml-2">
+                                    {product.discount} off
+                                </div>
                             </div>
                             <div className="product-page__main__left__review_wrapper">
                                 <div className="product-page__main__left__review_icon_wrapper">
@@ -162,46 +190,48 @@ const ProductPage = () => {
                                 <div className="product-page__main__left__review__rating"></div>
                             </div>
 
-                            <div class="product-page__main__left__price__wrapper">
-                                <div class="product-page__main__left__price">
-                                    {"\u20B9"} {product.price}
-                                </div>
-                                <strike class="product-page__main__left__price__crossed ml-2">
-                                    {"\u20B9"} {product.originalPrice}{" "}
-                                </strike>
-                                <div class="product-page__main__left__price__discount ml-2">
-                                    {product.discount} off
-                                </div>
+                            <div class="card-product__description mt-1 mb-1">
+                                Tasting Nodes: {product.tastingNodes}
+                                <br />
+                                Roast: {product.category}
                             </div>
 
-                            <button
-                                class="btn mt-1"
-                                onClick={() => {
-                                    isUserLogin
-                                        ? addToWishlist(product?._id)
-                                        : navigate("/login");
-                                }}
-                            >
-                                {isProductInWishlist
-                                    ? "WISHLISTED"
-                                    : "WISHLIST"}
-                            </button>
+                            <div className="product-page__button-container">
+                                <button
+                                    class="btn mt-1 mr-1"
+                                    onClick={() => {
+                                        isUserLogin
+                                            ? addToWishlist(product?._id)
+                                            : navigate("/login");
+                                    }}
+                                >
+                                    {isProductInWishlist
+                                        ? "WISHLISTED"
+                                        : "WISHLIST"}
+                                </button>
 
-                            <button
-                                class="btn mt-1"
-                                onClick={() => {
-                                    isUserLogin
-                                        ? addToCartHandler(product?._id)
-                                        : navigate("/login");
-                                }}
-                            >
-                                {isProductInCart ? "GO TO CART" : "ADD TO CART"}
-                            </button>
+                                <button
+                                    class="btn mt-1 product-page__cart-button"
+                                    onClick={() => {
+                                        isUserLogin
+                                            ? addToCartHandler(product?._id)
+                                            : navigate("/login");
+                                    }}
+                                >
+                                    {isProductInCart
+                                        ? "GO TO CART"
+                                        : "ADD TO CART"}
+                                </button>
+                            </div>
                         </div>
+                    </div>
+                    <div className="product-page__description mt-6">
+                        <div className="heading heading--h6">Description</div>
+                        <div>{product.description}</div>
                     </div>
                 </div>
             ) : (
-                <p></p>
+                <p>loading</p>
             )}
         </div>
     );
