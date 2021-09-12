@@ -1,4 +1,5 @@
 import "./Login.css";
+import Avatar from "../assets/account_circle_black_48dp.svg";
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
@@ -36,14 +37,23 @@ const Login = () => {
     return (
         <div className="login">
             {isUserLogin ? (
-                <>
-                    <p>Hi There!</p>
-                    <button onClick={handleLogout}>Logout</button>
-                </>
+                <div className="logged-in-container">
+                    <img
+                        className="logged-in__image mt-2"
+                        src={Avatar}
+                        alt="Avatar Logo"
+                    />
+                    <div className="heading--h6 mt-1 mb-1">Hi {name}!</div>
+                    <button className="btn" onClick={handleLogout}>
+                        Logout
+                    </button>
+                </div>
             ) : (
                 <>
                     <div className="login-from-container">
-                        <div className="heading heading--h4 login-heading">Welcome Back!</div>
+                        <div className="heading heading--h4 login-heading">
+                            Welcome Back!
+                        </div>
                         <form onSubmit={handleSubmit}>
                             <div className="input-text-wrapper mb-1">
                                 <input
@@ -72,7 +82,10 @@ const Login = () => {
                             </button>
                         </form>
 
-                        <Link className="btn btn--link login-btn-link" to="/signup">
+                        <Link
+                            className="btn btn--link login-btn-link"
+                            to="/signup"
+                        >
                             Don't Have Account Create One!
                         </Link>
                     </div>
