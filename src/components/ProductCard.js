@@ -17,6 +17,8 @@ const ProductCard = (props) => {
         discount,
         tastingNodes,
         category,
+        ratings,
+        reviews,
     } = props.details;
     const { isUserLogin, userId, token } = useContext(AuthContext);
 
@@ -143,7 +145,7 @@ const ProductCard = (props) => {
                     </span>
                 </div>
                 <span class="card-product__rating__reviews">
-                    342 Ratings & 29 Reviews
+                    {ratings} Ratings & {reviews} Reviews
                 </span>
             </div>
 

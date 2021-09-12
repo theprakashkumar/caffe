@@ -168,7 +168,8 @@ const ProductPage = () => {
                                     </span>
                                 </div>
                                 <span class="card-product__rating__reviews">
-                                    342 Ratings & 29 Reviews
+                                    {product.ratings} Ratings &{" "}
+                                    {product.reviews} Reviews
                                 </span>
                             </div>
                             <div class="card-product__price__wrapper">
@@ -225,7 +226,7 @@ const ProductPage = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="product-page__description mt-6">
+                    <div className="product-page__description mt-6 mb-6">
                         <div className="heading heading--h6">Description</div>
                         <div>{product.description}</div>
                     </div>
