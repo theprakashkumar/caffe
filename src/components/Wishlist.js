@@ -40,7 +40,8 @@ const Wishlist = () => {
     }, []);
 
     return (
-        <div>
+        <div className="wishlist flex flex-dir-cl flex-align-center">
+            <div className="heading--h5 mb-2">Wishlist</div>
             {loading ? (
                 <p>loading</p>
             ) : state[0] ? (
