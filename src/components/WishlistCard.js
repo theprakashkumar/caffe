@@ -1,3 +1,4 @@
+import "./WishlistCard.css";
 import axios from "axios";
 import { useContext } from "react";
 import { AuthContext } from "../contexts/AuthContext";
@@ -66,7 +67,7 @@ const WishlistCard = (props) => {
     };
 
     return (
-        <div class="card-wishlist mb-2">
+        <div class="card-wishlist mb-1">
             <div class="card-wishlist__image__wrapper">
                 <img src={image} class="card-wishlist__image" alt="Product" />
             </div>

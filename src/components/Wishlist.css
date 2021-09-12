@@ -1,5 +1,12 @@
 .wishlist {
-    width: max-content;
     margin: 5rem auto;
     min-height: 90vh;
+}
+
+@media only screen and (max-width: 610px) {
+    .wishlist {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 }

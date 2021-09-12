@@ -8,6 +8,7 @@ import EmptyCart from "./EmptyCart";
 
 const Cart = () => {
     const [loading, setLoading] = useState(true);
+    const [total, setTotal] = useState(0);
     const { state, dispatch } = useContext(CartContext);
     const { userId, token } = useContext(AuthContext);
 
@@ -34,17 +35,58 @@ const Cart = () => {
         }
     };
 
+    const getTotal = () => {
+        const total = state.reduce((total, product) => {
+            return total + product.product.price * product.quantity;
+        }, 0);
+        setTotal(total);
+    };
+
     useEffect(() => {
         getCart();
     }, []);
+
+    useEffect(() => {
+        getTotal();
+    }, [state]);
+
+    //     Subtotal
+    // Shipping
+    // Total (Tax incl.)
     return (
-        <div>
+        <div className="cart">
             {loading ? (
                 <p>loading</p>
             ) : state[0] ? (
-                state.map((item) => {
-                    return <CartCard product={item} />;
-                })
+                <>
+                    <div className="heading--h5 mb-2 cart__title">Cart</div>
+                    <div className="cart__content flex">
+                        <div className="cart__content-left ">
+                            {state.map((item) => {
+                                return <CartCard product={item} />;
+                            })}
+                        </div>
+                        <div className="cart__content-right">
+                            <div className="cart__content__price">
+                                <div className="cart__content-right__subtotal flex flex-justify-sb">
+                                    <div>Subtotal</div>
+                                    <div>{total}</div>
+                                </div>
+                                <div className="cart__content-right__shipping flex flex-justify-sb">
+                                    <div>Shipping</div>
+                                    <div>0</div>
+                                </div>
+                                <div className="cart__content-right__total flex flex-justify-sb">
+                                    <div>Total</div>
+                                    <div>{total}</div>
+                                </div>
+                            </div>
+                            <button className="btn btn-lg cart__content-right__button mt-1">
+                                Check Out
+                            </button>
+                        </div>
+                    </div>
+                </>
             ) : (
                 <EmptyCart />
             )}

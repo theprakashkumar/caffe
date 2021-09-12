@@ -1,0 +1,5 @@
+@media only screen and (max-width: 650px) {
+    .card-cart {
+        padding: 1rem;
+    }
+}

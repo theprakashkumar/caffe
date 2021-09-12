@@ -1,3 +1,4 @@
+import "./CartCard.css";
 import axios from "axios";
 import { useContext } from "react";
 import { AuthContext } from "../contexts/AuthContext";
@@ -116,13 +117,9 @@ const CartCard = (props) => {
     };
 
     return (
-        <div className="card-cart">
+        <div className="card-cart mb-1">
             <div className="card-cart__image__wrapper">
-                <img
-                    src={image}
-                    className="card-cart__image"
-                    alt="Product"
-                />
+                <img src={image} className="card-cart__image" alt="Product" />
             </div>
 
             <div className="card-cart__description">
