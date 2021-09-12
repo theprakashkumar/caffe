@@ -31,13 +31,28 @@ const Footer = () => {
                         </button>
                     </form>
                     <div className="footer-right__social-container mt-2">
-                        <a href="#" className="footer-right__social-container__link">
+                        <a
+                            href="#"
+                            className="footer-right__social-container__link"
+                        >
                             <i class="fab fa-facebook-f mr-2"></i>
                         </a>
-                        <a href="#" className="footer-right__social-container__link">
+                        <a
+                            href="#"
+                            className="footer-right__social-container__link"
+                        >
                             <i class="fab fa-twitter mr-2"></i>
                         </a>
-                        <a href="#" className="footer-right__social-container__link">
+                        <a
+                            href="#"
+                            className="footer-right__social-container__link"
+                        >
+                            <i class="fab fa-instagram mr-2"></i>
+                        </a>
+                        <a
+                            href="#"
+                            className="footer-right__social-container__link"
+                        >
                             <i class="fab fa-linkedin-in"></i>
                         </a>
                     </div>
