@@ -25,5 +25,9 @@ Ecom
 
 -   Maybe download SVG of icon and directly add.
 
-- If token is expired simply logout the user.
+-   If token is expired simply logout the user.
 
+Credits:
+
+-   Home Page Photo: https://www.cclproducts.com/
+-   Product Photo & Description: https://bluetokaicoffee.com/
