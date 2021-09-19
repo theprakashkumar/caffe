@@ -8,7 +8,7 @@ const ProductList = () => {
     const { data } = useContext(DataContext);
     const { state } = useContext(FilterContext);
     const { fastDeliveryOnly, showAll, sortBy } = state;
-    const [isLoading] = useState(false);
+    // const [isLoading] = useState(false);
 
     // filter products
     const getFilteredProduct = (product, fastDeliveryOnly, showAll) => {
@@ -36,12 +36,12 @@ const ProductList = () => {
     return (
         <div className="product-card">
             <Filter />
-            {isLoading ? (
-                <p>Loading Data</p>
-            ) : (
+            {data ? (
                 sortedProduct.map((product) => (
                     <ProductCard details={product} />
                 ))
+            ) : (
+                <p>Loading Data</p>
             )}
         </div>
     );
