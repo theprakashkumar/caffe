@@ -1,7 +1,7 @@
 .cart {
     width: fit-content;
     margin: 5rem auto;
-    min-height: 90vh;
+    min-height: 80vh;
 }
 
 .cart__title {

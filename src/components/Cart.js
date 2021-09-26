@@ -3,6 +3,8 @@ import "./Cart.css";
 import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import { CartContext } from "../contexts/CartContext";
+// import Loader from "react-loader-spinner"
+import PropagateLoader from "react-spinners/PropagateLoader";
 import CartCard from "./CartCard";
 import EmptyCart from "./EmptyCart";
 
@@ -49,14 +51,18 @@ const Cart = () => {
     useEffect(() => {
         getTotal();
     }, [state]);
-
-    //     Subtotal
-    // Shipping
-    // Total (Tax incl.)
     return (
         <div className="cart">
             {loading ? (
-                <p>loading</p>
+                // <Loader type="BallTriangle" color="black" height={60} width={60} />
+
+                <div className="loader">
+                    <PropagateLoader
+                        color={"#0f172a"}
+                        size={15}
+                        speedMultiplier={1.5}
+                    />
+                </div>
             ) : state[0] ? (
                 <>
                     <div className="heading--h5 mb-2 cart__title">Cart</div>
@@ -70,15 +76,21 @@ const Cart = () => {
                             <div className="cart__content__price">
                                 <div className="cart__content-right__subtotal flex flex-justify-sb">
                                     <div>Subtotal</div>
-                                    <div>{total}</div>
+                                    <div>
+                                        {"\u20B9"}
+                                        {total}
+                                    </div>
                                 </div>
                                 <div className="cart__content-right__shipping flex flex-justify-sb">
                                     <div>Shipping</div>
-                                    <div>0</div>
+                                    <div>{"\u20B9"}0</div>
                                 </div>
                                 <div className="cart__content-right__total flex flex-justify-sb">
                                     <div>Total</div>
-                                    <div>{total}</div>
+                                    <div>
+                                        {"\u20B9"}
+                                        {total}
+                                    </div>
                                 </div>
                             </div>
                             <button className="btn btn-lg cart__content-right__button mt-1">
