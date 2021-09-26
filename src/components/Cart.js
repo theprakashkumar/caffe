@@ -3,7 +3,6 @@ import "./Cart.css";
 import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import { CartContext } from "../contexts/CartContext";
-// import Loader from "react-loader-spinner"
 import PropagateLoader from "react-spinners/PropagateLoader";
 import CartCard from "./CartCard";
 import EmptyCart from "./EmptyCart";
@@ -54,8 +53,6 @@ const Cart = () => {
     return (
         <div className="cart">
             {loading ? (
-                // <Loader type="BallTriangle" color="black" height={60} width={60} />
-
                 <div className="loader">
                     <PropagateLoader
                         color={"#0f172a"}
