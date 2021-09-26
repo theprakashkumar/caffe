@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { DataContext } from "../contexts/DataContext";
 import { FilterContext } from "../contexts/FilterContext";
+import PropagateLoader from "react-spinners/PropagateLoader";
 import Filter from "./Filter";
 import ProductCard from "./ProductCard";
 
@@ -8,7 +9,6 @@ const ProductList = () => {
     const { data } = useContext(DataContext);
     const { state } = useContext(FilterContext);
     const { fastDeliveryOnly, showAll, sortBy } = state;
-    // const [isLoading] = useState(false);
 
     // filter products
     const getFilteredProduct = (product, fastDeliveryOnly, showAll) => {
@@ -41,7 +41,13 @@ const ProductList = () => {
                     <ProductCard details={product} />
                 ))
             ) : (
-                <p>Loading Data</p>
+                <div className="loader">
+                    <PropagateLoader
+                        color={"#0f172a"}
+                        size={15}
+                        speedMultiplier={1.5}
+                    />
+                </div>
             )}
         </div>
     );

@@ -1,6 +1,6 @@
 .wishlist {
     margin: 5rem auto;
-    min-height: 90vh;
+    min-height: 80vh;
 }
 
 @media only screen and (max-width: 610px) {
