@@ -25,14 +25,34 @@
 .product-page__cart-button {
     color: var(--main-background);
     background: var(--main-text-color);
+    min-width: 18rem;
+    max-height: 4.6rem;
 }
 
 .product-page__cart-button:hover {
+    transform: scale(1.01);
+}
+
+.product-page__wishlist-button {
+    min-width: 18rem;
+    max-height: 4.6rem;
+}
+
+.product-page__wishlist-button:hover {
     color: var(--main-text-color);
     background: var(--main-background);
+    transform: scale(1.01);
+}
+
+.product-page__button__animation-container {
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .product-page__description {
+    width: 95%;
     max-width: 100rem;
     margin-left: auto;
     margin-right: auto;

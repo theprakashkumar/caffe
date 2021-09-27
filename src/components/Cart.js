@@ -38,7 +38,7 @@ const Cart = () => {
 
     const getTotal = () => {
         const total = state.reduce((total, product) => {
-            return total + product.product.price * product.quantity;
+            return total + product.product?.price * product.quantity;
         }, 0);
         setTotal(total);
     };

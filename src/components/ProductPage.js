@@ -5,6 +5,7 @@ import { CartContext } from "../contexts/CartContext";
 import { WishlistContext } from "../contexts/WishlistContext";
 import { AuthContext } from "../contexts/AuthContext";
 import { useParams, useNavigate } from "react-router-dom";
+import PuffLoader from "react-spinners/PuffLoader";
 
 const ProductPage = () => {
     const { state: cartState, dispatch: cartDispatch } =
@@ -19,6 +20,8 @@ const ProductPage = () => {
     const [isProductInCart, setIsProductInCart] = useState(false);
     const [isProductInWishlist, setIsProductInWishlist] = useState(false);
 
+    const [addingToCart, setAddingToCart] = useState(false);
+    const [addingToWishlist, setAddingToWishlist] = useState(false);
     // find if item is already in cart or wishlist
     // const inCartOrWishlist = (id) => {
     //     const inCart = cartState.find((item) => item.product?._id === id);
@@ -62,6 +65,7 @@ const ProductPage = () => {
             return navigate("/cart");
         }
         try {
+            setAddingToCart(true);
             const response = await axios.post(
                 `/cart/${userId}`,
                 {
@@ -81,6 +85,7 @@ const ProductPage = () => {
                     },
                 });
                 setIsProductInCart(true);
+                setAddingToCart(false);
             }
         } catch (error) {
             console.log(error);
@@ -93,6 +98,7 @@ const ProductPage = () => {
             return navigate("/wishlist");
         }
         try {
+            setAddingToWishlist(true);
             const response = await axios.post(
                 `/wishlist/${userId}`,
                 {
@@ -111,6 +117,7 @@ const ProductPage = () => {
                         product,
                     },
                 });
+                setAddingToWishlist(false);
             }
         } catch (error) {
             console.log(error);
@@ -199,16 +206,27 @@ const ProductPage = () => {
 
                             <div className="product-page__button-container">
                                 <button
-                                    class="btn mt-1 mr-1"
+                                    class="btn mt-1 mr-1 product-page__wishlist-button"
                                     onClick={() => {
                                         isUserLogin
                                             ? addToWishlist(product?._id)
                                             : navigate("/login");
                                     }}
+                                    disabled={addingToWishlist}
                                 >
-                                    {isProductInWishlist
-                                        ? "WISHLISTED"
-                                        : "WISHLIST"}
+                                    {addingToWishlist ? (
+                                        <div className="product-page__button__animation-container">
+                                            <PuffLoader
+                                                color={"#0f172a"}
+                                                size={35}
+                                                speedMultiplier={1.5}
+                                            />
+                                        </div>
+                                    ) : isProductInWishlist ? (
+                                        "WISHLISTED"
+                                    ) : (
+                                        "WISHLIST"
+                                    )}
                                 </button>
 
                                 <button
@@ -218,10 +236,21 @@ const ProductPage = () => {
                                             ? addToCartHandler(product?._id)
                                             : navigate("/login");
                                     }}
+                                    disabled={addingToCart}
                                 >
-                                    {isProductInCart
-                                        ? "GO TO CART"
-                                        : "ADD TO CART"}
+                                    {addingToCart ? (
+                                        <div className="product-page__button__animation-container">
+                                            <PuffLoader
+                                                color={"#f8fafc"}
+                                                size={35}
+                                                speedMultiplier={1.5}
+                                            />
+                                        </div>
+                                    ) : isProductInCart ? (
+                                        "GO TO CART"
+                                    ) : (
+                                        "ADD TO CART"
+                                    )}
                                 </button>
                             </div>
                         </div>
