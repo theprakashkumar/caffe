@@ -1,3 +1,7 @@
+.product-page-container {
+    min-height: 90vh;
+}
+
 .product-page__main {
     display: flex;
     max-width: 100rem;

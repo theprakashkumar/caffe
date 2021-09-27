@@ -6,6 +6,7 @@ import { WishlistContext } from "../contexts/WishlistContext";
 import { AuthContext } from "../contexts/AuthContext";
 import { useParams, useNavigate } from "react-router-dom";
 import PuffLoader from "react-spinners/PuffLoader";
+import PropagateLoader from "react-spinners/PropagateLoader";
 
 const ProductPage = () => {
     const { state: cartState, dispatch: cartDispatch } =
@@ -150,7 +151,7 @@ const ProductPage = () => {
     }, [wishlistState]);
 
     return (
-        <div>
+        <div className="product-page-container">
             {product ? (
                 <div className="product-page">
                     <div className="product-page__main mt-3">
@@ -261,7 +262,13 @@ const ProductPage = () => {
                     </div>
                 </div>
             ) : (
-                <p>loading</p>
+                <div className="loader">
+                    <PropagateLoader
+                        color={"#0f172a"}
+                        size={15}
+                        speedMultiplier={1.5}
+                    />
+                </div>
             )}
         </div>
     );
