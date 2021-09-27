@@ -21,11 +21,13 @@ Ecom
 
 -   When the cart and wishlist is empty and I insert a item to wishlist now when I move that item to cart it goes into cart but when I do back on the product page it still show ADD TO CART.
 
--   Add which link item is active.
+-   Add which link item is active in navbar.
 
 -   Maybe download SVG of icon and directly add.
 
 -   If token is expired simply logout the user.
+
+-   Show loading animation while the product is being added to whishlist after clicking on head icon.
 
 Credits:
 
