@@ -1,0 +1,26 @@
+.filters__button-container {
+    display: flex;
+    flex-direction: row;
+}
+.filters__btn {
+    background: inherit;
+    outline: 2px solid transparent;
+    border: none;
+    padding: 0.7rem 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.filters__btn:hover {
+    background: #e5e7eb;
+    cursor: pointer;
+}
+
+.filters__btn__icon {
+    margin-right: 0.1rem;
+}

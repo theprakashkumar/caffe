@@ -8,15 +8,25 @@ import ProductCard from "./ProductCard";
 const ProductList = () => {
     const { data } = useContext(DataContext);
     const { state } = useContext(FilterContext);
-    const { fastDeliveryOnly, showAll, sortBy } = state;
+    const { fastDeliveryOnly, showAll, sortBy, categories } = state;
 
     // filter products
-    const getFilteredProduct = (product, fastDeliveryOnly, showAll) => {
+    const getFilteredProduct = (
+        product,
+        fastDeliveryOnly,
+        showAll,
+        categories
+    ) => {
         return product
             .filter(({ fastDelivery }) =>
                 fastDeliveryOnly ? fastDelivery : true
             )
-            .filter(({ inStock }) => (showAll ? true : inStock));
+            .filter(({ inStock }) => (showAll ? true : inStock))
+            .filter(({ category }) =>
+                categories.includes(category) || categories.length === 0
+                    ? true
+                    : false
+            );
     };
 
     // sort products
@@ -30,7 +40,12 @@ const ProductList = () => {
         return product;
     };
 
-    const filteredProduct = getFilteredProduct(data, fastDeliveryOnly, showAll);
+    const filteredProduct = getFilteredProduct(
+        data,
+        fastDeliveryOnly,
+        showAll,
+        categories
+    );
     const sortedProduct = getSortedProduct(filteredProduct, sortBy);
 
     return (

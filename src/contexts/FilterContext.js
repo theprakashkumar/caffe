@@ -6,14 +6,15 @@ export const FilterContext = createContext();
 const initialState = {
     fastDeliveryOnly: false,
     showAll: false,
-    sortBy: null
-}
+    sortBy: null,
+    categories: [],
+};
 
 export const FilterProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, initialState);
-    return(
-        <FilterContext.Provider value = {{state, dispatch}}>
-            { children }
+    return (
+        <FilterContext.Provider value={{ state, dispatch }}>
+            {children}
         </FilterContext.Provider>
     );
 };

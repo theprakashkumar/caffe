@@ -1,23 +1,35 @@
 const reducer = (state, action) => {
-    switch(action.type){
-        case 'TOOGLE_FASTDELIVERY':
+    switch (action.type) {
+        case "TOOGLE_FASTDELIVERY":
             return {
                 ...state,
-                fastDeliveryOnly: !state.fastDeliveryOnly
+                fastDeliveryOnly: !state.fastDeliveryOnly,
             };
-        case 'TOOGLE_INVENTORY':
-            return {
-                ...state, 
-                showAll: !state.showAll
-            };
-        case 'SORT_BY':
+        case "TOOGLE_INVENTORY":
             return {
                 ...state,
-                sortBy: action.payload
+                showAll: !state.showAll,
             };
+        case "SORT_BY":
+            return {
+                ...state,
+                sortBy: action.payload,
+            };
+        case "CATEGORY":
+            return {
+                ...state,
+                categories: state.categories.some(
+                    (value) => value === action.payload.newCategory
+                )
+                    ? state.categories.filter(
+                          (value) => value !== action.payload.newCategory
+                      )
+                    : state.categories.concat(action.payload.newCategory),
+            };
+
         default:
-            return state;   
+            return state;
     }
-}
+};
 
 export default reducer;

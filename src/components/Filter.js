@@ -1,39 +1,122 @@
-// ! Add the multi sider funcanility
+import "./Filter.css";
 import { useContext, useState } from "react";
 import { FilterContext } from "../contexts/FilterContext";
 
 const Filter = () => {
-    const [show, setShow] = useState(true);
-    const { dispatch } = useContext(FilterContext);
+    const [show, setShow] = useState(false);
+    const { state, dispatch } = useContext(FilterContext);
 
     const clickHandler = () => setShow(!show);
     return (
-        <div className="filters">
-            <button onClick={clickHandler}>Filters</button>
+        <div className="filters mt-2">
+            <div className="filters__button-container">
+                <button onClick={clickHandler} className="filters__btn">
+                    <span class="material-icons-outlined filters__btn__icon">
+                        filter_alt
+                    </span>
+                    <span className="filters__btn__text">Filters</span>
+                </button>
+                <button className="filters__btn ml-2">Clear Filter</button>
+            </div>
+
             {show ? (
                 <>
                     <div className="input-checkbox-wrapper">
-                        <label>
-                            <input
-                                onChange={() => {
-                                    dispatch({ type: "TOOGLE_INVENTORY" });
-                                }}
-                                type="checkbox"
-                                className="input-checkbox"
-                            />
-                            Include Out of Stock
+                        Roast:
+                        <input
+                            onChange={() => {
+                                dispatch({
+                                    type: "CATEGORY",
+                                    payload: {
+                                        newCategory: "Dark Roast",
+                                    },
+                                });
+                            }}
+                            type="checkbox"
+                            className="input-checkbox"
+                            id="checkbox-dark"
+                            checked={state.categories.some(
+                                (value) => value === "Dark Roast"
+                            )}
+                        />
+                        <label htmlFor="checkbox-dark">Dark</label>
+                        <input
+                            onChange={() => {
+                                dispatch({
+                                    type: "CATEGORY",
+                                    payload: {
+                                        newCategory: "Medium Dark Roast",
+                                    },
+                                });
+                            }}
+                            type="checkbox"
+                            className="input-checkbox"
+                            id="checkbox-medium-dark"
+                            checked={state.categories.some(
+                                (value) => value === "Medium Dark Roast"
+                            )}
+                        />
+                        <label htmlFor="checkbox-medium-dark">
+                            Medium Dark
                         </label>
+                        <input
+                            onChange={() => {
+                                dispatch({
+                                    type: "CATEGORY",
+                                    payload: {
+                                        newCategory: "Medium Roast",
+                                    },
+                                });
+                            }}
+                            type="checkbox"
+                            className="input-checkbox"
+                            id="checkbox-medium"
+                            checked={state.categories.some(
+                                (value) => value === "Medium Roast"
+                            )}
+                        />
+                        <label htmlFor="checkbox-medium">Medium</label>
+                        <input
+                            onChange={() => {
+                                dispatch({
+                                    type: "CATEGORY",
+                                    payload: {
+                                        newCategory: "Light Roast",
+                                    },
+                                });
+                            }}
+                            type="checkbox"
+                            className="input-checkbox"
+                            id="checkbox-light"
+                            checked={state.categories.some(
+                                (value) => value === "Light Roast"
+                            )}
+                        />
+                        <label htmlFor="checkbox-light">Light</label>
                     </div>
 
                     <div className="input-checkbox-wrapper">
-                        <label>
-                            <input
-                                onChange={() => {
-                                    dispatch({ type: "TOOGLE_FASTDELIVERY" });
-                                }}
-                                type="checkbox"
-                                className="input-checkbox"
-                            />
+                        <input
+                            onChange={() => {
+                                dispatch({ type: "TOOGLE_INVENTORY" });
+                            }}
+                            type="checkbox"
+                            className="input-checkbox"
+                            id="inventory"
+                        />
+                        <label htmlFor="inventory">Include Out of Stock</label>
+                    </div>
+
+                    <div className="input-checkbox-wrapper">
+                        <input
+                            onChange={() => {
+                                dispatch({ type: "TOOGLE_FASTDELIVERY" });
+                            }}
+                            type="checkbox"
+                            className="input-checkbox"
+                            id="fast-delivery"
+                        />
+                        <label htmlFor="fast-delivery">
                             Show Fast Delivery Only
                         </label>
                     </div>
@@ -57,22 +140,8 @@ const Filter = () => {
                                 <option value="PRICE_HIGH_TO_LOW">
                                     Price: High to Low
                                 </option>
-                                <option value="popularity">Popularity</option>
-                                <option value="newest-first">
-                                    Newest First
-                                </option>
                             </select>
                         </label>
-                    </div>
-
-                    <div className="input-range-wrapper">
-                        <label>Price Range:</label>
-                        <input
-                            type="range"
-                            className="input-range"
-                            min="0"
-                            max="10"
-                        />
                     </div>
                 </>
             ) : null}
