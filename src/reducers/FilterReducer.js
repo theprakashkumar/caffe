@@ -26,6 +26,13 @@ const reducer = (state, action) => {
                       )
                     : state.categories.concat(action.payload.newCategory),
             };
+        case "CLEAR_ALL":
+            return {
+                fastDeliveryOnly: false,
+                showAll: false,
+                sortBy: null,
+                categories: [],
+            };
 
         default:
             return state;

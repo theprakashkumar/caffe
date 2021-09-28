@@ -7,6 +7,12 @@ const Filter = () => {
     const { state, dispatch } = useContext(FilterContext);
 
     const clickHandler = () => setShow(!show);
+    const clearAllFilters = () => {
+        console.log("clearing");
+        dispatch({
+            type: "CLEAR_ALL",
+        });
+    };
     return (
         <div className="filters mt-2">
             <div className="filters__button-container">
@@ -16,13 +22,33 @@ const Filter = () => {
                     </span>
                     <span className="filters__btn__text">Filters</span>
                 </button>
-                <button className="filters__btn ml-2">Clear Filter</button>
+                <button className="filters__btn" onClick={clearAllFilters}>
+                    Clear Filters
+                </button>
+                <div className="input-dropdown-wrapper">
+                    <label style={{ display: "none" }}>Sort By:</label>
+                    <select
+                        onChange={(e) =>
+                            dispatch({
+                                type: "SORT_BY",
+                                payload: e.target.value,
+                            })
+                        }
+                        className="input-dropdown"
+                    >
+                        <option value="PRICE_LOW_TO_HIGH">
+                            Price: Low to High
+                        </option>
+                        <option value="PRICE_HIGH_TO_LOW">
+                            Price: High to Low
+                        </option>
+                    </select>
+                </div>
             </div>
 
             {show ? (
-                <>
+                <div className="filters__inputs">
                     <div className="input-checkbox-wrapper">
-                        Roast:
                         <input
                             onChange={() => {
                                 dispatch({
@@ -39,7 +65,9 @@ const Filter = () => {
                                 (value) => value === "Dark Roast"
                             )}
                         />
-                        <label htmlFor="checkbox-dark">Dark</label>
+                        <label htmlFor="checkbox-dark">Dark Roast Only</label>
+                    </div>
+                    <div className="input-checkbox-wrapper">
                         <input
                             onChange={() => {
                                 dispatch({
@@ -57,8 +85,10 @@ const Filter = () => {
                             )}
                         />
                         <label htmlFor="checkbox-medium-dark">
-                            Medium Dark
+                            Medium Dark Roast Only
                         </label>
+                    </div>
+                    <div className="input-checkbox-wrapper">
                         <input
                             onChange={() => {
                                 dispatch({
@@ -75,7 +105,11 @@ const Filter = () => {
                                 (value) => value === "Medium Roast"
                             )}
                         />
-                        <label htmlFor="checkbox-medium">Medium</label>
+                        <label htmlFor="checkbox-medium">
+                            Medium Roast Only
+                        </label>
+                    </div>
+                    <div className="input-checkbox-wrapper">
                         <input
                             onChange={() => {
                                 dispatch({
@@ -92,7 +126,7 @@ const Filter = () => {
                                 (value) => value === "Light Roast"
                             )}
                         />
-                        <label htmlFor="checkbox-light">Light</label>
+                        <label htmlFor="checkbox-light">Light Roast Only</label>
                     </div>
 
                     <div className="input-checkbox-wrapper">
@@ -103,6 +137,7 @@ const Filter = () => {
                             type="checkbox"
                             className="input-checkbox"
                             id="inventory"
+                            checked={state.showAll}
                         />
                         <label htmlFor="inventory">Include Out of Stock</label>
                     </div>
@@ -115,35 +150,13 @@ const Filter = () => {
                             type="checkbox"
                             className="input-checkbox"
                             id="fast-delivery"
+                            checked={state.fastDeliveryOnly}
                         />
                         <label htmlFor="fast-delivery">
                             Show Fast Delivery Only
                         </label>
                     </div>
-
-                    <div className="input-dropdown-wrapper">
-                        <label>
-                            {" "}
-                            Sort By:
-                            <select
-                                onChange={(e) =>
-                                    dispatch({
-                                        type: "SORT_BY",
-                                        payload: e.target.value,
-                                    })
-                                }
-                                className="input-dropdown"
-                            >
-                                <option value="PRICE_LOW_TO_HIGH">
-                                    Price: Low to High
-                                </option>
-                                <option value="PRICE_HIGH_TO_LOW">
-                                    Price: High to Low
-                                </option>
-                            </select>
-                        </label>
-                    </div>
-                </>
+                </div>
             ) : null}
         </div>
     );

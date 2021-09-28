@@ -1,6 +1,13 @@
+.filters {
+    width: fit-content;
+    margin: 2rem auto;
+}
+
 .filters__button-container {
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 .filters__btn {
     background: inherit;
@@ -23,4 +30,20 @@
 
 .filters__btn__icon {
     margin-right: 0.1rem;
+}
+
+.filters__inputs {
+    background: #fff;
+    margin-top: 0.7rem;
+    padding: 2rem;
+    font-size: 1.8rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 0.5rem;
+}
+
+@media screen and (max-width: 450px) {
+    .filters__inputs {
+        grid-template-columns: 1fr;
+    }
 }

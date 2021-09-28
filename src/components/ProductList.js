@@ -1,3 +1,4 @@
+import "./ProductList.css";
 import { useContext, useState } from "react";
 import { DataContext } from "../contexts/DataContext";
 import { FilterContext } from "../contexts/FilterContext";
@@ -49,12 +50,14 @@ const ProductList = () => {
     const sortedProduct = getSortedProduct(filteredProduct, sortBy);
 
     return (
-        <div className="product-card">
+        <div className="product-list-container">
             <Filter />
             {data ? (
-                sortedProduct.map((product) => (
-                    <ProductCard details={product} />
-                ))
+                <div className="product-list">
+                    {sortedProduct.map((product) => (
+                        <ProductCard details={product} />
+                    ))}
+                </div>
             ) : (
                 <div className="loader">
                     <PropagateLoader
