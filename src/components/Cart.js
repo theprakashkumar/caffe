@@ -90,8 +90,11 @@ const Cart = () => {
                                     </div>
                                 </div>
                             </div>
-                            <button className="btn btn-lg cart__content-right__button mt-1">
+                            <button className="btn btn-lg btn--icon cart__content-right__button mt-1">
                                 Check Out
+                                <span class="material-icons-outlined  btn--icon__icon ml-1">
+                                    east
+                                </span>
                             </button>
                         </div>
                     </div>

@@ -9,6 +9,7 @@
 }
 
 .cart__content-left {
+    height: fit-content;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -27,7 +28,15 @@
 }
 
 .cart__content-right__button {
+    display: flex;
+    justify-content: center;
     width: 100%;
+    background: var(--success-light);
+    border: 0.1rem solid var(--success-dark);
+}
+
+.cart__content-right__button:hover {
+    background: var(--success-dark);
 }
 
 @media only screen and (max-width: 650px) {

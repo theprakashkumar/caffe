@@ -134,7 +134,7 @@ const CartCard = (props) => {
                         {"\u20B9"} {mrp}{" "}
                     </strike>
                     <div className="card-cart__price__discount ml-2">
-                        {discount}% off
+                        {discount} off
                     </div>
                 </div>
 
@@ -158,10 +158,10 @@ const CartCard = (props) => {
                     </button>
                     <button
                         onClick={() => removeFromCart(productId)}
-                        className="btn card-cart__control__button"
+                        className="btn card-cart__control__button card-cart__control__button-delete"
                     >
                         <span
-                            className="material-icons-round"
+                            className="material-icons-round card-cart__control__button__icon"
                             onChange={() => deleteFromCart(productId)}
                         >
                             delete
