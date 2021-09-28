@@ -1,7 +1,7 @@
 .empty-wishlist {
     width: max-content;
     margin: 5rem auto;
-    min-height: 90vh;
+    min-height: 60vh;
 }
 .empty-wishlist__image {
     display: block;
