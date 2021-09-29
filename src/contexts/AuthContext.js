@@ -32,8 +32,6 @@ export const AuthProvider = ({ children }) => {
                     password,
                 });
                 if (response.data.success) {
-                    console.log({ ...response.data });
-                    console.log(response.data.name);
                     setLogin(true);
                     setUserDetails({
                         userId: response.data.id,
@@ -41,8 +39,6 @@ export const AuthProvider = ({ children }) => {
                         email: response.data.email,
                         token: response.data.token,
                     });
-                    console.log("use", userDetails.userId);
-                    console.log("use", userDetails);
                     localStorage?.setItem(
                         "login",
                         JSON.stringify({
@@ -55,10 +51,12 @@ export const AuthProvider = ({ children }) => {
                             },
                         })
                     );
+                    navigate(state?.from ? state.from : "/");
+                    return response.data.status;
                 }
-                navigate(state?.from ? state.from : "/");
             } catch (error) {
                 console.log("Something Went Wrong!", error);
+                return error.response.status;
             }
         }
     };

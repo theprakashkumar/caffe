@@ -6,6 +6,9 @@ import { AuthContext } from "../contexts/AuthContext";
 import { CartContext } from "../contexts/CartContext";
 import { WishlistContext } from "../contexts/WishlistContext";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const Login = () => {
     const { isUserLogin, name, loginWithCredential, logout } =
         useContext(AuthContext);
@@ -20,9 +23,22 @@ const Login = () => {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        loginWithCredential(credential.email, credential.password);
+        const loginStatus = await loginWithCredential(
+            credential.email,
+            credential.password
+        );
+
+        if (loginStatus === 403) {
+            toast.error("Wrong Password!", {
+                position: toast.POSITION.BOTTOM_CENTER,
+            });
+        } else if (loginStatus === 401) {
+            toast.error("User Not Found!", {
+                position: toast.POSITION.BOTTOM_CENTER,
+            });
+        }
     };
 
     const handleLogout = () => {
@@ -91,6 +107,7 @@ const Login = () => {
                     </div>
                 </>
             )}
+            <ToastContainer />
         </div>
     );
 };

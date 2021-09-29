@@ -10,7 +10,7 @@ E-commerce site for selling Coffee.
 
 -   Show loading animation while the product is being added to whishlist after clicking on heart icon.
 
--   Show loading animation on button in Cart and Wishlist Element.
+-   Show loading animation on button in Cart and Wishlist Element and on other button where it is necessary.
 
 #### Credits:
 

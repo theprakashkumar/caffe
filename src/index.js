@@ -11,8 +11,8 @@ import { CartProvider } from "./contexts/CartContext";
 import { WishlistProvider } from "./contexts/WishlistContext";
 import axios from "axios";
 
-// axios.defaults.baseURL = "https://Caffe-Backend.theprakashkumar.repl.co";
-axios.defaults.baseURL = "http://localhost:8080";
+axios.defaults.baseURL = "https://Caffe-Backend.theprakashkumar.repl.co";
+// axios.defaults.baseURL = "http://localhost:8080";
 
 ReactDOM.render(
     <React.StrictMode>
