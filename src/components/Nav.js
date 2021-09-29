@@ -1,6 +1,6 @@
 import "./Nav.css";
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { CartContext } from "../contexts/CartContext";
 import { WishlistContext } from "../contexts/WishlistContext";
 
@@ -13,7 +13,11 @@ const Nav = () => {
                 Caffè
             </Link>
             <div className="nav__menu">
-                <Link className="nav__item" to="/wishlist">
+                <NavLink
+                    activeClassName="nav__item-active"
+                    className="nav__item"
+                    to="/wishlist"
+                >
                     <div class="icon-with-badge">
                         <span class="material-icons-outlined icon-with-badge__icon">
                             bookmark_border
@@ -22,8 +26,12 @@ const Nav = () => {
                             {wishlistState?.length}
                         </span>
                     </div>
-                </Link>
-                <Link className="nav__item" to="/cart">
+                </NavLink>
+                <NavLink
+                    activeClassName="nav__item-active"
+                    className="nav__item"
+                    to="/cart"
+                >
                     <div class="icon-with-badge">
                         <span class="material-icons-outlined icon-with-badge__icon">
                             shopping_cart
@@ -32,14 +40,18 @@ const Nav = () => {
                             {cartState?.length}
                         </span>
                     </div>
-                </Link>
-                <Link className="nav__item" to="/login">
+                </NavLink>
+                <NavLink
+                    activeClassName="nav__item-active"
+                    className="nav__item"
+                    to="/login"
+                >
                     <div class="icon-with-badge">
                         <span class="material-icons-outlined icon-with-badge__icon">
                             perm_identity
                         </span>
                     </div>
-                </Link>
+                </NavLink>
             </div>
         </div>
     );

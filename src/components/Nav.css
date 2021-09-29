@@ -17,6 +17,14 @@
     align-self: center;
 }
 
+.nav__item-active {
+    color: var(--main-text-light-color);
+}
+
+.nav__item-active .icon-with-badge__text {
+    background-color: var(--main-text-light-color);
+}
+
 .icon-with-badge {
     justify-content: center;
     align-items: center;
