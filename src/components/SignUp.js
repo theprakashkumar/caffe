@@ -1,6 +1,9 @@
-import "./SignUp.css"
+import "./SignUp.css";
 import { useContext, useState } from "react";
 import { AuthContext } from "../contexts/AuthContext";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const initialUserDetails = {
     name: "",
@@ -11,10 +14,19 @@ const initialUserDetails = {
 const SignUp = () => {
     const [userDetails, setUserDetails] = useState(initialUserDetails);
     const { signUp } = useContext(AuthContext);
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        signUp(userDetails);
-        setUserDetails(initialUserDetails);
+        const signUpStatus = await signUp(userDetails);
+        console.log(signUpStatus);
+        if (signUpStatus === 409) {
+            toast.error("User Already Exits!", {
+                position: toast.POSITION.BOTTOM_CENTER,
+            });
+        } else if (signUpStatus === 200) {
+            toast.success("User Created!", {
+                position: toast.POSITION.BOTTOM_CENTER,
+            });
+        }
     };
 
     const handleChange = (e) => {
@@ -64,9 +76,12 @@ const SignUp = () => {
                         />
                     </div>
 
-                    <button class="btn btn--lg sign-up-btn mt-1">SIGN UP</button>
+                    <button class="btn btn--lg sign-up-btn mt-1">
+                        SIGN UP
+                    </button>
                 </form>
             </div>
+            <ToastContainer />
         </div>
     );
 };
