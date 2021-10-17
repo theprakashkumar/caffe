@@ -8,7 +8,7 @@ E-commerce site for selling Coffee.
 
 -   If token is expired simply logout the user.
 
-- On successful signup log in the user.
+-   On successful signup log in the user.
 
 -   Show loading animation while the product is being added to whishlist after clicking on heart icon.
 
