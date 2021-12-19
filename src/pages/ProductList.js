@@ -1,10 +1,10 @@
 import "./ProductList.css";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { DataContext } from "../contexts/DataContext";
 import { FilterContext } from "../contexts/FilterContext";
 import PropagateLoader from "react-spinners/PropagateLoader";
-import Filter from "./Filter";
-import ProductCard from "./ProductCard";
+import Filter from "../components/Filter";
+import ProductCard from "../components/ProductCard";
 
 const ProductList = () => {
     const { data } = useContext(DataContext);
@@ -55,7 +55,7 @@ const ProductList = () => {
             {data ? (
                 <div className="product-list">
                     {sortedProduct.map((product) => (
-                        <ProductCard details={product} />
+                        <ProductCard key={product._id} details={product} />
                     ))}
                 </div>
             ) : (

@@ -4,7 +4,7 @@ import { useEffect, useContext } from "react";
 import { Routes, Route } from "react-router-dom";
 import Nav from "./components/Nav";
 import Home from "./pages/Home";
-import ProductList from "./components/ProductList";
+import ProductList from "./pages/ProductList";
 import ProductPage from "./components/ProductPage";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
