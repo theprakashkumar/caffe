@@ -3,7 +3,7 @@ import axios from "axios";
 import { useEffect, useContext } from "react";
 import { Routes, Route } from "react-router-dom";
 import Nav from "./components/Nav";
-import Home from "./components/Home";
+import Home from "./pages/Home";
 import ProductList from "./components/ProductList";
 import ProductPage from "./components/ProductPage";
 import Login from "./components/Login";
