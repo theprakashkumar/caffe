@@ -5,7 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import Nav from "./components/Nav";
 import Home from "./pages/Home";
 import ProductList from "./pages/ProductList";
-import ProductPage from "./components/ProductPage";
+import ProductPage from "./pages/ProductPage";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import Wishlist from "./components/Wishlist";
