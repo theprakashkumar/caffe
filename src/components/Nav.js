@@ -8,14 +8,14 @@ const Nav = () => {
     const { state: cartState } = useContext(CartContext);
     const { state: wishlistState } = useContext(WishlistContext);
     return (
-        <div className="nav">
-            <Link className="nav__logo" to="/">
+        <div className="navbar">
+            <Link className="navbar__logo" to="/">
                 Caffè
             </Link>
-            <div className="nav__menu">
+            <div className="navbar__menu">
                 <NavLink
-                    activeClassName="nav__item-active"
-                    className="nav__item"
+                    activeClassName="navbar__item-active"
+                    className="navbar__item"
                     to="/wishlist"
                 >
                     <div class="icon-with-badge">
@@ -28,8 +28,8 @@ const Nav = () => {
                     </div>
                 </NavLink>
                 <NavLink
-                    activeClassName="nav__item-active"
-                    className="nav__item"
+                    activeClassName="navbar__item-active"
+                    className="navbar__item"
                     to="/cart"
                 >
                     <div class="icon-with-badge">
@@ -42,8 +42,8 @@ const Nav = () => {
                     </div>
                 </NavLink>
                 <NavLink
-                    activeClassName="nav__item-active"
-                    className="nav__item"
+                    activeClassName="navbar__item-active"
+                    className="navbar__item"
                     to="/login"
                 >
                     <div class="icon-with-badge">

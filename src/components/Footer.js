@@ -6,7 +6,7 @@ const Footer = () => {
         <div className="footer-container">
             <div className="footer">
                 <div className="footer-left">
-                    <div className="nav__logo footer-nav-logo">Caffè</div>
+                    <div className="footer-nav-logo">Caffè</div>
                     <div className="footer-left__link-container">
                         <Link to="/">
                             <div className="footer__link mt-0-5">Home</div>
