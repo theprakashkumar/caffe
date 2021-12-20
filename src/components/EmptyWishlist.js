@@ -10,8 +10,8 @@ const EmptyWishlist = () => {
                 src={emptyWishlist}
                 alt="Empty Wishlist Logo"
             />
-            <div className="heading--h6">I am empty :(</div>
-            <div>Your Wishlist is Empty</div>
+            <div className="heading--h5">I am empty :(</div>
+            <div >Your Wishlist is Empty</div>
             <Link className="btn btn--link link" to="/products">
                 Go to Catalog
             </Link>

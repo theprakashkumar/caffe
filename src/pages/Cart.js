@@ -3,9 +3,9 @@ import "./Cart.css";
 import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import { CartContext } from "../contexts/CartContext";
-import PropagateLoader from "react-spinners/PropagateLoader";
-import CartCard from "./CartCard";
-import EmptyCart from "./EmptyCart";
+import Loader from "../components/Loader";
+import CartCard from "../components/CartCard";
+import EmptyCart from "../components/EmptyCart";
 
 const Cart = () => {
     const [loading, setLoading] = useState(true);
@@ -51,17 +51,11 @@ const Cart = () => {
         getTotal();
     }, [state]);
     return (
-        <div className="cart">
+        <div>
             {loading ? (
-                <div className="loader">
-                    <PropagateLoader
-                        color={"#0f172a"}
-                        size={15}
-                        speedMultiplier={1.5}
-                    />
-                </div>
+                <Loader />
             ) : state[0] ? (
-                <>
+                <div className="cart">
                     <div className="heading--h5 mb-2 cart__title">Cart</div>
                     <div className="cart__content flex">
                         <div className="cart__content-left ">
@@ -98,7 +92,7 @@ const Cart = () => {
                             </button>
                         </div>
                     </div>
-                </>
+                </div>
             ) : (
                 <EmptyCart />
             )}
