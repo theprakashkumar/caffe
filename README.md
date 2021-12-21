@@ -1,20 +1,14 @@
-# caffe
+# Caffè
 
-E-commerce site for selling Coffee.
+## Caffè is a e-commerce site to sell Coffee Beans.
 
--   When the cart and wishlist is empty and I insert a item to wishlist now when I move that item to cart it goes into cart but when I do back on the product page it still show ADD TO CART.
+### Tech Stack
 
-### TODOs
+-   React(Hooks)
+-   Express.js
+-   MongoDB
+-   React Router
+-   JWT
 
--   If token is expired simply logout the user.
-
--   On successful signup log in the user.
-
--   Show loading animation while the product is being added to whishlist after clicking on heart icon.
-
--   Show loading animation on button in Cart and Wishlist Element and on other button where it is necessary.
-
-#### Credits:
-
--   Home Page Photo: https://www.cclproducts.com/
--   Product Photo & Description: https://bluetokaicoffee.com/
+Live Preview: https://caffeindia.netlify.app/
+Back End Code: https://github.com/ThePrakashKumar/Caffe-Backend/tree/dev
