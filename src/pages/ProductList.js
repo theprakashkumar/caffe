@@ -1,10 +1,10 @@
 import "./ProductList.css";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { DataContext } from "../contexts/DataContext";
 import { FilterContext } from "../contexts/FilterContext";
-import PropagateLoader from "react-spinners/PropagateLoader";
-import Filter from "./Filter";
-import ProductCard from "./ProductCard";
+import Loader from "../components/Loader";
+import Filter from "../components/Filter";
+import ProductCard from "../components/ProductCard";
 
 const ProductList = () => {
     const { data } = useContext(DataContext);
@@ -52,20 +52,14 @@ const ProductList = () => {
     return (
         <div className="product-list-container">
             <Filter />
-            {data ? (
+            {data[0] ? (
                 <div className="product-list">
                     {sortedProduct.map((product) => (
-                        <ProductCard details={product} />
+                        <ProductCard key={product._id} details={product} />
                     ))}
                 </div>
             ) : (
-                <div className="loader">
-                    <PropagateLoader
-                        color={"#0f172a"}
-                        size={15}
-                        speedMultiplier={1.5}
-                    />
-                </div>
+                <Loader />
             )}
         </div>
     );

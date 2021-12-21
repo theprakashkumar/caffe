@@ -1,7 +1,3 @@
-.product-list-container {
-    min-height: 90vh;
-}
-
 .product-list {
     margin: 1rem auto 3rem auto;
     display: grid;

@@ -7,6 +7,7 @@ import { AuthContext } from "../contexts/AuthContext";
 import { useParams, useNavigate } from "react-router-dom";
 import PuffLoader from "react-spinners/PuffLoader";
 import PropagateLoader from "react-spinners/PropagateLoader";
+import Loader from "../components/Loader";
 
 const ProductPage = () => {
     const { state: cartState, dispatch: cartDispatch } =
@@ -262,13 +263,7 @@ const ProductPage = () => {
                     </div>
                 </div>
             ) : (
-                <div className="loader">
-                    <PropagateLoader
-                        color={"#0f172a"}
-                        size={15}
-                        speedMultiplier={1.5}
-                    />
-                </div>
+                <Loader />
             )}
         </div>
     );

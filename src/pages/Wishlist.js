@@ -3,9 +3,9 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import { WishlistContext } from "../contexts/WishlistContext";
-import PropagateLoader from "react-spinners/PropagateLoader";
-import WishlistCard from "./WishlistCard";
-import EmptyWishlist from "./EmptyWishlist";
+import Loader from "../components/Loader";
+import WishlistCard from "../components/WishlistCard";
+import EmptyWishlist from "../components/EmptyWishlist";
 
 const Wishlist = () => {
     const [loading, setLoading] = useState(true);
@@ -41,22 +41,16 @@ const Wishlist = () => {
     }, []);
 
     return (
-        <div className="wishlist flex flex-dir-cl flex-align-center">
+        <div>
             {loading ? (
-                <div className="loader">
-                    <PropagateLoader
-                        color={"#0f172a"}
-                        size={15}
-                        speedMultiplier={1.5}
-                    />
-                </div>
+                <Loader />
             ) : state[0] ? (
-                <>
+                <div className="wishlist flex flex-dir-cl flex-align-center">
                     <div className="heading--h5 mb-2">Wishlist</div>
                     {state.map((item) => {
                         return <WishlistCard product={item} />;
                     })}
-                </>
+                </div>
             ) : (
                 <EmptyWishlist />
             )}

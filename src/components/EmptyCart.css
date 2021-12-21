@@ -1,9 +1,10 @@
-.empty-wishlist {
+.empty-cart {
     width: max-content;
-    margin: 5rem auto;
-    min-height: 60vh;
+    padding-top: 10rem;
+    height: 95vh;
+    margin: 0 auto;
 }
-.empty-wishlist__image {
+.empty-cart__image {
     display: block;
     width: 15rem;
     height: auto;

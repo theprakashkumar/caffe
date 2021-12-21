@@ -1,5 +1,5 @@
 .login {
-    min-height: 90vh;
+    height: 95vh;
 }
 
 .logged-in-container {
@@ -28,8 +28,8 @@
     color: var(--main-text-color);
     text-align: center;
     font-weight: 400;
-    margin-top: 10rem;
-    margin-bottom: 3rem;
+    padding-top: 10rem;
+    padding-bottom: 3rem;
 }
 
 .login-btn {
