@@ -54,7 +54,7 @@ const Cart = () => {
         <div>
             {loading ? (
                 <Loader />
-            ) : state[0] ? (
+            ) : state.length ? (
                 <div className="cart">
                     <div className="heading--h5 mb-2 cart__title">Cart</div>
                     <div className="cart__content flex">

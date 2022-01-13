@@ -105,8 +105,8 @@ function App() {
                     <PrivateRoutes path="/wishlist" element={<Wishlist />} />
                     <PrivateRoutes path="/cart" element={<Cart />} />
                 </Routes>
-                <Footer />
             </header>
+            <Footer />
         </div>
     );
 }

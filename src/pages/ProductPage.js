@@ -6,7 +6,6 @@ import { WishlistContext } from "../contexts/WishlistContext";
 import { AuthContext } from "../contexts/AuthContext";
 import { useParams, useNavigate } from "react-router-dom";
 import PuffLoader from "react-spinners/PuffLoader";
-import PropagateLoader from "react-spinners/PropagateLoader";
 import Loader from "../components/Loader";
 
 const ProductPage = () => {
@@ -24,26 +23,6 @@ const ProductPage = () => {
 
     const [addingToCart, setAddingToCart] = useState(false);
     const [addingToWishlist, setAddingToWishlist] = useState(false);
-    // find if item is already in cart or wishlist
-    // const inCartOrWishlist = (id) => {
-    //     const inCart = cartState.find((item) => item.product?._id === id);
-    //     const inWishlist = wishlistState.find(
-    //         (item) => item.product?._id === id
-    //     );
-
-    //     if (inCart) {
-    //         setIsProductInCart(true);
-    //     }
-    //     if (inWishlist) {
-    //         setIsProductInWishlist(true);
-    //     }
-
-    //     console.log({isProductInCart})
-    //     console.log("product id", id);
-    //     // console.log("product id from inCart", inCart.product._id);
-    //     console.log({ inCart });
-    //     console.log({ inWishlist });
-    // };
 
     const inCart = (id) => {
         const alreadyInCart = cartState.find(
@@ -58,6 +37,8 @@ const ProductPage = () => {
         const alreadyInWishlist = wishlistState.find((item) => item._id === id);
         if (alreadyInWishlist) {
             setIsProductInWishlist(true);
+        } else {
+            
         }
     };
 
@@ -66,60 +47,48 @@ const ProductPage = () => {
         if (isProductInCart) {
             return navigate("/cart");
         }
-        try {
-            setAddingToCart(true);
-            const response = await axios.post(
-                `/cart/${userId}`,
-                {
-                    _id: id,
-                },
-                {
-                    headers: {
-                        authorization: token,
-                    },
-                }
-            );
-            if (response.data.success) {
-                cartDispatch({
-                    type: "ADD_TO_CART",
-                    payload: {
-                        product,
-                    },
-                });
-                setIsProductInCart(true);
-                setAddingToCart(false);
-            }
-        } catch (error) {
-            console.log(error);
-        }
+        
     };
 
     // add product to wishlist
     const addToWishlist = async (id) => {
         if (isProductInWishlist) {
             return navigate("/wishlist");
-        }
-        try {
-            setAddingToWishlist(true);
-            const response = await axios.post(
-                `/wishlist/${userId}`,
-                {
-                    _id: id,
-                },
-                {
-                    headers: {
-                        authorization: token,
+        } else {
+            try {
+                setAddingToWishlist(true);
+                const response = await axios.post(
+                    `/wishlist/${userId}`,
+                    {
+                        _id: id,
                     },
+                    {
+                        headers: {
+                            authorization: token,
+                        },
+                    }
+                );
+                if (response.data.success) {
+                    wishlistDispatch({
+                        type: "ADD_TO_WISHLIST",
+                        payload: {
+                            product,
+                        },
+                    });
+                    setAddingToWishlist(false);
                 }
-            );
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    };
+
+    // get product from server
+    const getProduct = async (id) => {
+        try {
+            const response = await axios.get(`/products/${id}`);
             if (response.data.success) {
-                wishlistDispatch({
-                    type: "ADD_TO_WISHLIST",
-                    payload: {
-                        product,
-                    },
-                });
-                setAddingToWishlist(false);
+                setProduct(response.data.product);
             }
         } catch (error) {
             console.log(error);
@@ -127,17 +96,6 @@ const ProductPage = () => {
     };
 
     useEffect(() => {
-        // get product from server
-        const getProduct = async (id) => {
-            try {
-                const response = await axios.get(`/products/${id}`);
-                if (response.data.success) {
-                    setProduct(response.data.product);
-                }
-            } catch (error) {
-                console.log(error);
-            }
-        };
         getProduct(id);
         inCart(id);
         inWishlist(id);

@@ -52,7 +52,7 @@ const ProductList = () => {
     return (
         <div className="product-list-container">
             <Filter />
-            {data[0] ? (
+            {data.length ? (
                 <div className="product-list">
                     {sortedProduct.map((product) => (
                         <ProductCard key={product._id} details={product} />
