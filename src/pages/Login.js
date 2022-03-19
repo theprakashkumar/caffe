@@ -41,6 +41,13 @@ const Login = () => {
         }
     };
 
+    const guestLogin = async () => {
+        await loginWithCredential(
+            "guest@gmail.com",
+            "guest"
+        );
+    }
+
     const handleLogout = () => {
         cartDispatch({
             type: "RESET_CART",
@@ -93,10 +100,17 @@ const Login = () => {
                                 />
                             </div>
 
-                            <button className="btn btn--md login-btn mt-1 mb-1">
+                            <button className="btn btn--md login-btn login-btn-dark mt-1 mb-1">
                                 Login
                             </button>
                         </form>
+
+                        <button
+                            onClick={guestLogin}
+                            className="btn btn--md login-btn mb-1"
+                        >
+                            Login as Guest
+                        </button>
 
                         <Link
                             className="btn btn--link login-btn-link"

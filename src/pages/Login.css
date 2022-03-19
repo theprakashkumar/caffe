@@ -40,3 +40,18 @@
     display: flex;
     width: fit-content;
 }
+
+.login-btn-dark {
+    background: var(--main-text-color);
+    color: #fff;
+}
+
+.login-btn-dark:hover {
+    background: inherit;
+    color: var(--main-text-color);
+}
+
+.login-btn-link {
+    display: flex;
+    width: fit-content;
+}
