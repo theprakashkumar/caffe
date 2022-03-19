@@ -24,26 +24,6 @@ const ProductPage = () => {
 
     const [addingToCart, setAddingToCart] = useState(false);
     const [addingToWishlist, setAddingToWishlist] = useState(false);
-    // find if item is already in cart or wishlist
-    // const inCartOrWishlist = (id) => {
-    //     const inCart = cartState.find((item) => item.product?._id === id);
-    //     const inWishlist = wishlistState.find(
-    //         (item) => item.product?._id === id
-    //     );
-
-    //     if (inCart) {
-    //         setIsProductInCart(true);
-    //     }
-    //     if (inWishlist) {
-    //         setIsProductInWishlist(true);
-    //     }
-
-    //     console.log({isProductInCart})
-    //     console.log("product id", id);
-    //     // console.log("product id from inCart", inCart.product._id);
-    //     console.log({ inCart });
-    //     console.log({ inWishlist });
-    // };
 
     const inCart = (id) => {
         const alreadyInCart = cartState.find(
@@ -151,6 +131,7 @@ const ProductPage = () => {
         inWishlist(id);
     }, [wishlistState]);
 
+    // alert(product.inStock);
     return (
         <div className="product-page-container">
             {product ? (
@@ -238,7 +219,7 @@ const ProductPage = () => {
                                             ? addToCartHandler(product?._id)
                                             : navigate("/login");
                                     }}
-                                    disabled={addingToCart}
+                                    disabled={addingToCart || !product.inStock}
                                 >
                                     {addingToCart ? (
                                         <div className="product-page__button__animation-container">
@@ -250,6 +231,8 @@ const ProductPage = () => {
                                         </div>
                                     ) : isProductInCart ? (
                                         "GO TO CART"
+                                    ) : !product.inStock ? (
+                                        "OUT OF STOCK"
                                     ) : (
                                         "ADD TO CART"
                                     )}

@@ -57,6 +57,10 @@
     max-height: 4.6rem;
 }
 
+.product-page__cart-button:disabled:hover {
+    cursor: not-allowed;
+}
+
 .product-page__cart-button:hover {
     transform: scale(1.01);
 }
