@@ -102,9 +102,9 @@ const WishlistCard = (props) => {
                         onClick={() => moveToCart(_id)}
                     >
                         <span class="material-icons-outlined btn--icon__icon">
-                            shopping_bag
+                            shopping_cart
                         </span>
-                        MOVE TO BAG
+                        MOVE TO CART
                     </button>
                 </div>
             </div>
