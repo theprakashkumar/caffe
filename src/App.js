@@ -86,6 +86,7 @@ function App() {
     }, []);
 
     useEffect(() => {
+        console.log("user looged");
         if (isUserLogin) {
             getWishlist();
             getCart();
