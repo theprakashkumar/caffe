@@ -6,7 +6,6 @@ import { WishlistContext } from "../contexts/WishlistContext";
 import { AuthContext } from "../contexts/AuthContext";
 import { useParams, useNavigate } from "react-router-dom";
 import PuffLoader from "react-spinners/PuffLoader";
-import PropagateLoader from "react-spinners/PropagateLoader";
 import Loader from "../components/Loader";
 
 const ProductPage = () => {
@@ -131,7 +130,6 @@ const ProductPage = () => {
         inWishlist(id);
     }, [wishlistState]);
 
-    // alert(product.inStock);
     return (
         <div className="product-page-container">
             {product ? (
@@ -141,7 +139,7 @@ const ProductPage = () => {
                             <img
                                 src={product.image}
                                 className="product-page__main__right__image"
-                                alt="product-image"
+                                alt="product"
                             />
                         </div>
                         <div className="product-page__main__left">
