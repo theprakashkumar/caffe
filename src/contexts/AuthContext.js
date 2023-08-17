@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
             userDetails: emptyUser,
         };
 
-    const [isUserLogin, setLogin] = useState(initialLogin);
+    const [isUserLogin, setIsUserLogin] = useState(initialLogin);
     const [userDetails, setUserDetails] = useState(initialUserDetails);
     const { state } = useLocation();
     const navigate = useNavigate();
@@ -32,13 +32,14 @@ export const AuthProvider = ({ children }) => {
                     password,
                 });
                 if (response.data.success) {
-                    setLogin(true);
                     setUserDetails({
                         userId: response.data.id,
                         name: response.data.name,
                         email: response.data.email,
                         token: response.data.token,
                     });
+                    setIsUserLogin(true);
+
                     localStorage?.setItem(
                         "login",
                         JSON.stringify({
@@ -63,7 +64,7 @@ export const AuthProvider = ({ children }) => {
 
     const logout = () => {
         console.log("Logged Out!");
-        setLogin(false);
+        setIsUserLogin(false);
         setUserDetails(emptyUser);
         localStorage.removeItem("login");
     };
