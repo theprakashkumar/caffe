@@ -38,6 +38,7 @@ const Wishlist = () => {
 
     useEffect(() => {
         getWishlist();
+        // eslint-disable-next-line
     }, []);
 
     return (
@@ -48,7 +49,7 @@ const Wishlist = () => {
                 <div className="wishlist flex flex-dir-cl flex-align-center">
                     <div className="heading--h5 mb-2">Wishlist</div>
                     {state.map((item) => {
-                        return <WishlistCard product={item} />;
+                        return <WishlistCard product={item} key={item._id} />;
                     })}
                 </div>
             ) : (

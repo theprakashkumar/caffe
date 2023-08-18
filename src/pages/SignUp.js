@@ -43,9 +43,9 @@ const SignUp = () => {
                 </div>
 
                 <form onSubmit={handleSubmit}>
-                    <div class="input-text-wrapper mb-1">
+                    <div className="input-text-wrapper mb-1">
                         <input
-                            class="input-text  input-text-full-name"
+                            className="input-text  input-text-full-name"
                             type="text"
                             placeholder="Full Name"
                             name="name"
@@ -54,9 +54,9 @@ const SignUp = () => {
                         />
                     </div>
 
-                    <div class="input-text-wrapper mb-1">
+                    <div className="input-text-wrapper mb-1">
                         <input
-                            class="input-text input-text-email"
+                            className="input-text input-text-email"
                             type="text"
                             placeholder="Email"
                             name="email"
@@ -65,9 +65,9 @@ const SignUp = () => {
                         />
                     </div>
 
-                    <div class="input-text-wrapper">
+                    <div className="input-text-wrapper">
                         <input
-                            class="input-text input-text-password"
+                            className="input-text input-text-password"
                             type="password"
                             placeholder="Password"
                             name="password"
@@ -76,7 +76,7 @@ const SignUp = () => {
                         />
                     </div>
 
-                    <button class="btn btn--lg sign-up-btn mt-1">
+                    <button className="btn btn--lg sign-up-btn mt-1">
                         SIGN UP
                     </button>
                 </form>

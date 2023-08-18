@@ -35,6 +35,7 @@ export const CartProvider = ({ children }) => {
         if (isUserLogin) {
             getCart();
         }
+        // eslint-disable-next-line
     }, [isUserLogin]);
 
     return (

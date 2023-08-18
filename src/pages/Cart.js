@@ -22,7 +22,6 @@ const Cart = () => {
                 },
             });
             if (response.data.success) {
-                console.log(response.data.cart.cartItems);
                 dispatch({
                     type: "SYNC_CART",
                     payload: {
@@ -45,10 +44,12 @@ const Cart = () => {
 
     useEffect(() => {
         getCart();
+        // eslint-disable-next-line
     }, []);
 
     useEffect(() => {
         getTotal();
+        // eslint-disable-next-line
     }, [state]);
     return (
         <div>
@@ -60,7 +61,9 @@ const Cart = () => {
                     <div className="cart__content flex">
                         <div className="cart__content-left ">
                             {state.map((item) => {
-                                return <CartCard product={item} />;
+                                return (
+                                    <CartCard product={item} key={item._id} />
+                                );
                             })}
                         </div>
                         <div className="cart__content-right">
@@ -86,7 +89,7 @@ const Cart = () => {
                             </div>
                             <button className="btn btn-lg btn--icon cart__content-right__button mt-1">
                                 Check Out
-                                <span class="material-icons-outlined  btn--icon__icon ml-1">
+                                <span className="material-icons-outlined  btn--icon__icon ml-1">
                                     east
                                 </span>
                             </button>

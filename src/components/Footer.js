@@ -35,25 +35,25 @@ const Footer = () => {
                             href="https://www.facebook.com/"
                             className="footer-right__social-container__link"
                         >
-                            <i class="fab fa-facebook-f mr-2"></i>
+                            <i className="fab fa-facebook-f mr-2"></i>
                         </a>
                         <a
                             href="https://www.twitter.com/theprakashkumar"
                             className="footer-right__social-container__link"
                         >
-                            <i class="fab fa-twitter mr-2"></i>
+                            <i className="fab fa-twitter mr-2"></i>
                         </a>
                         <a
                             href="https://www.instagram.com/"
                             className="footer-right__social-container__link"
                         >
-                            <i class="fab fa-instagram mr-2"></i>
+                            <i className="fab fa-instagram mr-2"></i>
                         </a>
                         <a
                             href="https://www.linkedin.com/in/theprakashkumar"
                             className="footer-right__social-container__link"
                         >
-                            <i class="fab fa-linkedin-in"></i>
+                            <i className="fab fa-linkedin-in"></i>
                         </a>
                     </div>
                 </div>

@@ -96,26 +96,6 @@ const CartCard = (props) => {
         }
     };
 
-    // delete item from cart
-    const deleteFromCart = async (id) => {
-        try {
-            const response = await axios.delete(`/cart/${userId}`, {
-                headers: {
-                    authorization: token,
-                },
-                data: {
-                    id,
-                },
-            });
-            if (response.data.success) {
-                console.log("data updated");
-                console.log(response.data);
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
     return (
         <div className="card-cart mb-1">
             <div className="card-cart__image__wrapper">
@@ -160,10 +140,7 @@ const CartCard = (props) => {
                         onClick={() => removeFromCart(productId)}
                         className="btn card-cart__control__button card-cart__control__button-delete"
                     >
-                        <span
-                            className="material-icons-round card-cart__control__button__icon"
-                            onChange={() => deleteFromCart(productId)}
-                        >
+                        <span className="material-icons-round card-cart__control__button__icon">
                             delete
                         </span>
                     </button>

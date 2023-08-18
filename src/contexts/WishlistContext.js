@@ -34,6 +34,7 @@ export const WishlistProvider = ({ children }) => {
         if (isUserLogin) {
             getWishlist();
         }
+        // eslint-disable-next-line
     }, [isUserLogin]);
 
     return (

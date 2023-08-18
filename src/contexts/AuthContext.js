@@ -63,7 +63,6 @@ export const AuthProvider = ({ children }) => {
     };
 
     const logout = () => {
-        console.log("Logged Out!");
         setIsUserLogin(false);
         setUserDetails(emptyUser);
         localStorage.removeItem("login");

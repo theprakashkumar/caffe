@@ -67,41 +67,45 @@ const WishlistCard = (props) => {
     };
 
     return (
-        <div class="card-wishlist mb-1">
-            <div class="card-wishlist__image__wrapper">
-                <img src={image} class="card-wishlist__image" alt="Product" />
+        <div className="card-wishlist mb-1">
+            <div className="card-wishlist__image__wrapper">
+                <img
+                    src={image}
+                    className="card-wishlist__image"
+                    alt="Product"
+                />
             </div>
-            <div class="card-wishlist__description">
-                <div class="card-wishlist__description__title">{name}</div>
+            <div className="card-wishlist__description">
+                <div className="card-wishlist__description__title">{name}</div>
 
-                <div class="card-wishlist__price__wrapper">
-                    <div class="card-wishlist__price">
+                <div className="card-wishlist__price__wrapper">
+                    <div className="card-wishlist__price">
                         {"\u20B9"} {price}
                     </div>
-                    <strike class="card-wishlist__price__crossed ml-2">
+                    <strike className="card-wishlist__price__crossed ml-2">
                         {"\u20B9"} {mrp}{" "}
                     </strike>
-                    <div class="card-wishlist__price__discount ml-2">
+                    <div className="card-wishlist__price__discount ml-2">
                         {discount} off
                     </div>
                 </div>
 
-                <div class="card-wishlist__control__wrapper">
+                <div className="card-wishlist__control__wrapper">
                     <button
-                        class="btn btn--icon btn--sm card-wishlist__control__button"
+                        className="btn btn--icon btn--sm card-wishlist__control__button"
                         onClick={() => removeFromWishlist(_id)}
                     >
-                        <span class="material-icons-outlined btn--icon__icon">
+                        <span className="material-icons-outlined btn--icon__icon">
                             delete
                         </span>
                         DELETE
                     </button>
 
                     <button
-                        class="btn btn--icon btn--sm card-wishlist__control__button"
+                        className="btn btn--icon btn--sm card-wishlist__control__button"
                         onClick={() => moveToCart(_id)}
                     >
-                        <span class="material-icons-outlined btn--icon__icon">
+                        <span className="material-icons-outlined btn--icon__icon">
                             shopping_cart
                         </span>
                         MOVE TO CART

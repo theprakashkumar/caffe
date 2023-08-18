@@ -18,11 +18,11 @@ const Nav = () => {
                     className="navbar__item"
                     to="/wishlist"
                 >
-                    <div class="icon-with-badge">
-                        <span class="material-icons-outlined icon-with-badge__icon">
+                    <div className="icon-with-badge">
+                        <span className="material-icons-outlined icon-with-badge__icon">
                             bookmark_border
                         </span>
-                        <span class=" icon-with-badge__text">
+                        <span className=" icon-with-badge__text">
                             {wishlistState?.length}
                         </span>
                     </div>
@@ -32,11 +32,11 @@ const Nav = () => {
                     className="navbar__item"
                     to="/cart"
                 >
-                    <div class="icon-with-badge">
-                        <span class="material-icons-outlined icon-with-badge__icon">
+                    <div className="icon-with-badge">
+                        <span className="material-icons-outlined icon-with-badge__icon">
                             shopping_cart
                         </span>
-                        <span class="icon-with-badge__text">
+                        <span className="icon-with-badge__text">
                             {cartState?.length}
                         </span>
                     </div>
@@ -46,8 +46,8 @@ const Nav = () => {
                     className="navbar__item"
                     to="/login"
                 >
-                    <div class="icon-with-badge">
-                        <span class="material-icons-outlined icon-with-badge__icon">
+                    <div className="icon-with-badge">
+                        <span className="material-icons-outlined icon-with-badge__icon">
                             perm_identity
                         </span>
                     </div>

@@ -120,14 +120,17 @@ const ProductPage = () => {
         getProduct(id);
         inCart(id);
         inWishlist(id);
+        // eslint-disable-next-line
     }, []);
 
     useEffect(() => {
         inCart(id);
+        // eslint-disable-next-line
     }, [cartState]);
 
     useEffect(() => {
         inWishlist(id);
+        // eslint-disable-next-line
     }, [wishlistState]);
 
     return (
@@ -146,28 +149,28 @@ const ProductPage = () => {
                             <div className="product-page__main__left__title heading heading--h3">
                                 {product.name}
                             </div>
-                            <div class="card-product__rating__wrapper">
-                                <div class="card-product__rating__icon__wrapper">
-                                    <span class="card-product__rating__icon__text">
+                            <div className="card-product__rating__wrapper">
+                                <div className="card-product__rating__icon__wrapper">
+                                    <span className="card-product__rating__icon__text">
                                         {product.rating}
                                     </span>
-                                    <span class="material-icons-outlined card-product__rating__icon">
+                                    <span className="material-icons-outlined card-product__rating__icon">
                                         star
                                     </span>
                                 </div>
-                                <span class="card-product__rating__reviews">
+                                <span className="card-product__rating__reviews">
                                     {product.ratings} Ratings &{" "}
                                     {product.reviews} Reviews
                                 </span>
                             </div>
-                            <div class="card-product__price__wrapper">
-                                <div class="card-product__price">
+                            <div className="card-product__price__wrapper">
+                                <div className="card-product__price">
                                     {"\u20B9"} {product.price}
                                 </div>
-                                <strike class="card-product__price__crossed ml-2">
+                                <strike className="card-product__price__crossed ml-2">
                                     {"\u20B9"} {product.mrp}
                                 </strike>
-                                <div class="card-product__price__discount ml-2">
+                                <div className="card-product__price__discount ml-2">
                                     {product.discount} off
                                 </div>
                             </div>
@@ -179,7 +182,7 @@ const ProductPage = () => {
                                 <div className="product-page__main__left__review__rating"></div>
                             </div>
 
-                            <div class="card-product__description mt-1 mb-1">
+                            <div className="card-product__description mt-1 mb-1">
                                 Tasting Nodes: {product.tastingNodes}
                                 <br />
                                 Roast: {product.category}
@@ -187,7 +190,7 @@ const ProductPage = () => {
 
                             <div className="product-page__button-container">
                                 <button
-                                    class="btn mt-1 mr-1 product-page__wishlist-button"
+                                    className="btn mt-1 mr-1 product-page__wishlist-button"
                                     onClick={() => {
                                         isUserLogin
                                             ? addToWishlist(product?._id)
@@ -211,7 +214,7 @@ const ProductPage = () => {
                                 </button>
 
                                 <button
-                                    class="btn mt-1 product-page__cart-button"
+                                    className="btn mt-1 product-page__cart-button"
                                     onClick={() => {
                                         isUserLogin
                                             ? addToCartHandler(product?._id)

@@ -17,7 +17,7 @@ const Filter = () => {
         <div className="filters mt-2">
             <div className="filters__button-container">
                 <button onClick={clickHandler} className="filters__btn">
-                    <span class="material-icons-outlined filters__btn__icon">
+                    <span className="material-icons-outlined filters__btn__icon">
                         filter_alt
                     </span>
                     <span className="filters__btn__text">Filters</span>
