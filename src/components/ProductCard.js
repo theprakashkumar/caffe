@@ -30,7 +30,7 @@ const ProductCard = (props) => {
     const navigate = useNavigate();
 
     const inWishlist = (id) => {
-        const alreadyInWishlist = wishlistState.find(
+        const alreadyInWishlist = wishlistState?.find(
             (item) => item.product._id === id
         );
         if (alreadyInWishlist) {
@@ -68,20 +68,21 @@ const ProductCard = (props) => {
 
     // remove product from the wishlist
     const removeFromWishlist = async (id) => {
+        console.log({ token });
         try {
             const response = await axios.delete(`/wishlist/${userId}`, {
                 headers: {
                     authorization: token,
                 },
                 data: {
-                    _id,
+                    _id: id,
                 },
             });
             if (response.data.success) {
                 wishlistDispatch({
                     type: "SYNC_WISHLIST",
                     payload: {
-                        product: response.data.wishlist.wishlistItems,
+                        product: response.data.updatedWishlist.wishlistItems,
                     },
                 });
             }

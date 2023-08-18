@@ -9,13 +9,13 @@ import PuffLoader from "react-spinners/PuffLoader";
 import Loader from "../components/Loader";
 
 const ProductPage = () => {
+    const navigate = useNavigate();
     const { state: cartState, dispatch: cartDispatch } =
         useContext(CartContext);
     const { state: wishlistState, dispatch: wishlistDispatch } =
         useContext(WishlistContext);
     const { isUserLogin, userId, token } = useContext(AuthContext);
     const { id } = useParams();
-    const navigate = useNavigate();
     const [product, setProduct] = useState(null);
 
     const [isProductInCart, setIsProductInCart] = useState(false);
@@ -25,8 +25,8 @@ const ProductPage = () => {
     const [addingToWishlist, setAddingToWishlist] = useState(false);
 
     const inCart = (id) => {
-        const alreadyInCart = cartState.find(
-            (item) => item.product?._id === id
+        const alreadyInCart = cartState?.find(
+            (item) => item.product._id === id
         );
         if (alreadyInCart) {
             setIsProductInCart(true);
@@ -34,7 +34,10 @@ const ProductPage = () => {
     };
 
     const inWishlist = (id) => {
-        const alreadyInWishlist = wishlistState.find((item) => item._id === id);
+        const alreadyInWishlist = wishlistState?.find(
+            (item) => item.product._id === id
+        );
+
         if (alreadyInWishlist) {
             setIsProductInWishlist(true);
         }
@@ -59,10 +62,11 @@ const ProductPage = () => {
                 }
             );
             if (response.data.success) {
+                console.log(response.data);
                 cartDispatch({
-                    type: "ADD_TO_CART",
+                    type: "SYNC_CART",
                     payload: {
-                        product,
+                        product: response.data.updatedCart.cartItems,
                     },
                 });
                 setIsProductInCart(true);
@@ -73,11 +77,7 @@ const ProductPage = () => {
         }
     };
 
-    // add product to wishlist
     const addToWishlist = async (id) => {
-        if (isProductInWishlist) {
-            return navigate("/wishlist");
-        }
         try {
             setAddingToWishlist(true);
             const response = await axios.post(
@@ -93,15 +93,51 @@ const ProductPage = () => {
             );
             if (response.data.success) {
                 wishlistDispatch({
-                    type: "ADD_TO_WISHLIST",
+                    type: "SYNC_WISHLIST",
                     payload: {
-                        product,
+                        product: response.data.updatedWishlist.wishlistItems,
                     },
                 });
+                setIsProductInWishlist(true);
                 setAddingToWishlist(false);
             }
         } catch (error) {
             console.log(error);
+        }
+    };
+
+    // add product to wishlist
+    const removeFromWishlist = async (id) => {
+        try {
+            setAddingToWishlist(true);
+            const response = await axios.delete(`/wishlist/${userId}`, {
+                headers: {
+                    authorization: token,
+                },
+                data: {
+                    _id: id,
+                },
+            });
+            if (response.data.success) {
+                wishlistDispatch({
+                    type: "SYNC_WISHLIST",
+                    payload: {
+                        product: response.data.updatedWishlist.wishlistItems,
+                    },
+                });
+                setIsProductInWishlist(false);
+                setAddingToWishlist(false);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const handleWishlist = async (id) => {
+        if (isUserLogin) {
+            isProductInWishlist ? removeFromWishlist(id) : addToWishlist(id);
+        } else {
+            navigate("/login", { state: { from: "/products" } });
         }
     };
 
@@ -118,8 +154,6 @@ const ProductPage = () => {
             }
         };
         getProduct(id);
-        inCart(id);
-        inWishlist(id);
         // eslint-disable-next-line
     }, []);
 
@@ -191,11 +225,7 @@ const ProductPage = () => {
                             <div className="product-page__button-container">
                                 <button
                                     className="btn mt-1 mr-1 product-page__wishlist-button"
-                                    onClick={() => {
-                                        isUserLogin
-                                            ? addToWishlist(product?._id)
-                                            : navigate("/login");
-                                    }}
+                                    onClick={() => handleWishlist(product?._id)}
                                     disabled={addingToWishlist}
                                 >
                                     {addingToWishlist ? (
