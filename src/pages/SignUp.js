@@ -81,7 +81,14 @@ const SignUp = () => {
                     </button>
                 </form>
             </div>
-            <ToastContainer />
+            <ToastContainer
+                hideProgressBar
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                pauseOnHover
+            />
         </div>
     );
 };

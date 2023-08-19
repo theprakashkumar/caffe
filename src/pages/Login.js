@@ -42,11 +42,8 @@ const Login = () => {
     };
 
     const guestLogin = async () => {
-        await loginWithCredential(
-            "guest@gmail.com",
-            "guest"
-        );
-    }
+        await loginWithCredential("guest@gmail.com", "guest");
+    };
 
     const handleLogout = () => {
         cartDispatch({
@@ -121,7 +118,14 @@ const Login = () => {
                     </div>
                 </>
             )}
-            <ToastContainer />
+            <ToastContainer
+                hideProgressBar
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                pauseOnHover
+            />
         </div>
     );
 };
