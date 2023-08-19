@@ -15,6 +15,7 @@ import { AuthContext } from "./contexts/AuthContext";
 import { WishlistContext } from "./contexts/WishlistContext";
 import axios from "axios";
 import { CartContext } from "./contexts/CartContext";
+import Profile from "./pages/Profile";
 
 function App() {
     const { dispatch: wishlistDispatch } = useContext(WishlistContext);
@@ -87,6 +88,7 @@ function App() {
                     <Route path="/signup" element={<SignUp />} />
                     <PrivateRoutes path="/wishlist" element={<Wishlist />} />
                     <PrivateRoutes path="/cart" element={<Cart />} />
+                    <PrivateRoutes path="/profile" element={<Profile />} />
                 </Routes>
                 <Footer />
             </header>

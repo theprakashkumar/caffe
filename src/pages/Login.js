@@ -1,19 +1,13 @@
 import "./Login.css";
-import Avatar from "../assets/account_circle_black_48dp.svg";
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
-import { CartContext } from "../contexts/CartContext";
-import { WishlistContext } from "../contexts/WishlistContext";
-
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
-    const { isUserLogin, name, loginWithCredential, logout } =
-        useContext(AuthContext);
-    const { dispatch: cartDispatch } = useContext(CartContext);
-    const { dispatch: wishlistDispatch } = useContext(WishlistContext);
+    const { isUserLogin, loginWithCredential } = useContext(AuthContext);
+
     const [credential, setCredential] = useState({ email: "", password: "" });
 
     const handleChange = (e) => {
@@ -53,29 +47,10 @@ const Login = () => {
         await loginWithCredential("guest@gmail.com", "guest");
     };
 
-    const handleLogout = () => {
-        cartDispatch({
-            type: "RESET_CART",
-        });
-        wishlistDispatch({
-            type: "RESET_WISHLIST",
-        });
-        logout();
-    };
     return (
         <div className="login">
             {isUserLogin ? (
-                <div className="logged-in-container">
-                    <img
-                        className="logged-in__image mt-2"
-                        src={Avatar}
-                        alt="Avatar Logo"
-                    />
-                    <div className="heading--h6 mt-1 mb-1">Hi {name}!</div>
-                    <button className="btn" onClick={handleLogout}>
-                        Logout
-                    </button>
-                </div>
+                <Navigate to="/profile" />
             ) : (
                 <>
                     <div className="login-from-container">
