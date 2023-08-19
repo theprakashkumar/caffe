@@ -25,6 +25,14 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+        if (!emailRegex.test(credential.email)) {
+            return toast.error("Please enter a valid email address", {
+                position: toast.POSITION.BOTTOM_CENTER,
+            });
+        }
+
         const loginStatus = await loginWithCredential(
             credential.email,
             credential.password
@@ -97,7 +105,12 @@ const Login = () => {
                                 />
                             </div>
 
-                            <button className="btn btn--md login-btn login-btn-dark mt-1 mb-1">
+                            <button
+                                className="btn btn--md login-btn login-btn-dark mt-1 mb-1"
+                                disabled={
+                                    !credential.email || !credential.password
+                                }
+                            >
                                 Login
                             </button>
                         </form>

@@ -51,6 +51,11 @@
     color: var(--main-text-color);
 }
 
+.login-btn:disabled {
+    background: inherit;
+    color: #1010104d;
+}
+
 .login-btn-link {
     display: flex;
     width: fit-content;

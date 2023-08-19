@@ -19,3 +19,9 @@
 .sign-up-btn {
     width: 100%;
 }
+
+.sign-up-btn:disabled {
+    background: inherit;
+    color: #1010104d;
+    cursor: auto;
+}

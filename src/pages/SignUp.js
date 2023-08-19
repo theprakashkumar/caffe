@@ -14,8 +14,21 @@ const initialUserDetails = {
 const SignUp = () => {
     const [userDetails, setUserDetails] = useState(initialUserDetails);
     const { signUp } = useContext(AuthContext);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+        if (!emailRegex.test(userDetails.email)) {
+            return toast.error("Please enter a valid email address", {
+                position: toast.POSITION.BOTTOM_CENTER,
+            });
+        }
+
+        if (userDetails.password.length < 8) {
+            return toast.error("Password must be of least 8 character!", {
+                position: toast.POSITION.BOTTOM_CENTER,
+            });
+        }
         const signUpStatus = await signUp(userDetails);
         console.log(signUpStatus);
         if (signUpStatus === 409) {
@@ -76,7 +89,14 @@ const SignUp = () => {
                         />
                     </div>
 
-                    <button className="btn btn--lg sign-up-btn mt-1">
+                    <button
+                        className="btn btn--lg sign-up-btn mt-1"
+                        disabled={
+                            !userDetails.name ||
+                            !userDetails.email ||
+                            !userDetails.password
+                        }
+                    >
                         SIGN UP
                     </button>
                 </form>
