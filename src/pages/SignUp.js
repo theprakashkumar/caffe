@@ -4,6 +4,7 @@ import { AuthContext } from "../contexts/AuthContext";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Link } from "react-router-dom";
 
 const initialUserDetails = {
     name: "",
@@ -98,7 +99,7 @@ const SignUp = () => {
                     </div>
 
                     <button
-                        className="btn btn--lg sign-up-btn mt-1"
+                        className="btn btn--lg sign-up-btn mt-1 mb-1"
                         disabled={
                             !userDetails.name ||
                             !userDetails.email ||
@@ -107,6 +108,12 @@ const SignUp = () => {
                     >
                         SIGN UP
                     </button>
+                    <Link
+                        className="btn btn--link signup-btn-link mt-1"
+                        to="/login"
+                    >
+                        Login Instead?
+                    </Link>
                 </form>
             </div>
             <ToastContainer

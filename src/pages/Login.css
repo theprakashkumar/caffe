@@ -23,6 +23,8 @@
 .login-btn-link {
     display: flex;
     width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .login-btn-dark {
@@ -38,9 +40,4 @@
 .login-btn:disabled {
     background: inherit;
     color: #1010104d;
-}
-
-.login-btn-link {
-    display: flex;
-    width: fit-content;
 }

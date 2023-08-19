@@ -25,3 +25,10 @@
     color: #1010104d;
     cursor: auto;
 }
+
+.signup-btn-link {
+    display: flex;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
