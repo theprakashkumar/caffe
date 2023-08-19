@@ -68,7 +68,6 @@ const ProductCard = (props) => {
 
     // remove product from the wishlist
     const removeFromWishlist = async (id) => {
-        console.log({ token });
         try {
             const response = await axios.delete(`/wishlist/${userId}`, {
                 headers: {
@@ -99,11 +98,6 @@ const ProductCard = (props) => {
             navigate("/login", { state: { from: "/products" } });
         }
     };
-
-    useEffect(() => {
-        inWishlist(_id);
-        // eslint-disable-next-line
-    }, []);
 
     useEffect(() => {
         inWishlist(_id);

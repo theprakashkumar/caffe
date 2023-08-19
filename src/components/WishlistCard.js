@@ -19,13 +19,15 @@ const WishlistCard = (props) => {
                     authorization: token,
                 },
                 data: {
-                    _id,
+                    _id: id,
                 },
             });
             if (response.data.success) {
                 wishlistDispatch({
-                    type: "REMOVE_FROM_WISHLIST",
-                    payload: { _id },
+                    type: "SYNC_WISHLIST",
+                    payload: {
+                        product: response.data.updatedWishlist.wishlistItems,
+                    },
                 });
             }
         } catch (error) {
@@ -39,7 +41,7 @@ const WishlistCard = (props) => {
             const response = await axios.put(
                 `/wishlist/${userId}`,
                 {
-                    _id,
+                    _id: id,
                 },
                 {
                     headers: {

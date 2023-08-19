@@ -34,8 +34,6 @@ const Wishlist = () => {
         }
     };
 
-    // delete product from the wishlist
-
     useEffect(() => {
         getWishlist();
         // eslint-disable-next-line

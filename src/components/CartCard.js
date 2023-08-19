@@ -41,35 +41,8 @@ const CartCard = (props) => {
         }
     };
 
-    // manipulate cart
-    const increment = async (id, quantity) => {
-        try {
-            const response = await axios.put(
-                `/cart/${userId}`,
-                {
-                    _id: id,
-                    quantity,
-                },
-                {
-                    headers: {
-                        authorization: token,
-                    },
-                }
-            );
-            if (response.data.success) {
-                dispatch({
-                    type: "SYNC_CART",
-                    payload: {
-                        product: response.data.updatedCart.cartItems,
-                    },
-                });
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-    const decrement = async (id, quantity) => {
+    // update cart
+    const updateCart = async (id, quantity) => {
         try {
             const response = await axios.put(
                 `/cart/${userId}`,
@@ -120,7 +93,7 @@ const CartCard = (props) => {
 
                 <div className="card-cart__control__wrapper">
                     <button
-                        onClick={() => decrement(_id, quantity - 1)}
+                        onClick={() => updateCart(_id, quantity - 1)}
                         className="btn card-cart__control__button"
                     >
                         <span className="material-icons-round">remove</span>
@@ -131,7 +104,7 @@ const CartCard = (props) => {
                     </div>
 
                     <button
-                        onClick={() => increment(_id, quantity + 1)}
+                        onClick={() => updateCart(_id, quantity + 1)}
                         className="btn card-cart__control__button"
                     >
                         <span className="material-icons-round">add</span>
