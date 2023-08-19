@@ -1,5 +1,5 @@
 import "./SignUp.css";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 
 import { ToastContainer, toast } from "react-toastify";
@@ -48,6 +48,14 @@ const SignUp = () => {
             [e.target.name]: e.target.value,
         }));
     };
+
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+        });
+    }, []);
     return (
         <div className="signup">
             <div className="sign-up-from-container">

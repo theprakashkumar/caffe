@@ -1,5 +1,5 @@
 import "./Login.css";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 import { ToastContainer, toast } from "react-toastify";
@@ -46,6 +46,14 @@ const Login = () => {
     const guestLogin = async () => {
         await loginWithCredential("guest@gmail.com", "guest");
     };
+
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+        });
+    }, []);
 
     return (
         <div className="login">
