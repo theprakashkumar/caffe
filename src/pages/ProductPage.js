@@ -45,35 +45,41 @@ const ProductPage = () => {
 
     // add product to cart
     const addToCartHandler = async (id) => {
-        if (isProductInCart) {
-            return navigate("/cart");
-        }
-        try {
-            setAddingToCart(true);
-            const response = await axios.post(
-                `/cart/${userId}`,
-                {
-                    _id: id,
-                },
-                {
-                    headers: {
-                        authorization: token,
-                    },
-                }
-            );
-            if (response.data.success) {
-                console.log(response.data);
-                cartDispatch({
-                    type: "SYNC_CART",
-                    payload: {
-                        product: response.data.updatedCart.cartItems,
-                    },
-                });
-                setIsProductInCart(true);
-                setAddingToCart(false);
+        if (isUserLogin) {
+            console.log("login");
+            if (isProductInCart) {
+                return navigate("/cart");
             }
-        } catch (error) {
-            console.log(error);
+            try {
+                setAddingToCart(true);
+                const response = await axios.post(
+                    `/cart/${userId}`,
+                    {
+                        _id: id,
+                    },
+                    {
+                        headers: {
+                            authorization: token,
+                        },
+                    }
+                );
+                if (response.data.success) {
+                    console.log(response.data);
+                    cartDispatch({
+                        type: "SYNC_CART",
+                        payload: {
+                            product: response.data.updatedCart.cartItems,
+                        },
+                    });
+                    setIsProductInCart(true);
+                    setAddingToCart(false);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        } else {
+            console.log("ran");
+            navigate("/login", { state: { from: `/product/${id}` } });
         }
     };
 
@@ -137,7 +143,7 @@ const ProductPage = () => {
         if (isUserLogin) {
             isProductInWishlist ? removeFromWishlist(id) : addToWishlist(id);
         } else {
-            navigate("/login", { state: { from: "/products" } });
+            navigate("/login", { state: { from: `/product/${id}` } });
         }
     };
 
@@ -250,11 +256,9 @@ const ProductPage = () => {
 
                                 <button
                                     className="btn mt-1 product-page__cart-button"
-                                    onClick={() => {
-                                        isUserLogin
-                                            ? addToCartHandler(product?._id)
-                                            : navigate("/login");
-                                    }}
+                                    onClick={() =>
+                                        addToCartHandler(product?._id)
+                                    }
                                     disabled={addingToCart || !product.inStock}
                                 >
                                     {addingToCart ? (
