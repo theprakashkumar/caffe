@@ -31,7 +31,6 @@ const SignUp = () => {
             });
         }
         const signUpStatus = await signUp(userDetails);
-        console.log(signUpStatus);
         if (signUpStatus === 409) {
             toast.error("User Already Exits!", {
                 position: toast.POSITION.BOTTOM_CENTER,

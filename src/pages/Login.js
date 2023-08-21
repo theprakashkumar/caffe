@@ -1,6 +1,6 @@
 import "./Login.css";
 import { useContext, useEffect, useState } from "react";
-import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -59,6 +59,7 @@ const Login = () => {
         if (isUserLogin) {
             navigate(state?.from ? state.from : "/");
         }
+        // eslint-disable-next-line
     }, []);
 
     return (

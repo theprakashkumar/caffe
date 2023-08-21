@@ -46,7 +46,6 @@ const ProductPage = () => {
     // add product to cart
     const addToCartHandler = async (id) => {
         if (isUserLogin) {
-            console.log("login");
             if (isProductInCart) {
                 return navigate("/cart");
             }
@@ -64,7 +63,6 @@ const ProductPage = () => {
                     }
                 );
                 if (response.data.success) {
-                    console.log(response.data);
                     cartDispatch({
                         type: "SYNC_CART",
                         payload: {
@@ -78,7 +76,6 @@ const ProductPage = () => {
                 console.log(error);
             }
         } else {
-            console.log("ran");
             navigate("/login", { state: { from: `/product/${id}` } });
         }
     };

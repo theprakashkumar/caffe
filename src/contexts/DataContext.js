@@ -13,8 +13,8 @@ export const DataProvider = ({ children }) => {
                 if (response.data.success) {
                     setData(response.data.product);
                 }
-            } catch (err) {
-                console.log(err);
+            } catch (error) {
+                console.log(error);
             }
         };
         getData();
