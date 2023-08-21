@@ -74,9 +74,27 @@ export const AuthProvider = ({ children }) => {
                 ...userDetail,
             });
             if (response.data.success) {
-                console.log("New User Created!");
-                // ! USER NEED TO BE LOGGED IN HERE!
-                navigate("/login");
+                setUserDetails({
+                    userId: response.data.id,
+                    name: response.data.name,
+                    email: response.data.email,
+                    token: response.data.token,
+                });
+                setIsUserLogin(true);
+
+                localStorage?.setItem(
+                    "login",
+                    JSON.stringify({
+                        isUserLogin: true,
+                        userDetails: {
+                            userId: response.data.id,
+                            name: response.data.name,
+                            email: response.data.email,
+                            token: response.data.token,
+                        },
+                    })
+                );
+                navigate("/");
             }
         } catch (error) {
             console.log("Error While Creating New User!", error);
