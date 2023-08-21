@@ -92,7 +92,12 @@ const Cart = () => {
                                     </div>
                                 </div>
                             </div>
-                            <button className="btn btn-lg btn--icon cart__content-right__button mt-1">
+                            <button
+                                className="btn btn-lg btn--icon cart__content-right__button mt-1"
+                                onClick={() =>
+                                    alert("Still Wrorking On This! 🫠")
+                                }
+                            >
                                 Check Out
                                 <span className="material-icons-outlined  btn--icon__icon ml-1">
                                     east
