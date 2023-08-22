@@ -1,0 +1,19 @@
+.profile {
+    height: 95vh;
+}
+
+.logged-in-container {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.logged-in__image {
+    display: block;
+    width: 15rem;
+    height: auto;
+    margin-top: 7rem;
+}

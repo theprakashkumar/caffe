@@ -1,0 +1,16 @@
+.empty-wishlist {
+    width: max-content;
+    padding-top: 10rem;
+    height: 95vh;
+    margin: 0 auto;
+}
+
+.empty-wishlist__image {
+    display: block;
+    width: 15rem;
+    height: auto;
+}
+
+.link {
+    text-decoration: none;
+}

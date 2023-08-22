@@ -1,0 +1,22 @@
+@media only screen and (max-width: 650px) {
+    .card-cart {
+        padding: 1rem;
+    }
+}
+
+.card-cart__control__button__icon {
+    color: var(--error-dark);
+    transition: color 0.1s;
+}
+
+.card-cart__control__button-delete {
+    transition: background 0.1s;
+}
+
+.card-cart__control__button-delete:hover {
+    background: var(--error-dark);
+}
+
+.card-cart__control__button-delete:hover > .card-cart__control__button__icon {
+    color: inherit;
+}

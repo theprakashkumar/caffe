@@ -1,0 +1,20 @@
+.card-product {
+  justify-self: center;
+}
+
+.product-card-image {
+  width: 80%;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1.5rem;
+}
+
+@media screen and (max-width: 450px) {
+  .product-card {
+    margin-left: auto;
+    margin-right: auto;
+    width: 98%;
+  }
+}

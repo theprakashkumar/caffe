@@ -1,0 +1,49 @@
+.filters {
+    width: fit-content;
+    margin: 2rem auto;
+}
+
+.filters__button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.filters__btn {
+    background: inherit;
+    outline: 2px solid transparent;
+    border: none;
+    padding: 0.7rem 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.filters__btn:hover {
+    background: #e5e7eb;
+    cursor: pointer;
+}
+
+.filters__btn__icon {
+    margin-right: 0.1rem;
+}
+
+.filters__inputs {
+    background: #fff;
+    margin-top: 0.7rem;
+    padding: 2rem;
+    font-size: 1.8rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 0.5rem;
+}
+
+@media screen and (max-width: 450px) {
+    .filters__inputs {
+        grid-template-columns: 1fr;
+    }
+}

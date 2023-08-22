@@ -1,0 +1,43 @@
+.login {
+    height: 95vh;
+}
+
+.login-from-container {
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+}
+
+.login-heading {
+    color: var(--main-text-color);
+    text-align: center;
+    font-weight: 400;
+    padding-top: 10rem;
+    padding-bottom: 3rem;
+}
+
+.login-btn {
+    width: 100%;
+}
+
+.login-btn-link {
+    display: flex;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.login-btn-dark {
+    background: var(--main-text-color);
+    color: #fff;
+}
+
+.login-btn-dark:hover {
+    background: inherit;
+    color: var(--main-text-color);
+}
+
+.login-btn:disabled {
+    background: inherit;
+    color: #1010104d;
+}
