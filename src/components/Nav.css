@@ -28,6 +28,17 @@
     align-items: center;
 }
 
+.navbar__link {
+    color: var(--main-text-color);
+    font-size: 1.9rem;
+    font-weight: 500;
+}
+
+.navbar__link:hover {
+    color: var(--main-text-light-color);
+    transition: color 0.2s;
+}
+
 @media only screen and (max-width: 768px) {
     .navbar {
         justify-content: space-between;

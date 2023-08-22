@@ -30,7 +30,7 @@ const ProductCard = (props) => {
     const navigate = useNavigate();
 
     const inWishlist = (id) => {
-        const alreadyInWishlist = wishlistState.find(
+        const alreadyInWishlist = wishlistState?.find(
             (item) => item.product._id === id
         );
         if (alreadyInWishlist) {
@@ -74,14 +74,14 @@ const ProductCard = (props) => {
                     authorization: token,
                 },
                 data: {
-                    _id,
+                    _id: id,
                 },
             });
             if (response.data.success) {
                 wishlistDispatch({
                     type: "SYNC_WISHLIST",
                     payload: {
-                        product: response.data.wishlist.wishlistItems,
+                        product: response.data.updatedWishlist.wishlistItems,
                     },
                 });
             }
@@ -101,21 +101,18 @@ const ProductCard = (props) => {
 
     useEffect(() => {
         inWishlist(_id);
-    }, []);
-
-    useEffect(() => {
-        inWishlist(_id);
+        // eslint-disable-next-line
     }, [wishlistState]);
 
     return (
-        <div class="card-product">
-            <div class="card-product__image__wrapper">
+        <div className="card-product">
+            <div className="card-product__image__wrapper">
                 <img
                     src={image}
                     alt="product"
-                    class="card-product__image product-card-image"
+                    className="card-product__image product-card-image"
                 />
-                <button class="card-product__icon" onClick={clickHandler}>
+                <button className="card-product__icon" onClick={clickHandler}>
                     <svg
                         width="24"
                         height="24"
@@ -128,40 +125,40 @@ const ProductCard = (props) => {
                 </button>
             </div>
 
-            <div class="card-product__name">{name}</div>
+            <div className="card-product__name">{name}</div>
 
-            <div class="card-product__description">
+            <div className="card-product__description">
                 {tastingNodes} | {category}
             </div>
 
-            <div class="card-product__rating__wrapper">
-                <div class="card-product__rating__icon__wrapper">
-                    <span class="card-product__rating__icon__text">
+            <div className="card-product__rating__wrapper">
+                <div className="card-product__rating__icon__wrapper">
+                    <span className="card-product__rating__icon__text">
                         {rating}
                     </span>
-                    <span class="material-icons-outlined card-product__rating__icon">
+                    <span className="material-icons-outlined card-product__rating__icon">
                         star
                     </span>
                 </div>
-                <span class="card-product__rating__reviews">
+                <span className="card-product__rating__reviews">
                     {ratings} Ratings & {reviews} Reviews
                 </span>
             </div>
 
-            <div class="card-product__price__wrapper">
-                <div class="card-product__price">
+            <div className="card-product__price__wrapper">
+                <div className="card-product__price">
                     {"\u20B9"} {price}
                 </div>
-                <strike class="card-product__price__crossed ml-2">
+                <strike className="card-product__price__crossed ml-2">
                     {"\u20B9"} {mrp}{" "}
                 </strike>
-                <div class="card-product__price__discount ml-2">
+                <div className="card-product__price__discount ml-2">
                     {discount} off
                 </div>
             </div>
 
             <Link to={`/product/${_id}`}>
-                <button class="btn mt-1">SHOP NOW</button>
+                <button className="btn mt-1">SHOP NOW</button>
             </Link>
         </div>
     );

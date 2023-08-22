@@ -1,6 +1,4 @@
 import "./App.css";
-import axios from "axios";
-import { useEffect, useContext } from "react";
 import { Routes, Route } from "react-router-dom";
 import Nav from "./components/Nav";
 import Home from "./pages/Home";
@@ -11,31 +9,20 @@ import SignUp from "./pages/SignUp";
 import Wishlist from "./pages/Wishlist";
 import Cart from "./pages/Cart";
 import PrivateRoutes from "./utils/PrivateRoutes";
-import { DataContext } from "./contexts/DataContext";
+import Footer from "./components/Footer";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "./contexts/AuthContext";
 import { WishlistContext } from "./contexts/WishlistContext";
+import axios from "axios";
 import { CartContext } from "./contexts/CartContext";
-import Footer from "./components/Footer";
+import Profile from "./pages/Profile";
 
 function App() {
-    const { setData } = useContext(DataContext);
-    const { isUserLogin, token, userId } = useContext(AuthContext);
     const { dispatch: wishlistDispatch } = useContext(WishlistContext);
     const { dispatch: cartDispatch } = useContext(CartContext);
 
-    // get data from the server and save them in context
-    const getData = async () => {
-        try {
-            const response = await axios.get("/products");
-            if (response.data.success) {
-                setData(response.data.product);
-            }
-        } catch (err) {
-            console.log(err);
-        }
-    };
+    const { isUserLogin, userId, token } = useContext(AuthContext);
 
-    // get cart data from server and save them in context
     const getCart = async () => {
         try {
             const response = await axios.get(`/cart/${userId}`, {
@@ -56,7 +43,6 @@ function App() {
         }
     };
 
-    // get wishlist data from the server and save them in context
     const getWishlist = async () => {
         try {
             const response = await axios.get(`/wishlist/${userId}`, {
@@ -78,21 +64,18 @@ function App() {
     };
 
     useEffect(() => {
-        getData();
         if (isUserLogin) {
-            getWishlist();
             getCart();
         }
-    }, []);
-
-    useEffect(() => {
-        console.log("user looged");
-        if (isUserLogin) {
-            getWishlist();
-            getCart();
-        }
+        // eslint-disable-next-line
     }, [isUserLogin]);
 
+    useEffect(() => {
+        if (isUserLogin) {
+            getWishlist();
+        }
+        // eslint-disable-next-line
+    }, [isUserLogin]);
     return (
         <div className="App">
             <header className="App-header">
@@ -105,6 +88,7 @@ function App() {
                     <Route path="/signup" element={<SignUp />} />
                     <PrivateRoutes path="/wishlist" element={<Wishlist />} />
                     <PrivateRoutes path="/cart" element={<Cart />} />
+                    <PrivateRoutes path="/profile" element={<Profile />} />
                 </Routes>
                 <Footer />
             </header>

@@ -41,8 +41,8 @@ const CartCard = (props) => {
         }
     };
 
-    // manipulate cart
-    const increment = async (id, quantity) => {
+    // update cart
+    const updateCart = async (id, quantity) => {
         try {
             const response = await axios.put(
                 `/cart/${userId}`,
@@ -63,53 +63,6 @@ const CartCard = (props) => {
                         product: response.data.updatedCart.cartItems,
                     },
                 });
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-    const decrement = async (id, quantity) => {
-        try {
-            const response = await axios.put(
-                `/cart/${userId}`,
-                {
-                    _id: id,
-                    quantity,
-                },
-                {
-                    headers: {
-                        authorization: token,
-                    },
-                }
-            );
-            if (response.data.success) {
-                dispatch({
-                    type: "SYNC_CART",
-                    payload: {
-                        product: response.data.updatedCart.cartItems,
-                    },
-                });
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-    // delete item from cart
-    const deleteFromCart = async (id) => {
-        try {
-            const response = await axios.delete(`/cart/${userId}`, {
-                headers: {
-                    authorization: token,
-                },
-                data: {
-                    id,
-                },
-            });
-            if (response.data.success) {
-                console.log("data updated");
-                console.log(response.data);
             }
         } catch (error) {
             console.log(error);
@@ -140,7 +93,7 @@ const CartCard = (props) => {
 
                 <div className="card-cart__control__wrapper">
                     <button
-                        onClick={() => decrement(_id, quantity - 1)}
+                        onClick={() => updateCart(_id, quantity - 1)}
                         className="btn card-cart__control__button"
                     >
                         <span className="material-icons-round">remove</span>
@@ -151,7 +104,7 @@ const CartCard = (props) => {
                     </div>
 
                     <button
-                        onClick={() => increment(_id, quantity + 1)}
+                        onClick={() => updateCart(_id, quantity + 1)}
                         className="btn card-cart__control__button"
                     >
                         <span className="material-icons-round">add</span>
@@ -160,10 +113,7 @@ const CartCard = (props) => {
                         onClick={() => removeFromCart(productId)}
                         className="btn card-cart__control__button card-cart__control__button-delete"
                     >
-                        <span
-                            className="material-icons-round card-cart__control__button__icon"
-                            onChange={() => deleteFromCart(productId)}
-                        >
+                        <span className="material-icons-round card-cart__control__button__icon">
                             delete
                         </span>
                     </button>

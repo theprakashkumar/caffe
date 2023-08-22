@@ -6,6 +6,7 @@ export const WishlistContext = createContext();
 export const WishlistProvider = ({ children }) => {
     const initialState = [];
     const [state, dispatch] = useReducer(wishlistReducer, initialState);
+
     return (
         <WishlistContext.Provider value={{ state, dispatch }}>
             {children}

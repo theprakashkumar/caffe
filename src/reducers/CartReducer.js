@@ -6,7 +6,7 @@ const cartReducer = (state, action) => {
             return [...state, { ...action.payload.product }];
         case "REMOVE_FROM_CART":
             return state.filter(
-                (item) => item.product._id !== action.payload._id
+                (item) => item._id !== action.payload.product._id
             );
         case "RESET_CART":
             return [];

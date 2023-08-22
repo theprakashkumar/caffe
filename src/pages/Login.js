@@ -1,20 +1,17 @@
 import "./Login.css";
-import Avatar from "../assets/account_circle_black_48dp.svg";
-import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
-import { CartContext } from "../contexts/CartContext";
-import { WishlistContext } from "../contexts/WishlistContext";
-
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
-    const { isUserLogin, name, loginWithCredential, logout } =
-        useContext(AuthContext);
-    const { dispatch: cartDispatch } = useContext(CartContext);
-    const { dispatch: wishlistDispatch } = useContext(WishlistContext);
+    const { isUserLogin, loginWithCredential } = useContext(AuthContext);
+
     const [credential, setCredential] = useState({ email: "", password: "" });
+
+    const navigate = useNavigate();
+    const { state } = useLocation();
 
     const handleChange = (e) => {
         setCredential((credential) => ({
@@ -25,6 +22,14 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+        if (!emailRegex.test(credential.email)) {
+            return toast.error("Please enter a valid email address", {
+                position: toast.POSITION.BOTTOM_CENTER,
+            });
+        }
+
         const loginStatus = await loginWithCredential(
             credential.email,
             credential.password
@@ -42,86 +47,83 @@ const Login = () => {
     };
 
     const guestLogin = async () => {
-        await loginWithCredential(
-            "guest@gmail.com",
-            "guest"
-        );
-    }
-
-    const handleLogout = () => {
-        cartDispatch({
-            type: "RESET_CART",
-        });
-        wishlistDispatch({
-            type: "RESET_WISHLIST",
-        });
-        logout();
+        await loginWithCredential("guest@gmail.com", "guest");
     };
+
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+        });
+        if (isUserLogin) {
+            navigate(state?.from ? state.from : "/");
+        }
+        // eslint-disable-next-line
+    }, []);
+
     return (
         <div className="login">
-            {isUserLogin ? (
-                <div className="logged-in-container">
-                    <img
-                        className="logged-in__image mt-2"
-                        src={Avatar}
-                        alt="Avatar Logo"
-                    />
-                    <div className="heading--h6 mt-1 mb-1">Hi {name}!</div>
-                    <button className="btn" onClick={handleLogout}>
-                        Logout
-                    </button>
-                </div>
-            ) : (
-                <>
-                    <div className="login-from-container">
-                        <div className="heading heading--h4 login-heading">
-                            Welcome Back!
+            <>
+                <div className="login-from-container">
+                    <div className="heading heading--h4 login-heading">
+                        Welcome Back!
+                    </div>
+                    <form onSubmit={handleSubmit}>
+                        <div className="input-text-wrapper mb-1">
+                            <input
+                                className="input-text  input-text-email"
+                                type="text"
+                                placeholder="Email"
+                                name="email"
+                                value={credential.email}
+                                onChange={handleChange}
+                            />
                         </div>
-                        <form onSubmit={handleSubmit}>
-                            <div className="input-text-wrapper mb-1">
-                                <input
-                                    className="input-text  input-text-email"
-                                    type="text"
-                                    placeholder="Email"
-                                    name="email"
-                                    value={credential.email}
-                                    onChange={handleChange}
-                                />
-                            </div>
 
-                            <div className="input-text-wrapper">
-                                <input
-                                    className="input-text input-text-password"
-                                    type="password"
-                                    placeholder="Password"
-                                    name="password"
-                                    value={credential.password}
-                                    onChange={handleChange}
-                                />
-                            </div>
-
-                            <button className="btn btn--md login-btn login-btn-dark mt-1 mb-1">
-                                Login
-                            </button>
-                        </form>
+                        <div className="input-text-wrapper">
+                            <input
+                                className="input-text input-text-password"
+                                type="password"
+                                placeholder="Password"
+                                name="password"
+                                value={credential.password}
+                                onChange={handleChange}
+                            />
+                        </div>
 
                         <button
-                            onClick={guestLogin}
-                            className="btn btn--md login-btn mb-1"
+                            className="btn btn--md login-btn login-btn-dark mt-1 mb-1"
+                            disabled={!credential.email || !credential.password}
                         >
-                            Login as Guest
+                            Login
                         </button>
+                    </form>
 
-                        <Link
-                            className="btn btn--link login-btn-link"
-                            to="/signup"
-                        >
-                            Don't Have Account Create One!
-                        </Link>
-                    </div>
-                </>
-            )}
-            <ToastContainer />
+                    <button
+                        onClick={guestLogin}
+                        className="btn btn--md login-btn mb-1"
+                    >
+                        Login as Guest
+                    </button>
+
+                    <Link
+                        className="btn btn--link login-btn-link mt-1"
+                        to="/signup"
+                    >
+                        Don't Have Account Create One!
+                    </Link>
+                </div>
+            </>
+
+            <ToastContainer
+                hideProgressBar
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                pauseOnHover
+            />
         </div>
     );
 };
