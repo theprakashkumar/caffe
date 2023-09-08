@@ -1,5 +1,5 @@
 import "./ProductList.css";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { DataContext } from "../contexts/DataContext";
 import { FilterContext } from "../contexts/FilterContext";
 import Loader from "../components/Loader";
@@ -48,6 +48,14 @@ const ProductList = () => {
         categories
     );
     const sortedProduct = getSortedProduct(filteredProduct, sortBy);
+
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+        });
+    }, []);
 
     return (
         <div className="product-list-container">
