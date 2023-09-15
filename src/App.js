@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import Wishlist from "./pages/Wishlist";
 import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
 import PrivateRoutes from "./utils/PrivateRoutes";
 import Footer from "./components/Footer";
 import { useContext, useEffect } from "react";
@@ -89,6 +90,7 @@ function App() {
                     <PrivateRoutes path="/wishlist" element={<Wishlist />} />
                     <PrivateRoutes path="/cart" element={<Cart />} />
                     <PrivateRoutes path="/profile" element={<Profile />} />
+                    <PrivateRoutes path="/checkout" element={<Checkout />} />
                 </Routes>
                 <Footer />
             </header>
