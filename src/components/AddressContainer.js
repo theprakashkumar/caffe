@@ -1,36 +1,51 @@
 import "./AddressContainer.css";
-import { AuthContext } from "../contexts/AuthContext";
-import useAddress from "../hooks/useAddress";
 import { useContext, useEffect, useState } from "react";
 import AddressCard from "./AddressCard";
 import AddNewAddress from "./AddNewAddress";
 import { ToastContainer } from "react-toastify";
+import { AddressContext } from "../contexts/AddressContext";
 
-const AddressContainer = ({ isCheckout }) => {
-    const {
-        isLoading: addressLoading,
-        addresses,
-        newAddressThere,
-    } = useAddress();
+const AddressContainer = ({ isCheckout, selectAddressHandler }) => {
+    const [addressLoading, setAddressLoading] = useState(true);
+
+    const { getAddress, addresses } = useContext(AddressContext);
 
     const [isModalOpen, setIsModalOpen] = useState(false);
+    useEffect(() => {
+        setAddressLoading(true);
+        getAddress();
+        setAddressLoading(false);
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+        });
+        // eslint-disable-next-line
+    }, []);
     return (
         <div className="addressContainer">
-            {isCheckout && (
-                <p className="heading heading--h5 mt-1 mb-1 addressContainer-title">
-                    Delivery Address
-                </p>
-            )}
             <div className="addresses">
                 {!addressLoading &&
                     addresses.map((address) => (
-                        <AddressCard {...address} isCheckout={isCheckout} />
+                        <AddressCard
+                            address={address}
+                            isCheckout={isCheckout}
+                            key={address._id}
+                            selectAddressHandler={selectAddressHandler}
+                        />
                     ))}
             </div>
             {isCheckout && (
                 <button
                     className="btn btn--link mt-1"
-                    onClick={() => setIsModalOpen(true)}
+                    onClick={() => {
+                        window.scrollTo({
+                            top: 0,
+                            left: 0,
+                            behavior: "smooth",
+                        });
+                        setIsModalOpen(true);
+                    }}
                 >
                     Add New Address
                 </button>

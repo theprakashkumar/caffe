@@ -17,10 +17,12 @@ import { WishlistContext } from "./contexts/WishlistContext";
 import axios from "axios";
 import { CartContext } from "./contexts/CartContext";
 import Profile from "./pages/Profile";
+import { AddressContext } from "./contexts/AddressContext";
 
 function App() {
     const { dispatch: wishlistDispatch } = useContext(WishlistContext);
     const { dispatch: cartDispatch } = useContext(CartContext);
+    const { getAddress } = useContext(AddressContext);
 
     const { isUserLogin, userId, token } = useContext(AuthContext);
 
@@ -67,16 +69,12 @@ function App() {
     useEffect(() => {
         if (isUserLogin) {
             getCart();
+            getWishlist();
+            getAddress();
         }
         // eslint-disable-next-line
     }, [isUserLogin]);
 
-    useEffect(() => {
-        if (isUserLogin) {
-            getWishlist();
-        }
-        // eslint-disable-next-line
-    }, [isUserLogin]);
     return (
         <div className="App">
             <header className="App-header">

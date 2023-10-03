@@ -1,0 +1,25 @@
+.checkout-container {
+    max-width: 71rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+.delivery-title {
+    color: var(--main-text-color);
+    font-weight: 400;
+}
+
+.selected-address-container {
+    max-width: 98%;
+    margin-left: auto;
+    margin-right: auto;
+    background: #fff;
+    padding: 2rem;
+    box-shadow: 0 0 3px 1px var(--input-outline);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.edit-btn {
+    height: 5rem;
+}

@@ -4,15 +4,20 @@
     margin-right: auto;
 }
 
-.addressContainer-title {
-    color: var(--main-text-color);
-    font-weight: 400;
-}
-
 .addresses {
     display: grid;
     grid-template-columns: repeat(2, 35rem);
     gap: 1rem;
+}
+
+@media screen and (max-width: 580px) {
+    .addresses {
+        margin-left: auto;
+        margin-right: auto;
+
+        max-width: 98%;
+        grid-template-columns: repeat(1, auto);
+    }
 }
 
 .new-address-form-wrapper {

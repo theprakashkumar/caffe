@@ -1,9 +1,9 @@
 import "./AddNewAddress.css";
-import { useState } from "react";
-import useAddress from "../hooks/useAddress";
+import { useState, useContext } from "react";
+import { AddressContext } from "../contexts/AddressContext";
 
 const AddNewAddress = ({ closeModal }) => {
-    const { addNewAddress } = useAddress();
+    const { addNewAddress } = useContext(AddressContext);
     const [newAddress, setNewAddress] = useState({
         name: "",
         street: "",
@@ -34,9 +34,9 @@ const AddNewAddress = ({ closeModal }) => {
         e.preventDefault();
         setIsAdding(true);
         const isNewAddressAdded = await addNewAddress(newAddress);
-        // if (isNewAddressAdded) {
-        //     return closeModal(false);
-        // }
+        if (isNewAddressAdded) {
+            return closeModal(false);
+        }
         setIsAdding(false);
     };
 
