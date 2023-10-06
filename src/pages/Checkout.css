@@ -1,4 +1,5 @@
 .checkout-container {
+    min-height: 80vh;
     max-width: 71rem;
     margin-left: auto;
     margin-right: auto;
@@ -22,4 +23,22 @@
 
 .edit-btn {
     height: 5rem;
+}
+
+.payment-container {
+    max-width: 98%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 3rem;
+    background: #fff;
+    padding: 2rem;
+    box-shadow: 0 0 3px 1px var(--input-outline);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.order-summery-text {
+    font-size: 2rem;
+    font-weight: 500;
 }

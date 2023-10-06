@@ -13,10 +13,10 @@ Caffè is a e-commerce site to sell Coffee Beans.
 -   Filters to filter out product that user wants.
 -   Routing using React Router.
 -   Authentication using **JWT**.
+-   Razorpay Payment Gateway
 
 ## Features That I'm Working On:
 
--   Payment
 -   Address Management
 -   Order Section
 
