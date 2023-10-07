@@ -45,6 +45,7 @@ const Checkout = () => {
                     orderId: razorpayResponse.razorpay_order_id,
                     signature: razorpayResponse.razorpay_signature,
                     address: ` ${selectedAddress?.name}, ${selectedAddress?.street}, ${selectedAddress?.city}, ${selectedAddress?.state}-${selectedAddress?.zipCode}`,
+                    mobile: selectedAddress?.mobile,
                     items: cartData.map((item) => ({
                         product: item.product._id,
                         quantity: item.quantity,
@@ -157,7 +158,7 @@ const Checkout = () => {
                                 onClick={editButtonHandler}
                                 className="btn btn-md edit-btn"
                             >
-                                Edit
+                                Change
                             </button>
                         </div>
                     )}

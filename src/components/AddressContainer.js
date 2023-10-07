@@ -35,21 +35,21 @@ const AddressContainer = ({ isCheckout, selectAddressHandler }) => {
                         />
                     ))}
             </div>
-            {isCheckout && (
-                <button
-                    className="btn btn--link mt-1"
-                    onClick={() => {
-                        window.scrollTo({
-                            top: 0,
-                            left: 0,
-                            behavior: "smooth",
-                        });
-                        setIsModalOpen(true);
-                    }}
-                >
-                    Add New Address
-                </button>
-            )}
+
+            <button
+                className="btn btn--link mt-1"
+                onClick={() => {
+                    window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: "smooth",
+                    });
+                    setIsModalOpen(true);
+                }}
+            >
+                Add New Address
+            </button>
+
             {isModalOpen && (
                 <div
                     onClick={() => {
