@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import Wishlist from "./pages/Wishlist";
 import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
 import PrivateRoutes from "./utils/PrivateRoutes";
 import Footer from "./components/Footer";
 import { useContext, useEffect } from "react";
@@ -16,10 +17,12 @@ import { WishlistContext } from "./contexts/WishlistContext";
 import axios from "axios";
 import { CartContext } from "./contexts/CartContext";
 import Profile from "./pages/Profile";
+import { AddressContext } from "./contexts/AddressContext";
 
 function App() {
     const { dispatch: wishlistDispatch } = useContext(WishlistContext);
     const { dispatch: cartDispatch } = useContext(CartContext);
+    const { getAddress } = useContext(AddressContext);
 
     const { isUserLogin, userId, token } = useContext(AuthContext);
 
@@ -66,16 +69,12 @@ function App() {
     useEffect(() => {
         if (isUserLogin) {
             getCart();
+            getWishlist();
+            getAddress();
         }
         // eslint-disable-next-line
     }, [isUserLogin]);
 
-    useEffect(() => {
-        if (isUserLogin) {
-            getWishlist();
-        }
-        // eslint-disable-next-line
-    }, [isUserLogin]);
     return (
         <div className="App">
             <header className="App-header">
@@ -89,6 +88,7 @@ function App() {
                     <PrivateRoutes path="/wishlist" element={<Wishlist />} />
                     <PrivateRoutes path="/cart" element={<Cart />} />
                     <PrivateRoutes path="/profile" element={<Profile />} />
+                    <PrivateRoutes path="/checkout" element={<Checkout />} />
                 </Routes>
                 <Footer />
             </header>

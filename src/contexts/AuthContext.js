@@ -109,6 +109,7 @@ export const AuthProvider = ({ children }) => {
                 userId: userDetails.userId,
                 token: userDetails.token,
                 name: userDetails.name,
+                email: userDetails.email,
                 logout,
                 signUp,
             }}

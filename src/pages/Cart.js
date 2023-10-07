@@ -6,12 +6,15 @@ import { CartContext } from "../contexts/CartContext";
 import Loader from "../components/Loader";
 import CartCard from "../components/CartCard";
 import EmptyCart from "../components/EmptyCart";
+import { useNavigate } from "react-router";
 
 const Cart = () => {
     const [loading, setLoading] = useState(true);
     const [total, setTotal] = useState(0);
     const { state, dispatch } = useContext(CartContext);
     const { userId, token } = useContext(AuthContext);
+
+    const navigate = useNavigate();
 
     // get cart data from server
     const getCart = async () => {
@@ -94,9 +97,7 @@ const Cart = () => {
                             </div>
                             <button
                                 className="btn btn-lg btn--icon cart__content-right__button mt-1"
-                                onClick={() =>
-                                    alert("Still Wrorking On This! 🫠")
-                                }
+                                onClick={() => navigate("/checkout")}
                             >
                                 Check Out
                                 <span className="material-icons-outlined  btn--icon__icon ml-1">
