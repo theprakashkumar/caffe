@@ -1,0 +1,26 @@
+.order-card {
+    background: #fff;
+    padding: 2rem;
+    box-shadow: 0 0 3px 1px var(--input-outline);
+}
+
+.top-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.8rem;
+}
+
+.top-section-total-price {
+    width: fit-content;
+    margin-left: auto;
+}
+
+.user-details-container {
+    width: 82%;
+}
+
+.item-grand-total {
+    text-align: end;
+    font-weight: 500;
+}

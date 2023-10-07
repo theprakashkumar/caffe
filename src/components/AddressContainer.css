@@ -1,0 +1,33 @@
+.addressContainer {
+    max-width: 71rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.addresses {
+    display: grid;
+    grid-template-columns: repeat(2, 35rem);
+    gap: 1rem;
+}
+
+@media screen and (max-width: 580px) {
+    .addresses {
+        margin-left: auto;
+        margin-right: auto;
+
+        max-width: 98%;
+        grid-template-columns: repeat(1, auto);
+    }
+}
+
+.new-address-form-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #252424cc;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

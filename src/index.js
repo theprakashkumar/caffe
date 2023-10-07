@@ -10,6 +10,7 @@ import { FilterProvider } from "./contexts/FilterContext";
 import { CartProvider } from "./contexts/CartContext";
 import { WishlistProvider } from "./contexts/WishlistContext";
 import axios from "axios";
+import { AddressProvider } from "./contexts/AddressContext";
 
 axios.defaults.baseURL =
     process.env.REACT_APP_BASE_URL ||
@@ -23,7 +24,9 @@ ReactDOM.render(
                     <CartProvider>
                         <WishlistProvider>
                             <FilterProvider>
-                                <App />
+                                <AddressProvider>
+                                    <App />
+                                </AddressProvider>
                             </FilterProvider>
                         </WishlistProvider>
                     </CartProvider>
