@@ -12,10 +12,7 @@ import { WishlistProvider } from "./contexts/WishlistContext";
 import axios from "axios";
 import { AddressProvider } from "./contexts/AddressContext";
 
-axios.defaults.baseURL =
-    process.env.REACT_APP_BASE_URL ||
-    "https://Caffe-Backend.theprakashkumar.repl.co";
-
+axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 ReactDOM.render(
     <React.StrictMode>
         <Router>
