@@ -8,22 +8,22 @@ Caffè is a e-commerce site to sell Coffee Beans.
 
 ## Features
 
--   Add/Remove coffee to cart.
--   Add/Remove coffee from wishlists.
--   Filters to filter out product that user wants.
--   Routing using React Router.
--   Authentication using **JWT**.
--   Razorpay Payment Gateway
--   Address Management
--   Order Section
+- Add/Remove coffee to cart.
+- Add/Remove coffee from wishlists.
+- Filters to filter out product that user wants.
+- Routing using React Router.
+- Authentication using **JWT**.
+- Razorpay Payment Gateway
+- Address Management
+- Order Section
 
 ## Tech Stack
 
--   React(Hooks)
--   Express.js
--   MongoDB
--   React Router
--   JWT
+- React(Hooks)
+- Express.js
+- MongoDB
+- React Router
+- JWT
 
 ---
 

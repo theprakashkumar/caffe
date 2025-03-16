@@ -4,25 +4,25 @@ import { createContext, useEffect, useState } from "react";
 export const DataContext = createContext();
 
 export const DataProvider = ({ children }) => {
-    const [data, setData] = useState([]);
+  const [data, setData] = useState([]);
 
-    useEffect(() => {
-        const getData = async () => {
-            try {
-                const response = await axios.get("/products");
-                if (response.data.success) {
-                    setData(response.data.product);
-                }
-            } catch (error) {
-                console.log(error);
-            }
-        };
-        getData();
-    }, []);
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const response = await axios.get("/products");
+        if (response.data.success) {
+          setData(response.data.product);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getData();
+  }, []);
 
-    return (
-        <DataContext.Provider value={{ data, setData }}>
-            {children}
-        </DataContext.Provider>
-    );
+  return (
+    <DataContext.Provider value={{ data, setData }}>
+      {children}
+    </DataContext.Provider>
+  );
 };

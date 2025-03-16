@@ -1,25 +1,25 @@
 /* SCROLLBAR */
 /* width */
 ::-webkit-scrollbar {
-    width: 1rem;
+  width: 1rem;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-    background: var(--main-background);
+  background: var(--main-background);
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: var(--main-text-light-color);
+  background: var(--main-text-light-color);
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--main-text-color);
+  background: var(--main-text-color);
 }
 
 /* Main Section */
 .content {
-    display: flex;
+  display: flex;
 }

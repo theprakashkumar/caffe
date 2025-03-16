@@ -14,24 +14,24 @@ import { AddressProvider } from "./contexts/AddressContext";
 
 axios.defaults.baseURL = "https://caffe-9qab.onrender.com/";
 ReactDOM.render(
-    <React.StrictMode>
-        <Router>
-            <AuthProvider>
-                <DataProvider>
-                    <CartProvider>
-                        <WishlistProvider>
-                            <FilterProvider>
-                                <AddressProvider>
-                                    <App />
-                                </AddressProvider>
-                            </FilterProvider>
-                        </WishlistProvider>
-                    </CartProvider>
-                </DataProvider>
-            </AuthProvider>
-        </Router>
-    </React.StrictMode>,
-    document.getElementById("root")
+  <React.StrictMode>
+    <Router>
+      <AuthProvider>
+        <DataProvider>
+          <CartProvider>
+            <WishlistProvider>
+              <FilterProvider>
+                <AddressProvider>
+                  <App />
+                </AddressProvider>
+              </FilterProvider>
+            </WishlistProvider>
+          </CartProvider>
+        </DataProvider>
+      </AuthProvider>
+    </Router>
+  </React.StrictMode>,
+  document.getElementById("root"),
 );
 
 // If you want to start measuring performance in your app, pass a function
