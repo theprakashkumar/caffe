@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
@@ -13,7 +13,9 @@ import axios from "axios";
 import { AddressProvider } from "./contexts/AddressContext";
 
 axios.defaults.baseURL = "https://caffe-9qab.onrender.com/";
-ReactDOM.render(
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+root.render(
   <React.StrictMode>
     <Router>
       <AuthProvider>
@@ -31,7 +33,6 @@ ReactDOM.render(
       </AuthProvider>
     </Router>
   </React.StrictMode>,
-  document.getElementById("root"),
 );
 
 // If you want to start measuring performance in your app, pass a function
